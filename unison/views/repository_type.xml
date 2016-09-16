@@ -1,32 +1,52 @@
 <?xml version="1.0"?>
 <openerp>
     <data>
+
         <!-- Action to open Repository Type list -->
         <act_window 
-            id = "action_repository_type"
-            name = "Repository Types"
-            res_model = "unison.repository_type"
-            view_mode = "tree, form"
+            id="action_repository_type"
+            name="Repository Types"
+            res_model="unison.repository_type"
+            view_mode="tree,form"
         />
         
         <!-- Menu item to open Repository Type List -->
         <menuitem 
-            id = "menu_repository_type"
-            name = "Repository Types"
-            parent = "unison.menu_code"
-            sequence = "10"
-            action = "action_repository_type"
+            id="menu_repository_type"
+            name="Repository Types"
+            parent="unison.menu_code"
+            sequence="10"
+            action="action_repository_type"
         />
 
+        <!-- Repository Type Tree -->
+        <record id="view_tree_repository_type" model="ir.ui.view">
+            <field name="name">Repository Types Tree</field>
+            <field name="model">unison.repository_type</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="code"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
         <!-- Repository Type Form -->
-        <record id = "view_form_repository_type" model = "ir.ui.view">
+        <record id="view_form_repository_type" model="ir.ui.view">
             <field name="name">Repository Types Form</field>
             <field name="model">unison.repository_type</field>
             <field name="arch" type="xml">
-                <form string="Repository Types">
-                    <field name="code"/>
-                    <field name="name"/>
-                    <field name="description"/>
+                <form string="Repository Type">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_center">
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
                 </form>
             </field>
         </record>
