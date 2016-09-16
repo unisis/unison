@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "unison",
+    'name': "UniSon",
 
     'application': True,
 
@@ -17,7 +17,7 @@
 
     'category': 'Administration',
 
-    'version': '0.3',
+    'version': '0.4',
 
     # any module necessary for this one to work correctly
     'depends': ['base'],
@@ -26,6 +26,7 @@
     'data': [
         'data/data.xml',
         'security/ir.model.access.csv',
+        'views/menu_top.xml',
         'views/repository_type.xml',
     ],
 

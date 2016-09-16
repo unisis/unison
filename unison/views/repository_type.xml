@@ -13,8 +13,8 @@
         <menuitem 
             id = "menu_repository_type"
             name = "Repository Types"
-            parent = "mail.mail_feeds"
-            sequence = "20"
+            parent = "unison.menu_top"
+            sequence = "10"
             action = "action_repository_type"
         />
 

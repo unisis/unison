@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <!-- Main Menu (no parents) -->
+        <menuitem 
+            id = "menu_top"
+            name = "UniSon"
+            parent = ""
+            sequence = "400"
+        />
+    </data>
+</openerp>
