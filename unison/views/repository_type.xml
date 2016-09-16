@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <!-- Action to open Repository Type list -->
+        <act_window 
+            id = "action_repository_type"
+            name = "Repository Types"
+            res_model = "unison.repository_type"
+            view_mode = "tree, form"
+        />
+        
+        <!-- Menu item to open Repository Type List -->
+        <menuitem 
+            id = "menu_repository_type"
+            name = "Repository Types"
+            parent = "mail.mail_feeds"
+            sequence = "20"
+            action = "action_repository_type"
+        />
+
+        <!-- Repository Type Form -->
+        <record id = "view_form_repository_type" model = "ir.ui.view">
+            <field name="name">Repository Types Form</field>
+            <field name="model">unison.repository_type</field>
+            <field name="arch" type="xml">
+                <form string="Repository Types">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="description"/>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

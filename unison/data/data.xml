@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+        <record id="odoo_code" model="unison.repository_type">
+            <field name="code">0</field>
+            <field name="name">Odoo Code</field>
+            <field name="description">Odoo Code</field>
+        </record>
+        <record id="odoo_addons" model="unison.repository_type">
+            <field name="code">1</field>
+            <field name="name">Odoo Addons</field>
+            <field name="description">Odoo Addons</field>
+        </record>
+        <record id="oca_addons" model="unison.repository_type">
+            <field name="code">2</field>
+            <field name="name">OCA Addons</field>
+            <field name="description">OCA Addons</field>
+        </record>
+        <record id="adhoc_addons" model="unison.repository_type">
+            <field name="code">3</field>
+            <field name="name">Adhoc Addons</field>
+            <field name="description">Adhoc Addons</field>
+        </record>
+        <record id="unisis_addons" model="unison.repository_type">
+            <field name="code">4</field>
+            <field name="name">UniSis Addons</field>
+            <field name="description">UniSis Addons</field>
+        </record>
+        <record id="client_addons" model="unison.repository_type">
+            <field name="code">5</field>
+            <field name="name">Client Addons</field>
+            <field name="description">Client Addons</field>
+        </record>
+    </data>
+</openerp>
+
