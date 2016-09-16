@@ -13,7 +13,7 @@
         <menuitem 
             id = "menu_repository_type"
             name = "Repository Types"
-            parent = "unison.menu_top"
+            parent = "unison.menu_code"
             sequence = "10"
             action = "action_repository_type"
         />

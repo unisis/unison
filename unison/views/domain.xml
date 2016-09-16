@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <!-- Action to open Domain list -->
+        <act_window 
+            id = "action_domain"
+            name = "Domains"
+            res_model = "unison.domain"
+            view_mode = "tree, form"
+        />
+        
+        <!-- Menu item to open Domain List -->
+        <menuitem 
+            id = "menu_domain"
+            name = "Domains"
+            parent = "unison.menu_dns"
+            sequence = "10"
+            action = "action_domain"
+        />
+
+        <!-- Domain Form -->
+        <record id = "view_form_domain" model = "ir.ui.view">
+            <field name="name">Domain Form</field>
+            <field name="model">unison.domain</field>
+            <field name="arch" type="xml">
+                <form string="Domains">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="active"/>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

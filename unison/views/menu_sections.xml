@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <!-- Main Menu (no parents) -->
+        <menuitem 
+            id = "menu_top"
+            name = "UniSon"
+            parent = ""
+            sequence = "400"
+        />
+
+        <!-- DNS Section -->
+        <menuitem 
+            id = "menu_dns"
+            name = "DNS"
+            parent = "menu_top"
+            sequence = "10"
+        />
+
+        <!-- Code Section -->
+        <menuitem 
+            id = "menu_code"
+            name = "Code"
+            parent = "menu_top"
+            sequence = "20"
+        />
+    </data>
+</openerp>
