@@ -15,3 +15,7 @@ class Key(models.Model):
      putty_key = fields.Text('Private Key (PuTTY)')
      notes = fields.Text('Notes')
      active = fields.Boolean('Active', default=True)
+
+     # Reverse relationships
+     nodes = fields.One2many('unison.node', 'key_id', 'Nodes')
+

@@ -17,5 +17,8 @@ class Size(models.Model):
      notes = fields.Text('Notes')
      active = fields.Boolean('Active', default=True)
 
+     # Reverse relationships
+     nodes = fields.One2many('unison.node', 'size_id', 'Nodes')
+
      # The same node size is available on several regions (many to many)
      region_ids = fields.Many2many('unison.region', 'size_region_rel', 'size_id', 'region_id', string='Regions')

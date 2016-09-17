@@ -15,6 +15,9 @@ class Region(models.Model):
      notes = fields.Text('Notes')
      active = fields.Boolean('Active', default=True)
 
+     # Reverse relationships
+     nodes = fields.One2many('unison.node', 'region_id', 'Nodes')
+
      # Many2many relations fully defined on size and image models, here we are defining the "inverse" relation
      size_ids = fields.Many2many('unison.size', string='Sizes')
      image_ids = fields.Many2many('unison.image', string='Images')

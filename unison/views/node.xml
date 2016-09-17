@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Nodes list -->
+        <act_window 
+            id="action_node"
+            name="Nodes"
+            res_model="unison.node"
+            view_mode="tree,form"
+        />
+        
+        <!-- Menu item to open Nodes List -->
+        <menuitem 
+            id="menu_node"
+            name="Nodes"
+            parent="unison.menu_nodes"
+            sequence="50"
+            action="action_node"
+        />
+
+        <!-- Nodes Tree -->
+        <record id="view_tree_node" model="ir.ui.view">
+            <field name="name">Node Tree</field>
+            <field name="model">unison.node</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name"/>
+                    <field name="size_id"/>
+                    <field name="public_ip"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Node Form -->
+        <record id="view_form_node" model="ir.ui.view">
+            <field name="name">Node Form</field>
+            <field name="model">unison.node</field>
+            <field name="arch" type="xml">
+                <form string="Node">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="name"/>
+                                <field name="image_id"/>
+                                <field name="size_id"/>
+                                <field name="region_id"/>
+                                <field name="key_id"/>
+                                <field name="record_id"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="public_ip"/>
+                                <field name="private_ip"/>
+                                <field name="status"/>
+                                <field name="notes"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

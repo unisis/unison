@@ -20,3 +20,6 @@ class Record(models.Model):
      domain_id = fields.Many2one('unison.domain', 'Domain', ondelete='restrict')
      notes = fields.Text('Notes')
      active = fields.Boolean('Active', default=True)
+
+     # Reverse relationships
+     nodes = fields.One2many('unison.node', 'record_id', 'Nodes')
