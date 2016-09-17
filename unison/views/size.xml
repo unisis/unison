@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Sizes list -->
+        <act_window 
+            id="action_size"
+            name="Sizes"
+            res_model="unison.size"
+            view_mode="tree,form"
+        />
+        
+        <!-- Menu item to open Sizes List -->
+        <menuitem 
+            id="menu_size"
+            name="Sizes"
+            parent="unison.menu_nodes"
+            sequence="40"
+            action="action_size"
+        />
+
+        <!-- Size Tree -->
+        <record id="view_tree_size" model="ir.ui.view">
+            <field name="name">Size Tree</field>
+            <field name="model">unison.size</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="cloud_id"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Size Form -->
+        <record id="view_form_size" model="ir.ui.view">
+            <field name="name">Size Form</field>
+            <field name="model">unison.size</field>
+            <field name="arch" type="xml">
+                <form string="Size">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="cloud_id"/>
+                                <field name="name"/>
+                                <field name="active"/>
+                                <field name="notes"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="ram_mb"/>
+                                <field name="cpu_cores"/>
+                                <field name="disk_gb"/>
+                                <field name="transfer_tb"/>
+                                <field name="hourly_price_usd"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

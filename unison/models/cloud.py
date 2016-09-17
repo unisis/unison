@@ -14,3 +14,4 @@ class Cloud(models.Model):
 
      regions = fields.One2many('unison.region', 'cloud_id', 'Cloud Regions')
      images = fields.One2many('unison.image', 'cloud_id', 'Cloud Images')
+     sizes = fields.One2many('unison.size', 'cloud_id', 'Cloud Sizes')
