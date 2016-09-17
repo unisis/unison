@@ -25,7 +25,6 @@
             <field name="model">unison.domain</field>
             <field name="arch" type="xml">
                 <tree editable="top">
-                    <field name="code"/>
                     <field name="name"/>
                 </tree>
             </field>

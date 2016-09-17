@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Records list -->
+        <act_window 
+            id="action_record"
+            name="Records"
+            res_model="unison.record"
+            view_mode="tree,form"
+        />
+        
+        <!-- Menu item to open Records List -->
+        <menuitem 
+            id="menu_record"
+            name="Records"
+            parent="unison.menu_dns"
+            sequence="20"
+            action="action_record"
+        />
+
+        <!-- Record Tree -->
+        <record id="view_tree_record" model="ir.ui.view">
+            <field name="name">Record Tree</field>
+            <field name="model">unison.record</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="content"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Record Form -->
+        <record id="view_form_record" model="ir.ui.view">
+            <field name="name">Record Form</field>
+            <field name="model">unison.record</field>
+            <field name="arch" type="xml">
+                <form string="Record">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="domain_id"/>
+                                <field name="name"/>
+                                <field name="type"/>
+                                <field name="content"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="ttl"/>
+                                <field name="notes"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

@@ -24,5 +24,22 @@
             parent = "menu_top"
             sequence = "20"
         />
+
+        <!-- Nodes Section -->
+        <menuitem 
+            id = "menu_node"
+            name = "Nodes"
+            parent = "menu_top"
+            sequence = "30"
+        />
+
+        <!-- Installations Section -->
+        <menuitem 
+            id = "menu_installs"
+            name = "Installations"
+            parent = "menu_top"
+            sequence = "40"
+        />
+
     </data>
 </openerp>
