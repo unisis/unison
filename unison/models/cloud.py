@@ -12,4 +12,4 @@ class Cloud(models.Model):
      notes = fields.Text('Notes')
      active = fields.Boolean('Active', default=True)
 
-     # records = fields.One2many('unison.record', 'domain_id', 'Domain Records')
+     regions = fields.One2many('unison.region', 'cloud_id', 'Cloud Regions')

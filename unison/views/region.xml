@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Regions list -->
+        <act_window 
+            id="action_region"
+            name="Regions"
+            res_model="unison.region"
+            view_mode="tree,form"
+        />
+        
+        <!-- Menu item to open Regions List -->
+        <menuitem 
+            id="menu_region"
+            name="Regions"
+            parent="unison.menu_nodes"
+            sequence="20"
+            action="action_region"
+        />
+
+        <!-- Region Tree -->
+        <record id="view_tree_region" model="ir.ui.view">
+            <field name="name">Region Tree</field>
+            <field name="model">unison.region</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="cloud_id"/>
+                    <field name="name"/>
+                    <field name="available"/>
+                    <field name="selectable"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Region Form -->
+        <record id="view_form_region" model="ir.ui.view">
+            <field name="name">Region Form</field>
+            <field name="model">unison.region</field>
+            <field name="arch" type="xml">
+                <form string="Region">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="cloud_id"/>
+                                <field name="name"/>
+                                <field name="selectable"/>
+                                <field name="notes"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="features"/>
+                                <field name="available"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>
