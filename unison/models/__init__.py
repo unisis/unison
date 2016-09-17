@@ -8,6 +8,7 @@ import node
 import node_stat
 import record
 import region
+import repository
 import repository_type
 import size
 import volume
