@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Volumes list -->
+        <act_window 
+            id="action_volume"
+            name="Volumes"
+            res_model="unison.volume"
+            view_mode="tree,form"
+        />
+        
+        <!-- Menu item to open Volumes List -->
+        <menuitem 
+            id="menu_volume"
+            name="Volumes"
+            parent="unison.menu_nodes"
+            sequence="60"
+            action="action_volume"
+        />
+
+        <!-- Volumes Tree -->
+        <record id="view_tree_volume" model="ir.ui.view">
+            <field name="name">Volumes Tree</field>
+            <field name="model">unison.volume</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="cloud_id"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Volume Form -->
+        <record id="view_form_volume" model="ir.ui.view">
+            <field name="name">Volume Form</field>
+            <field name="model">unison.volume</field>
+            <field name="arch" type="xml">
+                <form string="Volume">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="cloud_id"/>
+                                <field name="name"/>
+                                <field name="size_gb"/>
+                                <field name="active"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="node_id"/>
+                                <field name="mount_point"/>
+                                <field name="notes"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>
