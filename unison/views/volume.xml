@@ -15,7 +15,7 @@
             id="menu_volume"
             name="Volumes"
             parent="unison.menu_nodes"
-            sequence="60"
+            sequence="70"
             action="action_volume"
         />
 

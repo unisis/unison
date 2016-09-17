@@ -15,7 +15,7 @@
             id="menu_node"
             name="Nodes"
             parent="unison.menu_nodes"
-            sequence="50"
+            sequence="60"
             action="action_node"
         />
 

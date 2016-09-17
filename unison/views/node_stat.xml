@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Node Stats list -->
+        <act_window 
+            id="action_node_stats"
+            name="Nodes Stats"
+            res_model="unison.node_stat"
+            view_mode="tree"
+        />
+        
+        <!-- Menu item to open Node Stats List -->
+        <menuitem 
+            id="menu_node_stats"
+            name="Stats"
+            parent="unison.menu_nodes"
+            sequence="80"
+            action="action_node_stats"
+        />
+
+        <!-- Stats Tree -->
+        <record id="view_tree_node_stats" model="ir.ui.view">
+            <field name="name">Nodes Stats Tree</field>
+            <field name="model">unison.node_stat</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="node_id"/>
+                    <field name="date"/>
+                    <field name="cpu_used"/>
+                    <field name="mem_used"/>
+                    <field name="disk_used"/>
+                    <field name="transfer_used"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- We don't need a Form view for Nodes Stats -->
+
+    </data>
+</openerp>
