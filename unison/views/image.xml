@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Images list -->
+        <act_window 
+            id="action_image"
+            name="Images"
+            res_model="unison.image"
+            view_mode="tree,form"
+        />
+        
+        <!-- Menu item to open Images List -->
+        <menuitem 
+            id="menu_image"
+            name="Images"
+            parent="unison.menu_nodes"
+            sequence="30"
+            action="action_image"
+        />
+
+        <!-- Images Tree -->
+        <record id="view_tree_image" model="ir.ui.view">
+            <field name="name">Image Tree</field>
+            <field name="model">unison.image</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="cloud_id"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Image Form -->
+        <record id="view_form_image" model="ir.ui.view">
+            <field name="name">Image Form</field>
+            <field name="model">unison.image</field>
+            <field name="arch" type="xml">
+                <form string="Image">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="cloud_id"/>
+                                <field name="name"/>
+                                <field name="active"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="notes"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

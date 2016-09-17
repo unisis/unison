@@ -13,3 +13,4 @@ class Cloud(models.Model):
      active = fields.Boolean('Active', default=True)
 
      regions = fields.One2many('unison.region', 'cloud_id', 'Cloud Regions')
+     images = fields.One2many('unison.image', 'cloud_id', 'Cloud Images')

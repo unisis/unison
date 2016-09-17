@@ -2,6 +2,7 @@
 
 import cloud
 import domain
+import image
 import record
 import region
 import repository_type
