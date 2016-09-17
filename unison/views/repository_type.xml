@@ -25,8 +25,8 @@
             <field name="model">unison.repository_type</field>
             <field name="arch" type="xml">
                 <tree editable="top">
-                    <field name="code"/>
                     <field name="name"/>
+                    <field name="sequence"/>
                 </tree>
             </field>
         </record>
@@ -45,6 +45,7 @@
                             <field name="code"/>
                             <field name="name"/>
                             <field name="description"/>
+                            <field name="sequence"/>
                         </group>
                     </sheet>
                 </form>

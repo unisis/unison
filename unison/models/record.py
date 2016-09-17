@@ -14,9 +14,9 @@ class Record(models.Model):
 
      code = fields.Char('Code') # DigitalOcean code, assigned after create
      type = fields.Selection(types, 'Type')
-     name = fields.Char('Name', required=True)
-     content = fields.Char('Content', required=True)
-     ttl = fields.Integer('TTL', required=True)
+     name = fields.Char('Name', required=True, index=True)
+     content = fields.Char('Content', required=True, index=True)
+     ttl = fields.Integer('TTL', required=True, help='Time To Live')
      domain_id = fields.Many2one('unison.domain', 'Domain', ondelete='restrict')
-     notes = fields.Char('Notes')
-     active = fields.Boolean('Active')
+     notes = fields.Text('Notes')
+     active = fields.Boolean('Active', default=True)

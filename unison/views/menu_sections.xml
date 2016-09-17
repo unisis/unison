@@ -27,7 +27,7 @@
 
         <!-- Nodes Section -->
         <menuitem 
-            id = "menu_node"
+            id = "menu_nodes"
             name = "Nodes"
             parent = "menu_top"
             sequence = "30"
