@@ -48,6 +48,7 @@
                                 <field name="active"/>
                             </group>
                             <group name="group_right">
+                                <field name="region_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
                                 <field name="notes"/>
                             </group>
                         </group>

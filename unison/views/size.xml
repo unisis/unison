@@ -54,6 +54,7 @@
                                 <field name="disk_gb"/>
                                 <field name="transfer_tb"/>
                                 <field name="hourly_price_usd"/>
+                                <field name="region_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
                             </group>
                         </group>
                     </sheet>

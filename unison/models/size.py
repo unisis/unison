@@ -16,3 +16,6 @@ class Size(models.Model):
      hourly_price_usd = fields.Float('Hourly Price (USD)')
      notes = fields.Text('Notes')
      active = fields.Boolean('Active', default=True)
+
+     # The same node size is available on several regions (many to many)
+     region_ids = fields.Many2many('unison.region', 'size_region_rel', 'size_id', 'region_id', string='Regions')

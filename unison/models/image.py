@@ -11,3 +11,6 @@ class Image(models.Model):
      cloud_id = fields.Many2one('unison.cloud', 'Cloud', ondelete='restrict')
      notes = fields.Text('Notes')
      active = fields.Boolean('Active', default=True)
+
+     # The same node image is available on several regions (many to many)
+     region_ids = fields.Many2many('unison.region', 'image_region_rel', 'image_id', 'region_id', string='Regions')

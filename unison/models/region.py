@@ -14,3 +14,7 @@ class Region(models.Model):
      selectable = fields.Boolean('Selectable', default=True, help='Indicates if we will launch droplets on this region, setting provided by UniSis')
      notes = fields.Text('Notes')
      active = fields.Boolean('Active', default=True)
+
+     # Many2many relations fully defined on size and image models, here we are defining the "inverse" relation
+     size_ids = fields.Many2many('unison.size', string='Sizes')
+     image_ids = fields.Many2many('unison.image', string='Images')
