@@ -4,6 +4,7 @@ from openerp import models, fields
 
 class Repository(models.Model):
      _name = 'unison.repository'
+     _rec_name = 'url' # This model doesn't have a field named 'name'
      _order = 'repository_type_id, url'
 
      url = fields.Char('Url', required=True, index=True)

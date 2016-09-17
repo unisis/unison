@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Branches list -->
+        <act_window 
+            id="action_branch"
+            name="Branches"
+            res_model="unison.branch"
+            view_mode="tree,form"
+        />
+        
+        <!-- Menu item to open Branches List -->
+        <menuitem 
+            id="menu_branch"
+            name="Branches"
+            parent="unison.menu_code"
+            sequence="30"
+            action="action_branch"
+        />
+
+        <!-- Branch Tree -->
+        <record id="view_tree_branch" model="ir.ui.view">
+            <field name="name">Branch Tree</field>
+            <field name="model">unison.branch</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="repository_id"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Branch Form -->
+        <record id="view_form_branch" model="ir.ui.view">
+            <field name="name">Branch Form</field>
+            <field name="model">unison.branch</field>
+            <field name="arch" type="xml">
+                <form string="Branch">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="repository_id"/>
+                                <field name="name"/>
+                                <field name="active"/>
+                                <field name="notes"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>
