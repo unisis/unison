@@ -3,6 +3,7 @@
 import branch
 import cloud
 import domain
+import float_ip
 import image
 import key
 import node

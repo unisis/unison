@@ -15,7 +15,7 @@
             id="menu_node_stats"
             name="Stats"
             parent="unison.menu_nodes"
-            sequence="80"
+            sequence="90"
             action="action_node_stats"
         />
 

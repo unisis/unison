@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Float IPs list -->
+        <act_window 
+            id="action_float_ip"
+            name="Float IPs"
+            res_model="unison.float_ip"
+            view_mode="tree,form"
+        />
+        
+        <!-- Menu item to open Float IPs List -->
+        <menuitem 
+            id="menu_float_ip"
+            name="Float IPs"
+            parent="unison.menu_nodes"
+            sequence="80"
+            action="action_float_ip"
+        />
+
+        <!-- Float IPs Tree -->
+        <record id="view_tree_float_ip" model="ir.ui.view">
+            <field name="name">Float IPs Tree</field>
+            <field name="model">unison.float_ip</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="cloud_id"/>
+                    <field name="address"/>
+                    <field name="node_id"/>
+                    <field name="date_attach"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Float IP Form -->
+        <record id="view_form_float_ip" model="ir.ui.view">
+            <field name="name">Float IP Form</field>
+            <field name="model">unison.float_ip</field>
+            <field name="arch" type="xml">
+                <form string="Float IP">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="cloud_id"/>
+                                <field name="address"/>
+                                <field name="active"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="node_id"/>
+                                <field name="date_attach"/>
+                                <field name="notes"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>
