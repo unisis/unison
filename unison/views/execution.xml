@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Executions list -->
+        <act_window 
+            id="action_execution"
+            name="Executions"
+            res_model="unison.execution"
+            view_mode="tree,form"
+        />
+        
+        <!-- Menu item to open Executions List -->
+        <menuitem 
+            id="menu_execution"
+            name="Executions"
+            parent="unison.menu_installs"
+            sequence="30"
+            action="action_execution"
+        />
+
+        <!-- Executions Tree -->
+        <record id="view_tree_execution" model="ir.ui.view">
+            <field name="name">Executions Tree</field>
+            <field name="model">unison.execution</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="install_id"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="hours"/>
+                    <field name="node_price_usd"/>
+                    <field name="volume_price_usd"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Executions Form -->
+        <record id="view_form_execution" model="ir.ui.view">
+            <field name="name">Execution Form</field>
+            <field name="model">unison.execution</field>
+            <field name="arch" type="xml">
+                <form string="Execution">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="install_id"/>
+                                <field name="date_start"/>
+                                <field name="date_end"/>
+                                <field name="hours"/>
+                                <field name="started_manually"/>
+                                <field name="stopped_manually"/>
+                                <field name="node_price_usd"/>
+                                <field name="volume_price_usd"/>
+                                <field name="notes"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>
