@@ -2,6 +2,8 @@
 
 from openerp import models, fields
 
+# This model is used to store information about images stored by each Cloud provider
+# This also includes custom images that we can prepare for our own needs.
 class Image(models.Model):
      _name = 'unison.image'
      _order = 'name'

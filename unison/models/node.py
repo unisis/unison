@@ -2,6 +2,8 @@
 
 from openerp import models, fields
 
+# This model is used to store information about cloud nodes 
+# (host machines launched by UniSon)
 class Node(models.Model):
      _name = 'unison.node'
      _order = 'name'

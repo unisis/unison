@@ -2,6 +2,7 @@
 
 from openerp import models, fields
 
+# This model is used to store the data about Git repositories
 class Repository(models.Model):
      _name = 'unison.repository'
      _rec_name = 'url' # This model doesn't have a field named 'name'

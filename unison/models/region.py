@@ -2,6 +2,7 @@
 
 from openerp import models, fields
 
+# This model is used to store the cloud regions (datacenters)
 class Region(models.Model):
      _name = 'unison.region'
      _order = 'name'

@@ -3,8 +3,8 @@
 from openerp import models, fields
 
 # Code represents the exact configuration of code for an installation or template
-# It's like a "super-commit" hash, but not related to just one repository, it's related
-# to the entire configuration of all added repositories, their selected branches and the commits on each branch
+# It's like a "super-commit" hash, but not related to just one repository, it's related to the
+# entire configuration of all added repositories, their selected branches and the commits on each branch
 # Therefore, code represents a snapshot of the code at certain exact point
 class Code(models.Model):
      _name = 'unison.code'

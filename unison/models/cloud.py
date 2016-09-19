@@ -2,6 +2,7 @@
 
 from openerp import models, fields
 
+# This class is used to store the different clouds used on UniSon (at this moment, only DigitalOcean is supported)
 class Cloud(models.Model):
      _name = 'unison.cloud'
      _order = 'name'

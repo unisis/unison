@@ -2,6 +2,7 @@
 
 from openerp import models, fields
 
+# This model is used to store the DNS records defined on DigitalOcean
 class Record(models.Model):
      _name = 'unison.record'
      _order = 'name'

@@ -2,6 +2,8 @@
 
 from openerp import models, fields
 
+# This model is used to indicate which repositories should be cloned so their modules
+# are available to be installed on certain installations (via their "code" snapshot)
 class CodeRepository(models.Model):
      _name = 'unison.code_repository'
      _rec_name = 'id'

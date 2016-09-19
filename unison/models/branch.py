@@ -2,6 +2,7 @@
 
 from openerp import models, fields
 
+# This model store the branches defined on each Git repository
 class Branch(models.Model):
      _name = 'unison.branch'
      _order = 'name'

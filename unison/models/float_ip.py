@@ -2,6 +2,8 @@
 
 from openerp import models, fields
 
+# This model is used to store information about IP addresses 
+# which can be reserved and assigned to different nodes
 class FloatIp(models.Model):
      _name = 'unison.float_ip'
      _rec_name = 'address'

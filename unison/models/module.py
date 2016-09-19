@@ -2,6 +2,8 @@
 
 from openerp import models, fields
 
+# This model is used to store information about Odoo modules (addons)
+# stored on each branch of each repository
 class Module(models.Model):
      _name = 'unison.module'
      _order = 'name'

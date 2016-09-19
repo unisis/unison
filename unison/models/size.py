@@ -2,6 +2,7 @@
 
 from openerp import models, fields
 
+# This model is used to store the node sizes available
 class Size(models.Model):
      _name = 'unison.size'
      _order = 'name'
