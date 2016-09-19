@@ -3,6 +3,7 @@
 import branch
 import cloud
 import code
+import code_module
 import code_repository
 import domain
 import float_ip

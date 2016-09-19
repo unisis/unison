@@ -2,41 +2,39 @@
 <openerp>
     <data>
 
-        <!-- Action to open Code Repositories list -->
+        <!-- Action to open Code Modules list -->
         <act_window 
-            id="action_code_repository"
-            name="Code Repositories"
-            res_model="unison.code_repository"
+            id="action_code_module"
+            name="Code Modules"
+            res_model="unison.code_module"
             view_mode="tree,form"
         />
         
-        <!-- Menu item to open Code Repositories List -->
+        <!-- Menu item to open Code Modules List -->
         <menuitem 
-            id="menu_code_repositories"
-            name="Code Repositories"
+            id="menu_code_modules"
+            name="Code Modules"
             parent="unison.menu_code"
-            sequence="60"
-            action="action_code_repository"
+            sequence="70"
+            action="action_code_module"
         />
 
-        <!-- Code Repositories Tree -->
-        <record id="view_tree_code_repository" model="ir.ui.view">
-            <field name="name">Code Repositories Tree</field>
-            <field name="model">unison.code_repository</field>
+        <!-- Code Modules Tree -->
+        <record id="view_tree_code_module" model="ir.ui.view">
+            <field name="name">Code Modules Tree</field>
+            <field name="model">unison.code_module</field>
             <field name="arch" type="xml">
                 <tree editable="top">
                     <field name="code_id"/>
-                    <field name="branch_id"/>
-                    <field name="commit"/>
-                    <field name="sequence"/>
+                    <field name="module_name"/>
                 </tree>
             </field>
         </record>
 
-        <!-- Code Repository Form -->
-        <record id="view_form_code_repository" model="ir.ui.view">
-            <field name="name">Code Repository Form</field>
-            <field name="model">unison.code_repository</field>
+        <!-- Code Module Form -->
+        <record id="view_form_code_module" model="ir.ui.view">
+            <field name="name">Code Module Form</field>
+            <field name="model">unison.code_module</field>
             <field name="arch" type="xml">
                 <form string="Code">
                     <header>
@@ -46,11 +44,9 @@
                         <group name="group_top">
                             <group name="group_left">
                                 <field name="code_id"/>
-                                <field name="branch_id"/>
-                                <field name="commit"/>
+                                <field name="module_name"/>
                             </group>
                             <group name="group_right">
-                                <field name="sequence"/>
                                 <field name="active"/>
                                 <field name="notes"/>
                             </group>

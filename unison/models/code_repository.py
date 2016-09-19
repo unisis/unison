@@ -7,7 +7,7 @@ from openerp import models, fields
 class CodeRepository(models.Model):
      _name = 'unison.code_repository'
      _rec_name = 'id'
-     _order = 'id'
+     _order = 'sequence'
 
      code_id = fields.Many2one('unison.code', 'Code', ondelete='restrict')
      branch_id = fields.Many2one('unison.branch', 'Branch', ondelete='restrict')
