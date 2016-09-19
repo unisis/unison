@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Code Repositories list -->
+        <act_window 
+            id="action_code_repository"
+            name="Code Repositories"
+            res_model="unison.code_repository"
+            view_mode="tree,form"
+        />
+        
+        <!-- Menu item to open Code Repositories List -->
+        <menuitem 
+            id="menu_code_repositories"
+            name="Code Repositories"
+            parent="unison.menu_code"
+            sequence="60"
+            action="action_code_repository"
+        />
+
+        <!-- Code Repositories Tree -->
+        <record id="view_tree_code_repository" model="ir.ui.view">
+            <field name="name">Code Repositories Tree</field>
+            <field name="model">unison.code_repository</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="code_id"/>
+                    <field name="branch_id"/>
+                    <field name="commit"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Code Repository Form -->
+        <record id="view_form_code_repository" model="ir.ui.view">
+            <field name="name">Code Repository Form</field>
+            <field name="model">unison.code_repository</field>
+            <field name="arch" type="xml">
+                <form string="Code">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="code_id"/>
+                                <field name="branch_id"/>
+                                <field name="commit"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="sequence"/>
+                                <field name="active"/>
+                                <field name="notes"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>
