@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Installs list -->
+        <act_window 
+            id="action_install"
+            name="Installations"
+            res_model="unison.install"
+            view_mode="tree,form"
+        />
+        
+        <!-- Menu item to open Installations List -->
+        <menuitem 
+            id="menu_install"
+            name="Intallations"
+            parent="unison.menu_installs"
+            sequence="10"
+            action="action_install"
+        />
+
+        <!-- Installations Tree -->
+        <record id="view_tree_install" model="ir.ui.view">
+            <field name="name">Installation Tree</field>
+            <field name="model">unison.install</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="partner_id"/>
+                    <field name="site_url"/>
+                    <field name="name"/>
+                    <field name="manage_dns"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Installation Form -->
+        <record id="view_form_installation" model="ir.ui.view">
+            <field name="name">Install Form</field>
+            <field name="model">unison.install</field>
+            <field name="arch" type="xml">
+                <form string="Installation">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="name"/>
+                                <field name="description"/>
+                                <field name="size_id"/>
+                                <field name="site_url"/>
+                                <field name="manage_dns"/>
+                                <field name="site_record_id"/>
+                                <field name="backups_execute_hour"/>
+                                <field name="backups_retention_days"/>
+                                <field name="status"/>
+                                <field name="admin_pwd"/>
+                                <field name="prod_code_id"/>
+                                <field name="test_code_id"/>
+                                <field name="node_id"/>
+                                <field name="volume_id"/>
+                                <field name="float_ip_id"/>
+                                <field name="mail_subaccount"/>
+                                <field name="mail_api_key"/>
+                                <field name="ssl_generate"/>
+                                <field name="active"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="ssl_private_key"/>
+                                <field name="ssl_certificate"/>
+                                <field name="ssl_expire_date"/>
+                                <field name="authorized_ips"/>
+                                <field name="notes"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

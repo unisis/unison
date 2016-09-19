@@ -8,6 +8,7 @@ import code_repository
 import domain
 import float_ip
 import image
+import install
 import key
 import module
 import node

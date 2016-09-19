@@ -27,8 +27,11 @@
                 <tree editable="top">
                     <field name="node_id"/>
                     <field name="date"/>
+                    <field name="cpu_cores"/>
                     <field name="cpu_used"/>
+                    <field name="mem_mb"/>
                     <field name="mem_used"/>
+                    <field name="disk_gb"/>
                     <field name="disk_used"/>
                     <field name="transfer_used"/>
                 </tree>
