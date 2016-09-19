@@ -15,7 +15,7 @@
             id="menu_backup"
             name="Backups"
             parent="unison.menu_installs"
-            sequence="40"
+            sequence="50"
             action="action_backup"
         />
 
@@ -53,6 +53,7 @@
                                 <field name="description"/>
                                 <field name="test_db"/>
                                 <field name="automatic"/>
+                                <field name="program_id"/>
                                 <field name="code_id"/>
                                 <field name="date_start"/>
                                 <field name="date_end"/>

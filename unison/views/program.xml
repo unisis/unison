@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Programs list -->
+        <act_window 
+            id="action_program"
+            name="Programs"
+            res_model="unison.program"
+            view_mode="tree,form"
+        />
+        
+        <!-- Menu item to open Programs List -->
+        <menuitem 
+            id="menu_program"
+            name="Programs"
+            parent="unison.menu_installs"
+            sequence="40"
+            action="action_program"
+        />
+
+        <!-- Program Tree -->
+        <record id="view_tree_program" model="ir.ui.view">
+            <field name="name">Program Tree</field>
+            <field name="model">unison.program</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="install_id"/>
+                    <field name="week_day"/>
+                    <field name="hour"/>
+                    <field name="minutes"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Program Form -->
+        <record id="view_form_program" model="ir.ui.view">
+            <field name="name">Program Form</field>
+            <field name="model">unison.program</field>
+            <field name="arch" type="xml">
+                <form string="Program">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="install_id"/>
+                                <field name="week_day"/>
+                                <field name="hour"/>
+                                <field name="minutes"/>
+                                <field name="notes"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

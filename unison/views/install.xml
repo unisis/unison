@@ -52,8 +52,6 @@
                                 <field name="site_url"/>
                                 <field name="manage_dns"/>
                                 <field name="site_record_id"/>
-                                <field name="backups_execute_hour"/>
-                                <field name="backups_retention_days"/>
                                 <field name="status"/>
                                 <field name="admin_pwd"/>
                                 <field name="prod_code_id"/>

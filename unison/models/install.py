@@ -15,8 +15,6 @@ class Install(models.Model):
      partner_id = fields.Many2one('res.partner', 'Client', ondelete='restrict')
      manage_dns = fields.Boolean('Manage DNS', default=True)
      site_record_id = fields.Many2one('unison.record', 'DNS Record', ondelete='restrict')
-     backups_execute_hour = fields.Integer('Backups Execute Hour')
-     backups_retention_days = fields.Integer('Backups Retention Days')
      status = fields.Char('Status')
      admin_pwd = fields.Char('Admin Password')
      prod_code_id = fields.Many2one('unison.code', 'Prod Code', ondelete='restrict')

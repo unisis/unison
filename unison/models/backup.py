@@ -12,6 +12,7 @@ class Backup(models.Model):
      install_id = fields.Many2one('unison.install', 'Install', ondelete='restrict')
      test_db = fields.Boolean('On Test DB?')
      automatic = fields.Boolean('Is Automatic?')
+     program_id = fields.Many2one('unison.program', 'Program', ondelete='restrict')
      code_id = fields.Many2one('unison.code', 'Code', ondelete='restrict')
      date_start = fields.Datetime('Date Start')
      date_end = fields.Datetime('Date End')
