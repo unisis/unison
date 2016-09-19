@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Schedules list -->
+        <act_window 
+            id="action_schedule"
+            name="Schedules"
+            res_model="unison.schedule"
+            view_mode="tree,form"
+        />
+        
+        <!-- Menu item to open Schedules List -->
+        <menuitem 
+            id="menu_schedule"
+            name="Schedules"
+            parent="unison.menu_installs"
+            sequence="20"
+            action="action_schedule"
+        />
+
+        <!-- Schedule Tree -->
+        <record id="view_tree_schedule" model="ir.ui.view">
+            <field name="name">Schedule Tree</field>
+            <field name="model">unison.schedule</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="install_id"/>
+                    <field name="week_day"/>
+                    <field name="start_hour"/>
+                    <field name="end_hour"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Schedule Form -->
+        <record id="view_form_schedule" model="ir.ui.view">
+            <field name="name">Schedule Form</field>
+            <field name="model">unison.schedule</field>
+            <field name="arch" type="xml">
+                <form string="Schedule">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="install_id"/>
+                                <field name="week_day"/>
+                                <field name="start_hour"/>
+                                <field name="end_hour"/>
+                                <field name="notes"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

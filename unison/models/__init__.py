@@ -17,5 +17,6 @@ import record
 import region
 import repository
 import repository_type
+import schedule
 import size
 import volume

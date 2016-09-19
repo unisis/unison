@@ -13,7 +13,7 @@
         <!-- Menu item to open Installations List -->
         <menuitem 
             id="menu_install"
-            name="Intallations"
+            name="Installations"
             parent="unison.menu_installs"
             sequence="10"
             action="action_install"

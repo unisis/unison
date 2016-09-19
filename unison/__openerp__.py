@@ -17,7 +17,7 @@
 
     'category': 'Administration',
 
-    'version': '0.45',
+    'version': '0.47',
 
     # any module necessary for this one to work correctly
     'depends': ['base'],
@@ -44,6 +44,7 @@
         'views/record.xml',
         'views/repository.xml',
         'views/repository_type.xml',
+        'views/schedule.xml',
         'views/size.xml',
         'views/volume.xml',
     ],
