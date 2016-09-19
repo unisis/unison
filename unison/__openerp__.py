@@ -27,6 +27,7 @@
         'data/data.xml',
         'security/ir.model.access.csv',
         'views/menu_sections.xml',
+        'views/backup.xml',
         'views/branch.xml',
         'views/cloud.xml',
         'views/code.xml',

@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Backups list -->
+        <act_window 
+            id="action_backup"
+            name="Backups"
+            res_model="unison.backup"
+            view_mode="tree,form"
+        />
+        
+        <!-- Menu item to open Backups List -->
+        <menuitem 
+            id="menu_backup"
+            name="Backups"
+            parent="unison.menu_installs"
+            sequence="40"
+            action="action_backup"
+        />
+
+        <!-- Backups Tree -->
+        <record id="view_tree_backup" model="ir.ui.view">
+            <field name="name">Backups Tree</field>
+            <field name="model">unison.backup</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="install_id"/>
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="test_db"/>
+                    <field name="date_start"/>
+                    <field name="db_mb"/>
+                    <field name="fs_mb"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Backup Form -->
+        <record id="view_form_backup" model="ir.ui.view">
+            <field name="name">Backup Form</field>
+            <field name="model">unison.backup</field>
+            <field name="arch" type="xml">
+                <form string="Backup">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="install_id"/>
+                                <field name="name"/>
+                                <field name="description"/>
+                                <field name="test_db"/>
+                                <field name="automatic"/>
+                                <field name="code_id"/>
+                                <field name="date_start"/>
+                                <field name="date_end"/>
+                                <field name="db_mb"/>
+                                <field name="fs_mb"/>
+                                <field name="notes"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

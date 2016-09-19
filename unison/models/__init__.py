@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import backup
 import branch
 import cloud
 import code
