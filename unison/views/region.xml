@@ -28,7 +28,6 @@
                     <field name="cloud_id"/>
                     <field name="name"/>
                     <field name="available"/>
-                    <field name="selectable"/>
                 </tree>
             </field>
         </record>
@@ -47,7 +46,6 @@
                             <group name="group_left">
                                 <field name="cloud_id"/>
                                 <field name="name"/>
-                                <field name="selectable"/>
                                 <field name="notes"/>
                             </group>
                             <group name="group_right">

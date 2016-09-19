@@ -12,7 +12,6 @@ class Region(models.Model):
      cloud_id = fields.Many2one('unison.cloud', 'Cloud', ondelete='restrict')
      features = fields.Text('Features')
      available = fields.Boolean('Available', default=True, help='Available to create new droplets, setting provided by DigitalOcean')
-     selectable = fields.Boolean('Selectable', default=True, help='Indicates if we will launch droplets on this region, setting provided by UniSis')
      notes = fields.Text('Notes')
      active = fields.Boolean('Active', default=True)
 
