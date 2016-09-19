@@ -46,6 +46,7 @@
         'views/record.xml',
         'views/repository.xml',
         'views/repository_type.xml',
+        'views/restore.xml',
         'views/schedule.xml',
         'views/size.xml',
         'views/volume.xml',
