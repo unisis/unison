@@ -3,10 +3,12 @@
 import branch
 import cloud
 import code
+import code_repository
 import domain
 import float_ip
 import image
 import key
+import module
 import node
 import node_stat
 import record

@@ -15,7 +15,7 @@
             id="menu_codes"
             name="Codes"
             parent="unison.menu_code"
-            sequence="40"
+            sequence="50"
             action="action_code"
         />
 

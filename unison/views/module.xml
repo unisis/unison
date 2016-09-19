@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Modules list -->
+        <act_window 
+            id="action_module"
+            name="Modules"
+            res_model="unison.module"
+            view_mode="tree,form"
+        />
+        
+        <!-- Menu item to open Modules List -->
+        <menuitem 
+            id="menu_module"
+            name="Modules"
+            parent="unison.menu_code"
+            sequence="40"
+            action="action_module"
+        />
+
+        <!-- Module Tree -->
+        <record id="view_tree_module" model="ir.ui.view">
+            <field name="name">Module Tree</field>
+            <field name="model">unison.module</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="branch_id"/>
+                    <field name="name"/>
+                    <field name="category"/>
+                    <field name="installable"/>
+                    <field name="application"/>
+                    <field name="author"/>
+                    <field name="website"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Module Form -->
+        <record id="view_form_module" model="ir.ui.view">
+            <field name="name">Module Form</field>
+            <field name="model">unison.module</field>
+            <field name="arch" type="xml">
+                <form string="Module">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="code"/>
+                                <field name="name"/>
+                                <field name="branch_id"/>
+                                <field name="description"/>
+                                <field name="summary"/>
+                                <field name="category"/>
+                                <field name="version"/>
+                            </group>
+                            <group name="group_left">
+                                <field name="license"/>
+                                <field name="installable"/>
+                                <field name="auto_install"/>
+                                <field name="application"/>
+                                <field name="author"/>
+                                <field name="website"/>
+                                <field name="db_config"/>
+                                <field name="active"/>
+                                <field name="notes"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>
