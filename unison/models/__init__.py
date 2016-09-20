@@ -9,6 +9,7 @@ import code_repository
 import config
 import domain
 import execution
+import feature
 import float_ip
 import image
 import install

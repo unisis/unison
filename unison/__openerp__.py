@@ -17,7 +17,7 @@
 
     'category': 'Administration',
 
-    'version': '0.54',
+    'version': '0.55',
 
     # any module necessary for this one to work correctly
     'depends': ['base'],
@@ -35,6 +35,7 @@
         'views/code_repository.xml',
         'views/config.xml',
         'views/execution.xml',
+        'views/feature.xml',
         'views/float_ip.xml',
         'views/image.xml',
         'views/install.xml',

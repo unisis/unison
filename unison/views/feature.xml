@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Features list -->
+        <act_window 
+            id="action_feature"
+            name="Features"
+            res_model="unison.feature"
+            view_mode="tree,form"
+        />
+        
+        <!-- Menu item to open Features List -->
+        <menuitem 
+            id="menu_feature"
+            name="Features"
+            parent="unison.menu_nodes"
+            sequence="15"
+            action="action_feature"
+        />
+
+        <!-- Features Tree -->
+        <record id="view_tree_feature" model="ir.ui.view">
+            <field name="name">Features Tree</field>
+            <field name="model">unison.feature</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="cloud_id"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Feature Form -->
+        <record id="view_form_feature" model="ir.ui.view">
+            <field name="name">Feature Form</field>
+            <field name="model">unison.feature</field>
+            <field name="arch" type="xml">
+                <form string="Feature">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="cloud_id"/>
+                                <field name="code"/>
+                                <field name="notes"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

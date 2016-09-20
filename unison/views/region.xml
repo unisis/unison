@@ -46,11 +46,11 @@
                             <group name="group_left">
                                 <field name="cloud_id"/>
                                 <field name="name"/>
+                                <field name="available"/>
                                 <field name="notes"/>
                             </group>
                             <group name="group_right">
-                                <field name="features"/>
-                                <field name="available"/>
+                                <field name="feature_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
                                 <field name="active"/>
                             </group>
                         </group>
