@@ -18,6 +18,7 @@ class Record(models.Model):
      name = fields.Char('Name', required=True, index=True)
      content = fields.Char('Content', required=True, index=True)
      ttl = fields.Integer('TTL', required=True, help='Time To Live')
+     priority = fields.Integer('Priority')
      domain_id = fields.Many2one('unison.domain', 'Domain', ondelete='restrict')
      notes = fields.Text('Notes')
      active = fields.Boolean('Active', default=True)

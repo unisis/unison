@@ -51,6 +51,7 @@
                             </group>
                             <group name="group_right">
                                 <field name="ttl"/>
+                                <field name="priority"/>
                                 <field name="notes"/>
                                 <field name="active"/>
                             </group>
