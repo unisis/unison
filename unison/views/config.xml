@@ -27,7 +27,7 @@
                 <tree editable="top">
                     <field name="main_domain"/>
                     <field name="region_id"/>
-                    <field name="snapshot_code"/>
+                    <field name="image_id"/>
                 </tree>
             </field>
         </record>
@@ -46,7 +46,7 @@
                             <group name="group_left">
                                 <field name="main_domain"/>
                                 <field name="region_id"/>
-                                <field name="snapshot_code"/>
+                                <field name="image_id"/>
                                 <field name="notes"/>
                             </group>
                         </group>

@@ -13,6 +13,9 @@ class Image(models.Model):
      cloud_id = fields.Many2one('unison.cloud', 'Cloud', ondelete='restrict')
      is_backup = fields.Boolean('Is Backup')
      is_private = fields.Boolean('Is Private')
+     min_disk_size = fields.Integer('Min Disk Size GB')
+     distribution = fields.Char('Distribution')
+     created_at = fields.Datetime('Created At')
      notes = fields.Text('Notes')
      active = fields.Boolean('Active', default=True)
 

@@ -10,6 +10,6 @@ class Config(models.Model):
      _order = 'id'
 
      main_domain = fields.Char('Main Domain')
-     region_id = fields.Many2one('unison.region', 'Region', ondelete='restrict', help='Region from cloud were new nodes will be launched')
-     snapshot_code = fields.Char('Snapshot', help='Snapshot Id used to launch nodes on the above region')
+     region_id = fields.Many2one('unison.region', 'Region', ondelete='restrict', help='Region from Cloud used to launch new nodes')
+     image_id = fields.Many2one('unison.image', 'Image', ondelete='restrict', help='Private snapshot used to launch new nodes on the above region')
      notes = fields.Text('Notes')
