@@ -27,6 +27,8 @@
                 <tree editable="top">
                     <field name="cloud_id"/>
                     <field name="name"/>
+                    <field name="is_backup"/>
+                    <field name="is_private"/>
                 </tree>
             </field>
         </record>
@@ -45,6 +47,8 @@
                             <group name="group_left">
                                 <field name="cloud_id"/>
                                 <field name="name"/>
+                                <field name="is_backup"/>
+                                <field name="is_private"/>
                                 <field name="active"/>
                             </group>
                             <group name="group_right">

@@ -11,6 +11,8 @@ class Image(models.Model):
      code = fields.Char('Code') # DigitalOcean code, assigned after create
      name = fields.Char('Name', required=True, index=True)
      cloud_id = fields.Many2one('unison.cloud', 'Cloud', ondelete='restrict')
+     is_backup = fields.Boolean('Is Backup')
+     is_private = fields.Boolean('Is Private')
      notes = fields.Text('Notes')
      active = fields.Boolean('Active', default=True)
 
