@@ -4,10 +4,10 @@ from openerp import models, fields
 
 # This model store the branches defined on each Git repository
 class Branch(models.Model):
-     _name = 'unison.branch'
-     _order = 'name'
+    _name = 'unison.branch'
+    _order = 'name'
 
-     name = fields.Char('Name', required=True, index=True)
-     repository_id = fields.Many2one('unison.repository', 'Repository', ondelete='restrict')
-     notes = fields.Text('Notes')
-     active = fields.Boolean('Active', default=True)
+    name = fields.Char('Name', required=True, index=True)
+    repository_id = fields.Many2one('unison.repository', 'Repository', ondelete='restrict')
+    notes = fields.Text('Notes')
+    active = fields.Boolean('Active', default=True)
