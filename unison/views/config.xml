@@ -44,6 +44,7 @@
                     <sheet>
                         <group name="group_top">
                             <group name="group_left">
+                                <button type="object" name="get_droplets_list" string="Get Droplets" />
                                 <field name="main_domain"/>
                                 <field name="region_id"/>
                                 <field name="image_id"/>
