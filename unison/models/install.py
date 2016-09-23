@@ -24,6 +24,7 @@ class Install(models.Model):
      float_ip_id = fields.Many2one('unison.float_ip', 'Float IP', ondelete='restrict')
      mail_subaccount = fields.Char('Mail Subaccount')
      mail_api_key = fields.Char('Mail API Key')
+     ssl_enabled = fields.Boolean('Enable HTTPS via a SSL certificate', default=True)
      ssl_generate = fields.Boolean('Generate SSL certificate self-signed', default=True)
      ssl_private_key = fields.Text('SSL Private Key')
      ssl_certificate = fields.Text('SSL Certificate')

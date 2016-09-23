@@ -61,10 +61,11 @@
                                 <field name="float_ip_id"/>
                                 <field name="mail_subaccount"/>
                                 <field name="mail_api_key"/>
-                                <field name="ssl_generate"/>
                                 <field name="active"/>
                             </group>
                             <group name="group_right">
+                                <field name="ssl_enabled"/>
+                                <field name="ssl_generate"/>
                                 <field name="ssl_private_key"/>
                                 <field name="ssl_certificate"/>
                                 <field name="ssl_expire_date"/>
