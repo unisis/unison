@@ -18,7 +18,7 @@ class DigitalOcean(models.Model):
     _name = 'unison.digital_ocean'
     _auto = False # This settings avoids the creation of a table 
 
-    def get_droplets_list(self):
+    def get_droplets_list(self, cr, uid):
         command = "/usr/bin/doctl compute droplet list --output json"
         return self.run_command(command)
 

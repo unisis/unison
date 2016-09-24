@@ -15,4 +15,4 @@ class Config(models.Model):
     notes = fields.Text('Notes')
 
     def get_droplets_list(self, cr, uid, ids, context={}):
-        return self.pool.get('unison.digital_ocean').get_droplets_list()
+        return self.pool.get('unison.digital_ocean').get_droplets_list(cr, uid)

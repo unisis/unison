@@ -17,13 +17,14 @@
 
     'category': 'Administration',
 
-    'version': '0.63',
+    'version': '0.64',
 
     # any module necessary for this one to work correctly
     'depends': ['base'],
 
     # always loaded
     'data': [
+        'data/cron.xml',
         'data/data.xml',
         'security/ir.model.access.csv',
         'views/menu_sections.xml',
