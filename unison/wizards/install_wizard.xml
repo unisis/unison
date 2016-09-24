@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Install Wizard in a new window-->
+        <act_window 
+            id="action_install_wizard"
+            name="Installation Wizard"
+            res_model="unison.install_wizard"
+            view_mode="form"
+            target="new"
+            multi="True"
+        />
+
+        <!-- Menu item to open Installations Wizard List -->
+        <menuitem 
+            id="menu_install_wizard"
+            name="Installation Wizard"
+            parent="unison.menu_installs"
+            sequence="15"
+            action="action_install_wizard"
+        />
+
+        <!-- Installation Wizard Form -->
+        <record id="view_form_installation_wizard" model="ir.ui.view">
+            <field name="name">Installation Wizard</field>
+            <field name="model">unison.install_wizard</field>
+            <field name="arch" type="xml">
+                <form string="Installation Wizard">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="name"/>
+                                <field name="description"/>
+                                <field name="size_id"/>
+                                <field name="site_url"/>
+                                <field name="manage_dns"/>
+                                <field name="ssl_enabled"/>
+                                <field name="ssl_generate"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button type="object" name="action_next" string="Next" class="oe_highlight" />
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

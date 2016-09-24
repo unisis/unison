@@ -17,7 +17,7 @@
 
     'category': 'Administration',
 
-    'version': '0.59',
+    'version': '0.63',
 
     # any module necessary for this one to work correctly
     'depends': ['base'],
@@ -53,6 +53,7 @@
         'views/schedule.xml',
         'views/size.xml',
         'views/volume.xml',
+        'wizards/install_wizard.xml',
     ],
 
     # only loaded in demonstration mode
