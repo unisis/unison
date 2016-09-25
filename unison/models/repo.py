@@ -11,14 +11,12 @@ class Repo(models.Model):
         ('mercurial', 'Mercurial'),
     ]
 
-    name = fields.Char('Name', required=True, index=True)
-    description = fields.Char('Description')
+    name = fields.Char('Name') # This is the repo name, will be added as suffix to the repo_group.url
     repo_group_id = fields.Many2one('unison.repo_group', 'Repository Group', ondelete='restrict')
-    url = fields.Char('Url')
-    only_addons = fields.Boolean('Only Addons', default=True) # False to indicate a Odoo installation which have addons on their ./addons subirectory
+    description = fields.Char('Description')
+    core_code = fields.Boolean('Core Code', default=False) # True to indicate an Odoo core repo (which have addons on their ./addons subirectory)
     type = fields.Selection(types, 'Type', default='git')
     is_private = fields.Boolean('Is Private', default=False)
-    clone_command = fields.Char('Clone Command', required=True)
     ssh_private_key = fields.Text('SSH Private Key')
     fork_repo_id = fields.Many2one('unison.repo', 'Forked Repo', ondelete='restrict')
     notes = fields.Text('Notes')

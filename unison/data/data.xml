@@ -56,14 +56,230 @@
 
         <!-- Repositories used on Generic Code Template 8.0 -->
 
-        <!-- Odoo Repo -->
+        <!-- Odoo SA Main Repo -->
         <record id="repo_odoo" model="unison.repo">
-            <field name="name">odoo</field>
-            <field name="description">Odoo Repo</field>
             <field name="repo_group_id" ref="repo_group_odoo"/>
-            <field name="url">https://github.com/odoo/odoo</field>
-            <field name="only_addons">False</field>
-            <field name="clone_command">git clone git@github.com:odoo/odoo.git</field>
+            <field name="name">odoo</field>
+            <field name="description">Main Odoo Repo</field>
+            <field name="core_code">True</field>
+        </record>
+
+        <!-- OCA Repos -->
+        <record id="repo_oca_account_financial_reporting" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_oca"/>
+            <field name="name">account-financial-reporting</field>
+        </record>
+
+        <record id="repo_oca_account_invoicing" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_oca"/>
+            <field name="name">account-invoicing</field>
+        </record>
+
+        <record id="repo_oca_knowledge" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_oca"/>
+            <field name="name">knowledge</field>
+        </record>
+
+        <record id="repo_oca_reporting_engine_oca" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_oca"/>
+            <field name="name">reporting-engine-oca</field>
+        </record>
+
+        <record id="repo_oca_server_tools" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_oca"/>
+            <field name="name">server-tools</field>
+        </record>
+
+        <record id="repo_oca_stock_logistics_workflow" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_oca"/>
+            <field name="name">stock-logistics-workflow</field>
+        </record>
+
+        <record id="repo_oca_web" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_oca"/>
+            <field name="name">web</field>
+        </record>
+
+        <!-- Adhoc Repos -->
+        <record id="repo_adhoc_account_analytic" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">account-analytic</field>
+        </record>
+
+        <record id="repo_adhoc_account_financial_tools" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">account-financial-tools</field>
+        </record>
+
+        <record id="repo_adhoc_account_invoicing" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">account-invoicing</field>
+        </record>
+
+        <record id="repo_adhoc_account_payment" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">account-payment</field>
+        </record>
+
+        <record id="repo_adhoc_aeroo_reports" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">aeroo_reports</field>
+        </record>
+
+        <record id="repo_adhoc_crm" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">crm</field>
+        </record>
+
+        <record id="repo_adhoc_hr" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">hr</field>
+        </record>
+
+        <record id="repo_adhoc_manufacture" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">manufacture</field>
+        </record>
+
+        <record id="repo_adhoc_miscellaneous" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">miscellaneous</field>
+        </record>
+
+        <record id="repo_adhoc_multi_company" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">multi-company</field>
+        </record>
+
+        <record id="repo_adhoc_odoo_academic" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">odoo-academic</field>
+        </record>
+
+        <record id="repo_adhoc_odoo_argentina" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">odoo-argentina</field>
+        </record>
+
+        <record id="repo_adhoc_odoo_clinic" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">odoo-clinic</field>
+        </record>
+
+        <record id="repo_adhoc_odoo_etl" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">odoo-etl</field>
+        </record>
+
+        <record id="repo_adhoc_odoo_help" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">odoo-help</field>
+        </record>
+
+        <record id="repo_adhoc_odoo_infrastructure" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">odoo-infrastructure</field>
+        </record>
+
+        <record id="repo_adhoc_odoo_law_tracking" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">odoo-law-tracking</field>
+        </record>
+
+        <record id="repo_adhoc_odoo_legal" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">odoo-legal</field>
+        </record>
+
+        <record id="repo_adhoc_odoo_logistic" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">odoo-logistic</field>
+        </record>
+
+        <record id="repo_adhoc_odoo_nautical" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">odoo-nautical</field>
+        </record>
+
+        <record id="repo_adhoc_odoo_public_administration" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">odoo-public-administration</field>
+        </record>
+
+        <record id="repo_adhoc_odoo_setup" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">odoo-setup</field>
+        </record>
+
+        <record id="repo_adhoc_odoo_support" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">odoo-support</field>
+        </record>
+
+        <record id="repo_adhoc_odoo_usability" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">odoo-usability</field>
+        </record>
+
+        <record id="repo_adhoc_odoo_web" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">odoo-web</field>
+        </record>
+
+        <record id="repo_adhoc_partner" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">partner</field>
+        </record>
+
+        <record id="repo_adhoc_product" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">product</field>
+        </record>
+
+        <record id="repo_adhoc_project" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">project</field>
+        </record>
+
+        <record id="repo_adhoc_purchase" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">purchase</field>
+        </record>
+
+        <record id="repo_adhoc_reporting_engine" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">reporting-engine</field>
+        </record>
+
+        <record id="repo_adhoc_sale" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">sale</field>
+        </record>
+
+        <record id="repo_adhoc_stock" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">stock</field>
+        </record>
+
+        <record id="repo_adhoc_survey" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">survey</field>
+        </record>
+
+        <record id="repo_adhoc_surveyor" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">surveyor</field>
+        </record>
+
+        <record id="repo_adhoc_website" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="name">website</field>
+        </record>
+
+        <!-- UniSis Repos -->
+        <record id="repo_unisis_addons" model="unison.repo">
+            <field name="repo_group_id" ref="repo_group_unisis"/>
+            <field name="name">addons</field>
         </record>
 
     </data>
