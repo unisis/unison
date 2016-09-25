@@ -25,9 +25,10 @@
             <field name="model">unison.code</field>
             <field name="arch" type="xml">
                 <tree editable="top">
-                    <field name="hash"/>
+                    <field name="name"/>
                     <field name="description"/>
                     <field name="is_template"/>
+                    <field name="hash"/>
                 </tree>
             </field>
         </record>
@@ -44,10 +45,11 @@
                     <sheet>
                         <group name="group_top">
                             <group name="group_left">
-                                <field name="hash"/>
+                                <field name="name"/>
                                 <field name="description"/>
                                 <field name="is_template"/>
                                 <field name="manual_config"/>
+                                <field name="hash"/>
                             </group>
                             <group name="group_right">
                                 <field name="active"/>

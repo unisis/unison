@@ -8,6 +8,6 @@ class Branch(models.Model):
     _order = 'name'
 
     name = fields.Char('Name', required=True, index=True)
-    repository_id = fields.Many2one('unison.repository', 'Repository', ondelete='restrict')
+    repo_id = fields.Many2one('unison.repo', 'Repository', ondelete='restrict')
     notes = fields.Text('Notes')
     active = fields.Boolean('Active', default=True)

@@ -4,37 +4,40 @@
 
         <!-- Action to open Repositories list -->
         <act_window 
-            id="action_repository"
+            id="action_repo"
             name="Repositories"
-            res_model="unison.repository"
+            res_model="unison.repo"
             view_mode="tree,form"
         />
         
         <!-- Menu item to open Repositories List -->
         <menuitem 
-            id="menu_repository"
+            id="menu_repo"
             name="Repositories"
             parent="unison.menu_code"
             sequence="20"
-            action="action_repository"
+            action="action_repo"
         />
 
         <!-- Repositories Tree -->
-        <record id="view_tree_repository" model="ir.ui.view">
+        <record id="view_tree_repos" model="ir.ui.view">
             <field name="name">Repository Tree</field>
-            <field name="model">unison.repository</field>
+            <field name="model">unison.repo</field>
             <field name="arch" type="xml">
                 <tree editable="top">
-                    <field name="repository_type_id"/>
+                    <field name="repo_group_id"/>
+                    <field name="name"/>
                     <field name="url"/>
+                    <field name="is_private"/>
+                    <field name="only_addons"/>
                 </tree>
             </field>
         </record>
 
         <!-- Repository Form -->
-        <record id="view_form_repository" model="ir.ui.view">
+        <record id="view_form_repo" model="ir.ui.view">
             <field name="name">Repository Form</field>
-            <field name="model">unison.repository</field>
+            <field name="model">unison.repo</field>
             <field name="arch" type="xml">
                 <form string="Repository">
                     <header>
@@ -43,16 +46,20 @@
                     <sheet>
                         <group name="group_top">
                             <group name="group_left">
-                                <field name="repository_type_id"/>
-                                <field name="url"/>
+                                <field name="repo_group_id"/>
+                                <field name="name"/>
                                 <field name="description"/>
-                                <field name="active"/>
-                                <field name="notes"/>
+                                <field name="url"/>
+                                <field name="only_addons"/>
+                                <field name="type"/>
+                                <field name="is_private"/>
                             </group>
                             <group name="group_right">
                                 <field name="clone_command"/>
                                 <field name="ssh_private_key"/>
-                                <field name="forked_from_url"/>
+                                <field name="fork_repo_id"/>
+                                <field name="notes"/>
+                                <field name="active"/>
                             </group>
                         </group>
                     </sheet>

@@ -25,7 +25,7 @@
             <field name="model">unison.branch</field>
             <field name="arch" type="xml">
                 <tree editable="top">
-                    <field name="repository_id"/>
+                    <field name="repo_id"/>
                     <field name="name"/>
                 </tree>
             </field>
@@ -43,7 +43,7 @@
                     <sheet>
                         <group name="group_top">
                             <group name="group_left">
-                                <field name="repository_id"/>
+                                <field name="repo_id"/>
                                 <field name="name"/>
                                 <field name="active"/>
                                 <field name="notes"/>

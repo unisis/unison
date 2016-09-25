@@ -2,7 +2,8 @@
 <openerp>
     <data noupdate="0">
         <!-- Clouds -->
-        <record id="odoo_code" model="unison.cloud">
+
+        <record id="cloud_digitalocean" model="unison.cloud">
             <field name="code">digitalocean</field>
             <field name="name">DigitalOcean</field>
             <field name="api_key">[ENTER-API-KEY]</field>
@@ -10,42 +11,60 @@
             <field name="active">1</field>
         </record>
 
-        <!-- Repository Types -->
-        <record id="odoo_code" model="unison.repository_type">
-            <field name="code">odoo-code</field>
-            <field name="name">Odoo Code</field>
-            <field name="description">Odoo Code</field>
+        <!-- Default Code Template for UniSis -->
+
+        <record id="code_unisis" model="unison.code">
+            <field name="name">UniSis Template</field>
+            <field name="description">Default Template for New Installations</field>
+            <field name="is_template">1</field>
+            <field name="active">1</field>
+        </record>
+
+        <!-- Predefined Repo Groups used for Generic Code Template 8.0 -->
+
+        <!-- Odoo SA Repo Group -->
+        <record id="repo_group_odoo" model="unison.repo_group">
+            <field name="name">odoo</field>
+            <field name="description">Odoo SA Repos</field>
+            <field name="url">https://github.com/odoo</field>
             <field name="sequence">1</field>
         </record>
-        <record id="odoo_addons" model="unison.repository_type">
-            <field name="code">odoo-addons</field>
-            <field name="name">Odoo Addons</field>
-            <field name="description">Odoo Addons</field>
+
+        <!-- OCA Repo Group -->
+        <record id="repo_group_oca" model="unison.repo_group">
+            <field name="name">oca</field>
+            <field name="description">OCA Repos</field>
+            <field name="url">https://github.com/oca</field>
             <field name="sequence">2</field>
         </record>
-        <record id="oca_addons" model="unison.repository_type">
-            <field name="code">oca-addons</field>
-            <field name="name">OCA Addons</field>
-            <field name="description">OCA Addons</field>
+
+        <!-- Adhoc Repo Group -->
+        <record id="repo_group_adhoc" model="unison.repo_group">
+            <field name="name">adhoc</field>
+            <field name="description">Adhoc Repos</field>
+            <field name="url">https://github.com/ingadhoc</field>
             <field name="sequence">3</field>
         </record>
-        <record id="adhoc_addons" model="unison.repository_type">
-            <field name="code">adhoc-addons</field>
-            <field name="name">Adhoc Addons</field>
-            <field name="description">Adhoc Addons</field>
+
+        <!-- UniSis Repo Group -->
+        <record id="repo_group_unisis" model="unison.repo_group">
+            <field name="name">unisis</field>
+            <field name="description">UniSis Repos</field>
+            <field name="url">https://github.com/unisis</field>
             <field name="sequence">4</field>
         </record>
-        <record id="unisis_addons" model="unison.repository_type">
-            <field name="code">unisis-addons</field>
-            <field name="name">UniSis Addons</field>
-            <field name="description">UniSis Addons</field>
-            <field name="sequence">5</field>
+
+        <!-- Repositories used on Generic Code Template 8.0 -->
+
+        <!-- Odoo Repo -->
+        <record id="repo_odoo" model="unison.repo">
+            <field name="name">odoo</field>
+            <field name="description">Odoo Repo</field>
+            <field name="repo_group_id" ref="repo_group_odoo"/>
+            <field name="url">https://github.com/odoo/odoo</field>
+            <field name="only_addons">False</field>
+            <field name="clone_command">git clone git@github.com:odoo/odoo.git</field>
         </record>
-        <record id="client_addons" model="unison.repository_type">
-            <field name="code">client-addons</field>
-            <field name="name">Client Addons</field>
-            <field name="description">Client Addons</field>
-            <field name="sequence">6</field>
-        </record>
+
     </data>
 </openerp>

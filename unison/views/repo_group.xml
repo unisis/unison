@@ -2,50 +2,53 @@
 <openerp>
     <data>
 
-        <!-- Action to open Repository Type list -->
+        <!-- Action to open Repository Group list -->
         <act_window 
-            id="action_repository_type"
-            name="Repository Types"
-            res_model="unison.repository_type"
+            id="action_repo_group"
+            name="Repository Groups"
+            res_model="unison.repo_group"
             view_mode="tree,form"
         />
         
-        <!-- Menu item to open Repository Type List -->
+        <!-- Menu item to open Repository Groups List -->
         <menuitem 
-            id="menu_repository_type"
-            name="Repository Types"
+            id="menu_repo_group"
+            name="Repository Groups"
             parent="unison.menu_code"
             sequence="10"
-            action="action_repository_type"
+            action="action_repo_group"
         />
 
-        <!-- Repository Type Tree -->
-        <record id="view_tree_repository_type" model="ir.ui.view">
-            <field name="name">Repository Types Tree</field>
-            <field name="model">unison.repository_type</field>
+        <!-- Repository Groups Tree -->
+        <record id="view_tree_repo_groups" model="ir.ui.view">
+            <field name="name">Repository Groups Tree</field>
+            <field name="model">unison.repo_group</field>
             <field name="arch" type="xml">
                 <tree editable="top">
                     <field name="name"/>
+                    <field name="url"/>
                     <field name="sequence"/>
                 </tree>
             </field>
         </record>
 
-        <!-- Repository Type Form -->
-        <record id="view_form_repository_type" model="ir.ui.view">
-            <field name="name">Repository Types Form</field>
-            <field name="model">unison.repository_type</field>
+        <!-- Repository Group Form -->
+        <record id="view_form_repo_group" model="ir.ui.view">
+            <field name="name">Repository Group Form</field>
+            <field name="model">unison.repo_group</field>
             <field name="arch" type="xml">
-                <form string="Repository Type">
+                <form string="Repository Group">
                     <header>
                         <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
                     </header>
                     <sheet>
                         <group name="group_center">
-                            <field name="code"/>
                             <field name="name"/>
                             <field name="description"/>
+                            <field name="url"/>
                             <field name="sequence"/>
+                            <field name="notes"/>
+                            <field name="active"/>
                         </group>
                     </sheet>
                 </form>

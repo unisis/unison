@@ -20,8 +20,8 @@ import node_stat
 import program
 import record
 import region
-import repository
-import repository_type
+import repo
+import repo_group
 import restore
 import schedule
 import size
