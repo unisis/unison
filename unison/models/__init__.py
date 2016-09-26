@@ -5,7 +5,7 @@ import branch
 import cloud
 import code
 import code_module
-import code_repository
+import code_repo
 import config
 import domain
 import execution

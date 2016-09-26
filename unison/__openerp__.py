@@ -33,7 +33,7 @@
         'views/cloud.xml',
         'views/code.xml',
         'views/code_module.xml',
-        'views/code_repository.xml',
+        'views/code_repo.xml',
         'views/config.xml',
         'views/execution.xml',
         'views/feature.xml',
