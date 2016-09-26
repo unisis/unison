@@ -28,6 +28,7 @@
                     <field name="main_domain"/>
                     <field name="region_id"/>
                     <field name="image_id"/>
+                    <field name="default_branch"/>
                 </tree>
             </field>
         </record>
@@ -48,6 +49,7 @@
                                 <field name="main_domain"/>
                                 <field name="region_id"/>
                                 <field name="image_id"/>
+                                <field name="default_branch"/>
                                 <field name="notes"/>
                             </group>
                         </group>

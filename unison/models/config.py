@@ -12,6 +12,7 @@ class Config(models.Model):
     main_domain = fields.Char('Main Domain')
     region_id = fields.Many2one('unison.region', 'Region', ondelete='restrict', help='Region from Cloud used to launch new nodes')
     image_id = fields.Many2one('unison.image', 'Image', ondelete='restrict', help='Private snapshot used to launch new nodes on the above region')
+    default_branch = fields.Char('Default Branch', default='8.0')
     notes = fields.Text('Notes')
 
     def get_droplets_list(self, cr, uid, ids, context={}):

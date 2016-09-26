@@ -228,8 +228,6 @@
             <field name="name">product</field>
         </record>
 
-        <!-- ATTENTION: The 'project' module is not added to the database? -->
-
         <record id="repo_adhoc_project" model="unison.repo">
             <field name="repo_group_id" ref="repo_group_adhoc"/>
             <field name="name">project</field>
@@ -274,6 +272,228 @@
         <record id="repo_unisis_addons" model="unison.repo">
             <field name="repo_group_id" ref="repo_group_unisis"/>
             <field name="name">addons</field>
+        </record>
+
+        <!-- Branches (just default 8.0 branch on repos) -->
+
+        <record id="branch_repo_odoo" model="unison.branch">
+            <field name="repo_id" ref="repo_odoo"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_oca_account_financial_reporting" model="unison.branch">
+            <field name="repo_id" ref="repo_oca_account_financial_reporting"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_oca_account_invoicing" model="unison.branch">
+            <field name="repo_id" ref="repo_oca_account_invoicing"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_oca_knowledge" model="unison.branch">
+            <field name="repo_id" ref="repo_oca_knowledge"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_oca_reporting_engine_oca" model="unison.branch">
+            <field name="repo_id" ref="repo_oca_reporting_engine_oca"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_oca_server_tools" model="unison.branch">
+            <field name="repo_id" ref="repo_oca_server_tools"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_oca_stock_logistics_workflow" model="unison.branch">
+            <field name="repo_id" ref="repo_oca_stock_logistics_workflow"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_oca_web" model="unison.branch">
+            <field name="repo_id" ref="repo_oca_web"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_account_analytic" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_account_analytic"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_account_financial_tools" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_account_financial_tools"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_account_invoicing" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_account_invoicing"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_account_payment" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_account_payment"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_aeroo_reports" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_aeroo_reports"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_crm" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_crm"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_hr" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_hr"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_manufacture" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_manufacture"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_miscellaneous" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_miscellaneous"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_multi_company" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_multi_company"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_odoo_academic" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_odoo_academic"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_odoo_argentina" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_odoo_argentina"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_odoo_clinic" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_odoo_clinic"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_odoo_etl" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_odoo_etl"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_odoo_help" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_odoo_help"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_odoo_infrastructure" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_odoo_infrastructure"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_odoo_law_tracking" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_odoo_law_tracking"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_odoo_legal" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_odoo_legal"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_odoo_logistic" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_odoo_logistic"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_odoo_nautical" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_odoo_nautical"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_odoo_public_administration" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_odoo_public_administration"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_odoo_setup" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_odoo_setup"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_odoo_support" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_odoo_support"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_odoo_usability" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_odoo_usability"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_odoo_web" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_odoo_web"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_partner" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_partner"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_product" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_product"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_project" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_project"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_purchase" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_purchase"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_reporting_engine" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_reporting_engine"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_sale" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_sale"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_stock" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_stock"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_survey" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_survey"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_surveyor" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_surveyor"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_adhoc_website" model="unison.branch">
+            <field name="repo_id" ref="repo_adhoc_website"/>
+            <field name="name">8.0</field>
+        </record>
+
+        <record id="branch_repo_unisis_addons" model="unison.branch">
+            <field name="repo_id" ref="repo_unisis_addons"/>
+            <field name="name">8.0</field>
         </record>
 
         <!-- Default Code Template for UniSis -->
@@ -920,6 +1140,11 @@
         <record id="code_module_product_website_categ_search" model="unison.code_module">
             <field name="code_id" ref="code_unisis"/>
             <field name="module_name">product_website_categ_search</field>
+        </record>
+
+        <record id="code_module_project" model="unison.code_module">
+            <field name="code_id" ref="code_unisis"/>
+            <field name="module_name">project</field>
         </record>
 
         <record id="code_module_purchase" model="unison.code_module">
