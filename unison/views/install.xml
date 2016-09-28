@@ -48,7 +48,6 @@
                             <group name="group_left">
                                 <field name="name"/>
                                 <field name="description"/>
-                                <field name="size_id"/>
                                 <field name="site_url"/>
                                 <field name="manage_dns"/>
                                 <field name="site_record_id"/>

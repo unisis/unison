@@ -29,6 +29,7 @@
                     <field name="week_day"/>
                     <field name="start_hour"/>
                     <field name="end_hour"/>
+                    <field name="size_id"/>
                 </tree>
             </field>
         </record>
@@ -49,6 +50,7 @@
                                 <field name="week_day"/>
                                 <field name="start_hour"/>
                                 <field name="end_hour"/>
+                                <field name="size_id"/>
                                 <field name="notes"/>
                             </group>
                         </group>
