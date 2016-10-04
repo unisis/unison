@@ -15,7 +15,7 @@
             id="menu_program"
             name="Programs"
             parent="unison.menu_installs"
-            sequence="70"
+            sequence="60"
             action="action_program"
         />
 

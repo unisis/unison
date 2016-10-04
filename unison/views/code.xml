@@ -26,7 +26,9 @@
             <field name="arch" type="xml">
                 <tree editable="top">
                     <field name="name"/>
+                    <field name="description"/>
                     <field name="hash"/>
+                    <field name="code_id"/>
                 </tree>
             </field>
         </record>
@@ -46,6 +48,7 @@
                                 <field name="name"/>
                                 <field name="description"/>
                                 <field name="hash"/>
+                                <field name="code_id"/>
                             </group>
                             <group name="group_right">
                                 <field name="active"/>

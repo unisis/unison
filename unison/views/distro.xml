@@ -15,7 +15,7 @@
             id="menu_distro"
             name="Distros"
             parent="unison.menu_installs"
-            sequence="20"
+            sequence="10"
             action="action_distro"
         />
 
@@ -27,6 +27,11 @@
                 <tree editable="top">
                     <field name="name"/>
                     <field name="description"/>
+                    <field name="domain_id"/>
+                    <field name="region_id"/>
+                    <field name="image_id"/>
+                    <field name="code_id"/>
+                    <field name="min_size_id"/>
                 </tree>
             </field>
         </record>
@@ -46,7 +51,10 @@
                                 <field name="name"/>
                                 <field name="description"/>
                                 <field name="domain_id"/>
+                                <field name="region_id"/>
+                                <field name="image_id"/>
                                 <field name="code_id"/>
+                                <field name="min_size_id"/>
                                 <field name="manual_steps"/>
                                 <field name="notes"/>
                                 <field name="active"/>

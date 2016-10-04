@@ -15,7 +15,7 @@
             id="menu_execution"
             name="Executions"
             parent="unison.menu_installs"
-            sequence="60"
+            sequence="50"
             action="action_execution"
         />
 

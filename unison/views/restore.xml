@@ -15,7 +15,7 @@
             id="menu_restore"
             name="Restores"
             parent="unison.menu_installs"
-            sequence="90"
+            sequence="80"
             action="action_restore"
         />
 

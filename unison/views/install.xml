@@ -15,7 +15,7 @@
             id="menu_install"
             name="Installations"
             parent="unison.menu_installs"
-            sequence="30"
+            sequence="20"
             action="action_install"
         />
 
