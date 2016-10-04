@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Distros list -->
+        <act_window 
+            id="action_distro"
+            name="Distros"
+            res_model="unison.distro"
+            view_mode="tree,form"
+        />
+        
+        <!-- Menu item to open Distros List -->
+        <menuitem 
+            id="menu_distro"
+            name="Distros"
+            parent="unison.menu_installs"
+            sequence="20"
+            action="action_distro"
+        />
+
+        <!-- Distros Tree -->
+        <record id="view_tree_distro" model="ir.ui.view">
+            <field name="name">Distros Tree</field>
+            <field name="model">unison.distro</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Distro Form -->
+        <record id="view_form_distro" model="ir.ui.view">
+            <field name="name">Distro Form</field>
+            <field name="model">unison.distro</field>
+            <field name="arch" type="xml">
+                <form string="Distro">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="name"/>
+                                <field name="description"/>
+                                <field name="domain_id"/>
+                                <field name="code_id"/>
+                                <field name="manual_steps"/>
+                                <field name="notes"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

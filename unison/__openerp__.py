@@ -35,6 +35,7 @@
         'views/code_module.xml',
         'views/code_repo.xml',
         'views/config.xml',
+        'views/distro.xml',
         'views/execution.xml',
         'views/feature.xml',
         'views/float_ip.xml',

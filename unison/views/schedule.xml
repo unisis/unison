@@ -15,7 +15,7 @@
             id="menu_schedule"
             name="Schedules"
             parent="unison.menu_installs"
-            sequence="20"
+            sequence="50"
             action="action_schedule"
         />
 

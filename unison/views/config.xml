@@ -15,7 +15,7 @@
             id="menu_config"
             name="Configuration"
             parent="unison.menu_installs"
-            sequence="5"
+            sequence="10"
             action="action_config"
         />
 

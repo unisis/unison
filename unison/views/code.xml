@@ -26,8 +26,6 @@
             <field name="arch" type="xml">
                 <tree editable="top">
                     <field name="name"/>
-                    <field name="description"/>
-                    <field name="is_template"/>
                     <field name="hash"/>
                 </tree>
             </field>
@@ -47,8 +45,6 @@
                             <group name="group_left">
                                 <field name="name"/>
                                 <field name="description"/>
-                                <field name="is_template"/>
-                                <field name="manual_config"/>
                                 <field name="hash"/>
                             </group>
                             <group name="group_right">

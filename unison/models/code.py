@@ -2,7 +2,7 @@
 
 from openerp import models, fields
 
-# Code represents the exact configuration of code for an installation or template
+# Code represents the exact configuration of code for an installation or distro template
 # It's like a "super-commit" hash, but not related to just one repository, it's related to the
 # entire configuration of all added repositories, their selected branches and the commits on each branch
 # Just one of the selected repos should have repo.only_addons=0 (meaning that contains the Odoo code base)
@@ -12,8 +12,6 @@ class Code(models.Model):
 
     name = fields.Char('Name', required=True, index=True)
     description = fields.Char('Description')
-    is_template = fields.Boolean('Is Template?')
-    manual_config = fields.Text('Manual Configuration')
     hash = fields.Char('Code Hash', index=True)
     notes = fields.Text('Notes')
     active = fields.Boolean('Active', default=True)

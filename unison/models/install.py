@@ -10,6 +10,7 @@ class Install(models.Model):
 
     name = fields.Char('Name', required=True, index=True)
     description = fields.Char('Description', required=True, index=True)
+    distro_id = fields.Many2one('unison.distro', 'Distro', ondelete='restrict')
     site_url = fields.Char('Site URL', required=True, index=True)
     partner_id = fields.Many2one('res.partner', 'Client', ondelete='restrict')
     manage_dns = fields.Boolean('Manage DNS', default=True)

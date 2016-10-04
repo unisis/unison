@@ -7,6 +7,7 @@ import code
 import code_module
 import code_repo
 import config
+import distro
 import domain
 import execution
 import feature

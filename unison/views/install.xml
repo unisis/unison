@@ -15,7 +15,7 @@
             id="menu_install"
             name="Installations"
             parent="unison.menu_installs"
-            sequence="10"
+            sequence="30"
             action="action_install"
         />
 
@@ -25,6 +25,7 @@
             <field name="model">unison.install</field>
             <field name="arch" type="xml">
                 <tree editable="top">
+                    <field name="distro_id"/>
                     <field name="partner_id"/>
                     <field name="site_url"/>
                     <field name="name"/>
@@ -48,6 +49,7 @@
                             <group name="group_left">
                                 <field name="name"/>
                                 <field name="description"/>
+                                <field name="distro_id"/>
                                 <field name="site_url"/>
                                 <field name="manage_dns"/>
                                 <field name="site_record_id"/>
