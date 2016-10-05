@@ -10,7 +10,7 @@ class Backup(models.Model):
     name = fields.Char('Name', required=True, index=True)
     description = fields.Char('Description')
     install_id = fields.Many2one('unison.install', 'Install', ondelete='restrict')
-    test_db = fields.Boolean('On Test DB?')
+    test_db = fields.Boolean('Backup Test DB?')
     automatic = fields.Boolean('Is Automatic?')
     program_id = fields.Many2one('unison.program', 'Program', ondelete='restrict')
     code_id = fields.Many2one('unison.code', 'Code', ondelete='restrict')
