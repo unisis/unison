@@ -24,7 +24,7 @@
             <field name="name">Region Tree</field>
             <field name="model">unison.region</field>
             <field name="arch" type="xml">
-                <tree editable="top">
+                <tree create="false" delete="false" editable="false">
                     <field name="cloud_id"/>
                     <field name="name"/>
                     <field name="available"/>
@@ -37,21 +37,21 @@
             <field name="name">Region Form</field>
             <field name="model">unison.region</field>
             <field name="arch" type="xml">
-                <form string="Region">
+                <form string="Region" create="false" delete="false" editable="true">
                     <header>
                         <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
                     </header>
                     <sheet>
                         <group name="group_top">
                             <group name="group_left">
-                                <field name="cloud_id"/>
-                                <field name="name"/>
-                                <field name="available"/>
-                                <field name="notes"/>
+                                <field name="cloud_id" readonly="1"/>
+                                <field name="name" readonly="1"/>
+                                <field name="available" readonly="1"/>
+                                <field name="feature_ids" widget="many2many_tags" readonly="1" options="{'no_create_edit': True}"/>
                             </group>
                             <group name="group_right">
-                                <field name="feature_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
-                                <field name="active"/>
+                                <field name="notes"/>
+                                <field name="active" readonly="1"/>
                             </group>
                         </group>
                     </sheet>

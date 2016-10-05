@@ -24,7 +24,7 @@
             <field name="name">Keys Tree</field>
             <field name="model">unison.key</field>
             <field name="arch" type="xml">
-                <tree editable="top">
+                <tree create="false" delete="false" editable="false">
                     <field name="cloud_id"/>
                     <field name="name"/>
                 </tree>
@@ -36,23 +36,23 @@
             <field name="name">Key Form</field>
             <field name="model">unison.key</field>
             <field name="arch" type="xml">
-                <form string="Key">
+                <form string="Key" create="false" delete="false" editable="true">
                     <header>
                         <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
                     </header>
                     <sheet>
                         <group name="group_top">
                             <group name="group_left">
-                                <field name="cloud_id"/>
-                                <field name="name"/>
-                                <field name="fingerprint"/>
-                                <field name="active"/>
+                                <field name="cloud_id" readonly="1"/>
+                                <field name="name" readonly="1"/>
+                                <field name="fingerprint" readonly="1"/>
+                                <field name="active" readonly="1"/>
                                 <field name="notes"/>
                             </group>
                             <group name="group_right">
-                                <field name="public_key"/>
-                                <field name="private_key"/>
-                                <field name="putty_key"/>
+                                <field name="public_key" readonly="1"/>
+                                <field name="private_key" readonly="1"/>
+                                <field name="putty_key" readonly="1"/>
                             </group>
                         </group>
                     </sheet>

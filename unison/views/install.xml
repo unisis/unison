@@ -24,7 +24,7 @@
             <field name="name">Installation Tree</field>
             <field name="model">unison.install</field>
             <field name="arch" type="xml">
-                <tree editable="top">
+                <tree create="top" delete="false" editable="false">
                     <field name="distro_id"/>
                     <field name="partner_id"/>
                     <field name="site_url"/>
@@ -40,7 +40,7 @@
             <field name="name">Install Form</field>
             <field name="model">unison.install</field>
             <field name="arch" type="xml">
-                <form string="Installation">
+                <form string="Installation" create="true" delete="true" editable="true">
                     <header>
                         <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
                     </header>
@@ -52,16 +52,17 @@
                                 <field name="distro_id"/>
                                 <field name="site_url"/>
                                 <field name="manage_dns"/>
-                                <field name="site_record_id"/>
-                                <field name="status"/>
-                                <field name="admin_pwd"/>
-                                <field name="prod_code_id"/>
-                                <field name="test_code_id"/>
-                                <field name="node_id"/>
-                                <field name="volume_id"/>
-                                <field name="float_ip_id"/>
-                                <field name="mail_subaccount"/>
-                                <field name="mail_api_key"/>
+                                <field name="site_record_id" readonly="1"/>
+                                <field name="status" readonly="1"/>
+                                <field name="admin_pwd" readonly="1"/>
+                                <field name="prod_code_id" readonly="1"/>
+                                <field name="test_code_id" readonly="1"/>
+                                <field name="node_id" readonly="1"/>
+                                <field name="volume_gb"/>
+                                <field name="volume_id" readonly="1"/>
+                                <field name="float_ip_id" readonly="1"/>
+                                <field name="mail_subaccount" readonly="1"/>
+                                <field name="mail_api_key" readonly="1"/>
                                 <field name="active"/>
                             </group>
                             <group name="group_right">

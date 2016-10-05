@@ -24,7 +24,7 @@
             <field name="name">Float IPs Tree</field>
             <field name="model">unison.float_ip</field>
             <field name="arch" type="xml">
-                <tree editable="top">
+                <tree create="false" delete="false" editable="false">
                     <field name="cloud_id"/>
                     <field name="address"/>
                     <field name="node_id"/>
@@ -38,20 +38,20 @@
             <field name="name">Float IP Form</field>
             <field name="model">unison.float_ip</field>
             <field name="arch" type="xml">
-                <form string="Float IP">
+                <form string="Float IP" create="false" delete="false" editable="true">
                     <header>
                         <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
                     </header>
                     <sheet>
                         <group name="group_top">
                             <group name="group_left">
-                                <field name="cloud_id"/>
-                                <field name="address"/>
-                                <field name="active"/>
+                                <field name="cloud_id" readonly="1"/>
+                                <field name="address" readonly="1"/>
+                                <field name="active" readonly="1"/>
                             </group>
                             <group name="group_right">
-                                <field name="node_id"/>
-                                <field name="date_attach"/>
+                                <field name="node_id" readonly="1"/>
+                                <field name="date_attach" readonly="1"/>
                                 <field name="notes"/>
                             </group>
                         </group>

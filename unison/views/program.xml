@@ -24,7 +24,7 @@
             <field name="name">Program Tree</field>
             <field name="model">unison.program</field>
             <field name="arch" type="xml">
-                <tree editable="top">
+                <tree create="top" delete="false" editable="false">
                     <field name="install_id"/>
                     <field name="week_day"/>
                     <field name="hour"/>
@@ -38,7 +38,7 @@
             <field name="name">Program Form</field>
             <field name="model">unison.program</field>
             <field name="arch" type="xml">
-                <form string="Program">
+                <form string="Program" create="true" delete="true" editable="true">
                     <header>
                         <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
                     </header>

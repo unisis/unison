@@ -24,7 +24,7 @@
             <field name="name">Code Tree</field>
             <field name="model">unison.code</field>
             <field name="arch" type="xml">
-                <tree editable="top">
+                <tree create="top" delete="false" editable="false">
                     <field name="name"/>
                     <field name="description"/>
                     <field name="hash"/>
@@ -38,7 +38,7 @@
             <field name="name">Code Form</field>
             <field name="model">unison.code</field>
             <field name="arch" type="xml">
-                <form string="Code">
+                <form string="Code" create="true" delete="true" editable="true">
                     <header>
                         <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
                     </header>

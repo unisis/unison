@@ -24,7 +24,7 @@
             <field name="name">Code Repositories Tree</field>
             <field name="model">unison.code_repo</field>
             <field name="arch" type="xml">
-                <tree editable="top">
+                <tree create="top" delete="false" editable="false">
                     <field name="code_id"/>
                     <field name="branch_id"/>
                     <field name="commit"/>
@@ -37,7 +37,7 @@
             <field name="name">Code Repository Form</field>
             <field name="model">unison.code_repo</field>
             <field name="arch" type="xml">
-                <form string="Code">
+                <form string="Code Repo" create="true" delete="true" editable="true">
                     <header>
                         <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
                     </header>

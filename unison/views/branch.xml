@@ -24,7 +24,7 @@
             <field name="name">Branch Tree</field>
             <field name="model">unison.branch</field>
             <field name="arch" type="xml">
-                <tree editable="top">
+                <tree create="false" delete="false" editable="false">
                     <field name="repo_id"/>
                     <field name="name"/>
                 </tree>
@@ -36,16 +36,16 @@
             <field name="name">Branch Form</field>
             <field name="model">unison.branch</field>
             <field name="arch" type="xml">
-                <form string="Branch">
+                <form string="Branch" create="false" delete="false" editable="true">
                     <header>
                         <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
                     </header>
                     <sheet>
                         <group name="group_top">
                             <group name="group_left">
-                                <field name="repo_id"/>
-                                <field name="name"/>
-                                <field name="active"/>
+                                <field name="repo_id" readonly="1"/>
+                                <field name="name" readonly="1"/>
+                                <field name="active" readonly="1"/>
                                 <field name="notes"/>
                             </group>
                         </group>

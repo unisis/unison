@@ -24,7 +24,7 @@
             <field name="name">Node Tree</field>
             <field name="model">unison.node</field>
             <field name="arch" type="xml">
-                <tree editable="top">
+                <tree create="false" delete="false" editable="false">
                     <field name="name"/>
                     <field name="size_id"/>
                     <field name="public_ip"/>
@@ -37,26 +37,26 @@
             <field name="name">Node Form</field>
             <field name="model">unison.node</field>
             <field name="arch" type="xml">
-                <form string="Node">
+                <form string="Node" create="false" delete="false" editable="true">
                     <header>
                         <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
                     </header>
                     <sheet>
                         <group name="group_top">
                             <group name="group_left">
-                                <field name="name"/>
-                                <field name="image_id"/>
-                                <field name="size_id"/>
-                                <field name="region_id"/>
-                                <field name="key_id"/>
-                                <field name="record_id"/>
+                                <field name="name" readonly="1"/>
+                                <field name="image_id" readonly="1"/>
+                                <field name="size_id" readonly="1"/>
+                                <field name="region_id" readonly="1"/>
+                                <field name="key_id" readonly="1"/>
+                                <field name="record_id" readonly="1"/>
                             </group>
                             <group name="group_right">
-                                <field name="public_ip"/>
-                                <field name="private_ip"/>
-                                <field name="status"/>
+                                <field name="public_ip" readonly="1"/>
+                                <field name="private_ip" readonly="1"/>
+                                <field name="status" readonly="1"/>
+                                <field name="active" readonly="1"/>
                                 <field name="notes"/>
-                                <field name="active"/>
                             </group>
                         </group>
                     </sheet>

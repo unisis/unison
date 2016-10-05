@@ -24,7 +24,7 @@
             <field name="name">Domain Tree</field>
             <field name="model">unison.domain</field>
             <field name="arch" type="xml">
-                <tree editable="top">
+                <tree create="false" delete="false" editable="false">
                     <field name="name"/>
                 </tree>
             </field>
@@ -35,15 +35,15 @@
             <field name="name">Domain Form</field>
             <field name="model">unison.domain</field>
             <field name="arch" type="xml">
-                <form string="Domain">
+                <form string="Domain" create="false" delete="false" editable="true">
                     <header>
                         <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
                     </header>
                     <sheet>
                         <group name="group_center">
-                            <field name="code"/>
-                            <field name="name"/>
-                            <field name="active"/>
+                            <field name="code" readonly="1"/>
+                            <field name="name" readonly="1"/>
+                            <field name="active" readonly="1"/>
                         </group>
                     </sheet>
                 </form>

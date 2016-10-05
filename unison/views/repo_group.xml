@@ -24,7 +24,7 @@
             <field name="name">Repository Groups Tree</field>
             <field name="model">unison.repo_group</field>
             <field name="arch" type="xml">
-                <tree editable="top">
+                <tree create="top" delete="false" editable="false">
                     <field name="name"/>
                     <field name="url"/>
                     <field name="sequence"/>
@@ -37,7 +37,7 @@
             <field name="name">Repository Group Form</field>
             <field name="model">unison.repo_group</field>
             <field name="arch" type="xml">
-                <form string="Repository Group">
+                <form string="Repository Group" create="true" delete="true" editable="true">
                     <header>
                         <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
                     </header>

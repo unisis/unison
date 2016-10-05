@@ -24,7 +24,7 @@
             <field name="name">Distros Tree</field>
             <field name="model">unison.distro</field>
             <field name="arch" type="xml">
-                <tree editable="top">
+                <tree create="top" delete="false" editable="false">
                     <field name="name"/>
                     <field name="description"/>
                     <field name="is_public"/>
@@ -33,6 +33,7 @@
                     <field name="image_id"/>
                     <field name="code_id"/>
                     <field name="min_size_id"/>
+                    <field name="min_volume_gb"/>
                 </tree>
             </field>
         </record>
@@ -42,7 +43,7 @@
             <field name="name">Distro Form</field>
             <field name="model">unison.distro</field>
             <field name="arch" type="xml">
-                <form string="Distro">
+                <form string="Distro" create="true" delete="true" editable="true">
                     <header>
                         <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
                     </header>
@@ -57,6 +58,7 @@
                                 <field name="image_id"/>
                                 <field name="code_id"/>
                                 <field name="min_size_id"/>
+                                <field name="min_volume_gb"/>
                                 <field name="manual_steps"/>
                                 <field name="notes"/>
                                 <field name="active"/>

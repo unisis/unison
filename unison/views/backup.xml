@@ -41,7 +41,7 @@
             <field name="name">Backup Form</field>
             <field name="model">unison.backup</field>
             <field name="arch" type="xml">
-                <form string="Backup">
+                <form string="Backup" create="true" delete="false" editable="true">
                     <header>
                         <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
                     </header>

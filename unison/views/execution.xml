@@ -24,7 +24,7 @@
             <field name="name">Executions Tree</field>
             <field name="model">unison.execution</field>
             <field name="arch" type="xml">
-                <tree editable="top">
+                <tree create="false" delete="false" editable="false">
                     <field name="install_id"/>
                     <field name="date_start"/>
                     <field name="date_end"/>
@@ -40,21 +40,21 @@
             <field name="name">Execution Form</field>
             <field name="model">unison.execution</field>
             <field name="arch" type="xml">
-                <form string="Execution">
+                <form string="Execution" create="false" delete="false" editable="true">
                     <header>
                         <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
                     </header>
                     <sheet>
                         <group name="group_top">
                             <group name="group_left">
-                                <field name="install_id"/>
-                                <field name="date_start"/>
-                                <field name="date_end"/>
-                                <field name="hours"/>
-                                <field name="started_manually"/>
-                                <field name="stopped_manually"/>
-                                <field name="node_price_usd"/>
-                                <field name="volume_price_usd"/>
+                                <field name="install_id" readonly="1"/>
+                                <field name="date_start" readonly="1"/>
+                                <field name="date_end" readonly="1"/>
+                                <field name="hours" readonly="1"/>
+                                <field name="started_manually" readonly="1"/>
+                                <field name="stopped_manually" readonly="1"/>
+                                <field name="node_price_usd" readonly="1"/>
+                                <field name="volume_price_usd" readonly="1"/>
                                 <field name="notes"/>
                             </group>
                         </group>

@@ -20,6 +20,7 @@ class Install(models.Model):
     prod_code_id = fields.Many2one('unison.code', 'Prod Code', ondelete='restrict')
     test_code_id = fields.Many2one('unison.code', 'Test Code', ondelete='restrict')
     node_id = fields.Many2one('unison.node', 'Node', ondelete='restrict')
+    volume_gb = fields.Integer('Volume Desired GB', required=True)
     volume_id = fields.Many2one('unison.volume', 'Volume', ondelete='restrict')
     float_ip_id = fields.Many2one('unison.float_ip', 'Float IP', ondelete='restrict')
     mail_subaccount = fields.Char('Mail Subaccount')

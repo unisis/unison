@@ -24,7 +24,7 @@
             <field name="name">Module Tree</field>
             <field name="model">unison.module</field>
             <field name="arch" type="xml">
-                <tree editable="top">
+                <tree create="false" delete="false" editable="false">
                     <field name="branch_id"/>
                     <field name="name"/>
                     <field name="category"/>
@@ -41,30 +41,30 @@
             <field name="name">Module Form</field>
             <field name="model">unison.module</field>
             <field name="arch" type="xml">
-                <form string="Module">
+                <form string="Module" create="false" delete="false" editable="true">
                     <header>
                         <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
                     </header>
                     <sheet>
                         <group name="group_top">
                             <group name="group_left">
-                                <field name="code"/>
-                                <field name="name"/>
-                                <field name="branch_id"/>
-                                <field name="description"/>
-                                <field name="summary"/>
-                                <field name="category"/>
-                                <field name="version"/>
+                                <field name="code" readonly="1"/>
+                                <field name="name" readonly="1"/>
+                                <field name="branch_id" readonly="1"/>
+                                <field name="description" readonly="1"/>
+                                <field name="summary" readonly="1"/>
+                                <field name="category" readonly="1"/>
+                                <field name="version" readonly="1"/>
                             </group>
                             <group name="group_left">
-                                <field name="license"/>
-                                <field name="installable"/>
-                                <field name="auto_install"/>
-                                <field name="application"/>
-                                <field name="author"/>
-                                <field name="website"/>
+                                <field name="license" readonly="1"/>
+                                <field name="installable" readonly="1"/>
+                                <field name="auto_install" readonly="1"/>
+                                <field name="application" readonly="1"/>
+                                <field name="author" readonly="1"/>
+                                <field name="website" readonly="1"/>
+                                <field name="active" readonly="1"/>
                                 <field name="db_config"/>
-                                <field name="active"/>
                                 <field name="notes"/>
                             </group>
                         </group>

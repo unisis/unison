@@ -24,7 +24,7 @@
             <field name="name">Features Tree</field>
             <field name="model">unison.feature</field>
             <field name="arch" type="xml">
-                <tree editable="top">
+                <tree create="false" delete="false" editable="false">
                     <field name="cloud_id"/>
                     <field name="code"/>
                 </tree>
@@ -36,15 +36,15 @@
             <field name="name">Feature Form</field>
             <field name="model">unison.feature</field>
             <field name="arch" type="xml">
-                <form string="Feature">
+                <form string="Feature" create="false" delete="false" editable="true">
                     <header>
                         <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
                     </header>
                     <sheet>
                         <group name="group_top">
                             <group name="group_left">
-                                <field name="cloud_id"/>
-                                <field name="code"/>
+                                <field name="cloud_id" readonly="1"/>
+                                <field name="code" readonly="1"/>
                                 <field name="notes"/>
                                 <field name="active"/>
                             </group>

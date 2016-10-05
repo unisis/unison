@@ -24,7 +24,7 @@
             <field name="name">Volumes Tree</field>
             <field name="model">unison.volume</field>
             <field name="arch" type="xml">
-                <tree editable="top">
+                <tree create="false" delete="false" editable="false">
                     <field name="cloud_id"/>
                     <field name="name"/>
                 </tree>
@@ -36,21 +36,21 @@
             <field name="name">Volume Form</field>
             <field name="model">unison.volume</field>
             <field name="arch" type="xml">
-                <form string="Volume">
+                <form string="Volume" create="false" delete="false" editable="true">
                     <header>
                         <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
                     </header>
                     <sheet>
                         <group name="group_top">
                             <group name="group_left">
-                                <field name="cloud_id"/>
-                                <field name="name"/>
-                                <field name="size_gb"/>
-                                <field name="active"/>
+                                <field name="cloud_id" readonly="1"/>
+                                <field name="name" readonly="1"/>
+                                <field name="size_gb" readonly="1"/>
+                                <field name="active" readonly="1"/>
                             </group>
                             <group name="group_right">
-                                <field name="node_id"/>
-                                <field name="mount_point"/>
+                                <field name="node_id" readonly="1"/>
+                                <field name="mount_point" readonly="1"/>
                                 <field name="notes"/>
                             </group>
                         </group>

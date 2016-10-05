@@ -24,7 +24,7 @@
             <field name="name">Restores Tree</field>
             <field name="model">unison.restore</field>
             <field name="arch" type="xml">
-                <tree editable="top">
+                <tree create="top" delete="false" editable="false">
                     <field name="install_id"/>
                     <field name="backup_id"/>
                     <field name="restore_code"/>
@@ -39,21 +39,21 @@
             <field name="name">Restore Form</field>
             <field name="model">unison.restore</field>
             <field name="arch" type="xml">
-                <form string="Restore">
+                <form string="Restore" create="true" delete="true" editable="true">
                     <header>
                         <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
                     </header>
                     <sheet>
                         <group name="group_top">
                             <group name="group_left">
-                                <field name="install_id"/>
-                                <field name="backup_id"/>
-                                <field name="restore_code"/>
-                                <field name="date_start"/>
-                                <field name="date_end"/>
-                                <field name="success"/>
+                                <field name="install_id" readonly="1"/>
+                                <field name="backup_id" readonly="1"/>
+                                <field name="restore_code" readonly="1"/>
+                                <field name="date_start" readonly="1"/>
+                                <field name="date_end" readonly="1"/>
+                                <field name="success" readonly="1"/>
+                                <field name="active" readonly="1"/>
                                 <field name="notes"/>
-                                <field name="active"/>
                             </group>
                         </group>
                     </sheet>

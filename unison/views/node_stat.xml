@@ -24,16 +24,16 @@
             <field name="name">Nodes Stats Tree</field>
             <field name="model">unison.node_stat</field>
             <field name="arch" type="xml">
-                <tree editable="top">
-                    <field name="node_id"/>
-                    <field name="date"/>
-                    <field name="cpu_cores"/>
-                    <field name="cpu_used"/>
-                    <field name="mem_mb"/>
-                    <field name="mem_used"/>
-                    <field name="disk_gb"/>
-                    <field name="disk_used"/>
-                    <field name="transfer_used"/>
+                <tree create="false" delete="false" editable="false">
+                    <field name="node_id" readonly="1"/>
+                    <field name="date" readonly="1"/>
+                    <field name="cpu_cores" readonly="1"/>
+                    <field name="cpu_used" readonly="1"/>
+                    <field name="mem_mb" readonly="1"/>
+                    <field name="mem_used" readonly="1"/>
+                    <field name="disk_gb" readonly="1"/>
+                    <field name="disk_used" readonly="1"/>
+                    <field name="transfer_used" readonly="1"/>
                 </tree>
             </field>
         </record>
