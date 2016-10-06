@@ -31,9 +31,6 @@
                     <field name="domain_id"/>
                     <field name="region_id"/>
                     <field name="image_id"/>
-                    <field name="version_id"/>
-                    <field name="min_size_id"/>
-                    <field name="min_volume_gb"/>
                 </tree>
             </field>
         </record>

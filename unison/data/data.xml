@@ -53,7 +53,7 @@
             <field name="repo_group_id" ref="repo_group_odoo"/>
             <field name="name">odoo</field>
             <field name="description">Main Odoo Repo</field>
-            <field name="core_code">True</field>
+            <field name="is_main">True</field>
         </record>
 
         <!-- OCA Repos -->
