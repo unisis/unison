@@ -55,8 +55,10 @@
                                 <field name="site_record_id" readonly="1"/>
                                 <field name="status" readonly="1"/>
                                 <field name="admin_pwd" readonly="1"/>
-                                <field name="prod_code_id" readonly="1"/>
-                                <field name="test_code_id" readonly="1"/>
+                                <field name="prod_distro_version_id"/>
+                                <field name="prod_install_version_id"/>
+                                <field name="test_distro_version_id"/>
+                                <field name="test_install_version_id"/>
                                 <field name="node_id" readonly="1"/>
                                 <field name="volume_gb"/>
                                 <field name="volume_id" readonly="1"/>

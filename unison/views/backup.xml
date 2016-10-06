@@ -30,6 +30,8 @@
                     <field name="description"/>
                     <field name="test_db"/>
                     <field name="date_start"/>
+                    <field name="version_id"/>
+                    <field name="changed_code"/>
                     <field name="db_mb"/>
                     <field name="fs_mb"/>
                 </tree>
@@ -54,7 +56,8 @@
                                 <field name="test_db"/>
                                 <field name="automatic"/>
                                 <field name="program_id"/>
-                                <field name="code_id"/>
+                                <field name="version_id"/>
+                                <field name="changed_code"/>
                                 <field name="date_start"/>
                                 <field name="date_end"/>
                                 <field name="db_mb"/>

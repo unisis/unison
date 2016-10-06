@@ -14,13 +14,13 @@ class Distro(models.Model):
     name = fields.Char('Name', required=True, index=True)
     description = fields.Text('Description', required=True, index=True)
     is_public = fields.Boolean('Is Public')
-    domain_id = fields.Many2one('unison.domain', 'Domain', required=True, ondelete='restrict')  # For example, edif.com.ar
-    region_id = fields.Many2one('unison.region', 'Region', required=True, ondelete='restrict', help='Region used to launch new nodes for this distro')
-    image_id = fields.Many2one('unison.image', 'Image', required=True, ondelete='restrict', help='Private snapshot used to launch new nodes for this distro')
-    code_id = fields.Many2one('unison.code', 'Code Template', required=True, ondelete='restrict')
-    min_size_id = fields.Many2one('unison.size', 'Minimal Image Size', required=True, ondelete='restrict')
-    min_volume_gb = fields.Many2one('unison.size', 'Minimal Volume GB', required=True, ondelete='restrict')
-    manual_steps = fields.Text('Manual Configuration Instructions')
+    domain_id = fields.Many2one('unison.domain', 'Domain', ondelete='restrict')  # For example, edif.com.ar
+    region_id = fields.Many2one('unison.region', 'Region', ondelete='restrict', help='Region used to launch new nodes for this distro')
+    image_id = fields.Many2one('unison.image', 'Image', ondelete='restrict', help='Private snapshot used to launch new nodes for this distro')
+    version_id = fields.Many2one('unison.version', 'Version for New Installations', ondelete='restrict')
+    min_size_id = fields.Many2one('unison.size', 'Minimal Image Size', ondelete='restrict')
+    min_volume_gb = fields.Many2one('unison.size', 'Minimal Volume GB', ondelete='restrict')
+    manual_config = fields.Text('Manual Configuration Instructions')
     notes = fields.Text('Notes')
     active = fields.Boolean('Active', default=True)
 

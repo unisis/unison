@@ -14,7 +14,7 @@ class Repo(models.Model):
     name = fields.Char('Name') # This is the repo name, will be added as suffix to the repo_group.url
     repo_group_id = fields.Many2one('unison.repo_group', 'Repository Group', ondelete='restrict')
     description = fields.Char('Description')
-    core_code = fields.Boolean('Core Code', default=False) # True to indicate an Odoo core repo (which have addons on their ./addons subirectory)
+    is_main = fields.Boolean('Is Main', default=False) # True to indicate an Odoo main repo (which have addons on their ./addons subirectory)
     type = fields.Selection(types, 'Type', default='git')
     is_private = fields.Boolean('Is Private', default=False)
     ssh_private_key = fields.Text('SSH Private Key')

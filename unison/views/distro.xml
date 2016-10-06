@@ -31,7 +31,7 @@
                     <field name="domain_id"/>
                     <field name="region_id"/>
                     <field name="image_id"/>
-                    <field name="code_id"/>
+                    <field name="version_id"/>
                     <field name="min_size_id"/>
                     <field name="min_volume_gb"/>
                 </tree>
@@ -56,10 +56,10 @@
                                 <field name="domain_id"/>
                                 <field name="region_id"/>
                                 <field name="image_id"/>
-                                <field name="code_id"/>
+                                <field name="version_id"/>
                                 <field name="min_size_id"/>
                                 <field name="min_volume_gb"/>
-                                <field name="manual_steps"/>
+                                <field name="manual_config"/>
                                 <field name="notes"/>
                                 <field name="active"/>
                             </group>

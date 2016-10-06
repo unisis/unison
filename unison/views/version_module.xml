@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Version Modules list -->
+        <act_window 
+            id="action_version_module"
+            name="Version Modules"
+            res_model="unison.version_module"
+            view_mode="tree,form"
+        />
+        
+        <!-- Menu item to open Version Modules List -->
+        <menuitem 
+            id="menu_version_modules"
+            name="Version Modules"
+            parent="unison.menu_code"
+            sequence="70"
+            action="action_version_module"
+        />
+
+        <!-- Version Modules Tree -->
+        <record id="view_tree_version_module" model="ir.ui.view">
+            <field name="name">Version Modules Tree</field>
+            <field name="model">unison.version_module</field>
+            <field name="arch" type="xml">
+                <tree create="top" delete="false" editable="false">
+                    <field name="version_id"/>
+                    <field name="module_name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Version Module Form -->
+        <record id="view_form_version_module" model="ir.ui.view">
+            <field name="name">Version Module Form</field>
+            <field name="model">unison.version_module</field>
+            <field name="arch" type="xml">
+                <form string="Version Module" create="true" delete="true" editable="true">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="version_id"/>
+                                <field name="module_name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

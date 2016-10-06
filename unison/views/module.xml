@@ -64,7 +64,6 @@
                                 <field name="author" readonly="1"/>
                                 <field name="website" readonly="1"/>
                                 <field name="active" readonly="1"/>
-                                <field name="db_config"/>
                                 <field name="notes"/>
                             </group>
                         </group>

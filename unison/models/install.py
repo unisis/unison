@@ -3,7 +3,9 @@
 from openerp import models, fields
 
 # This model is used to store information about Odoo installations requested by clients
-# Each installation has a production installation and a test installation on the same node
+# Each installation has a production installation and a test installation on the same node.
+# Each prod/inst installation is composed by a distro version (set of repos and modules
+# provided by UniSis) and an optional install version (additional set of custom modules)
 class Install(models.Model):
     _name = 'unison.install'
     _order = 'name'
@@ -17,8 +19,10 @@ class Install(models.Model):
     site_record_id = fields.Many2one('unison.record', 'DNS Record', ondelete='restrict')
     status = fields.Char('Status')
     admin_pwd = fields.Char('Admin Password')
-    prod_code_id = fields.Many2one('unison.code', 'Prod Code', ondelete='restrict')
-    test_code_id = fields.Many2one('unison.code', 'Test Code', ondelete='restrict')
+    prod_distro_version_id = fields.Many2one('unison.version', 'Prod Distro Version', required=True, ondelete='restrict')
+    prod_install_version_id = fields.Many2one('unison.version', 'Prod Install Version', ondelete='restrict')
+    test_distro_version_id = fields.Many2one('unison.version', 'Test Distro Version', required=True, ondelete='restrict')
+    test_install_version_id = fields.Many2one('unison.version', 'Test Install Version', ondelete='restrict')
     node_id = fields.Many2one('unison.node', 'Node', ondelete='restrict')
     volume_gb = fields.Integer('Volume Desired GB', required=True)
     volume_id = fields.Many2one('unison.volume', 'Volume', ondelete='restrict')

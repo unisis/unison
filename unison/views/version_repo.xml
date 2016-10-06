@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Version Repositories list -->
+        <act_window 
+            id="action_version_repo"
+            name="Version Repositories"
+            res_model="unison.version_repo"
+            view_mode="tree,form"
+        />
+        
+        <!-- Menu item to open Version Repositories List -->
+        <menuitem 
+            id="menu_version_repositories"
+            name="Version Repositories"
+            parent="unison.menu_code"
+            sequence="60"
+            action="action_version_repo"
+        />
+
+        <!-- Version Repositories Tree -->
+        <record id="view_tree_version_repo" model="ir.ui.view">
+            <field name="name">Version Repositories Tree</field>
+            <field name="model">unison.version_repo</field>
+            <field name="arch" type="xml">
+                <tree create="top" delete="false" editable="false">
+                    <field name="version_id"/>
+                    <field name="branch_id"/>
+                    <field name="commit"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Version Repository Form -->
+        <record id="view_form_version_repo" model="ir.ui.view">
+            <field name="name">Version Repository Form</field>
+            <field name="model">unison.version_repo</field>
+            <field name="arch" type="xml">
+                <form string="Version Repo" create="true" delete="true" editable="true">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="version_id"/>
+                                <field name="branch_id"/>
+                                <field name="commit"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

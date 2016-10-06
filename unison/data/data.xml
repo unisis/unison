@@ -496,1151 +496,1162 @@
             <field name="name">8.0</field>
         </record>
 
-        <!-- Default Code Template for UniSis -->
+        <!-- Create Distro for Edif -->
 
-        <record id="code_unisis" model="unison.code">
-            <field name="name">UniSis Template</field>
-            <field name="description">Default Template for New Installations</field>
-            <field name="is_template">1</field>
+        <record id="distro_edif" model="unison.distro">
+            <field name="name">Edif</field>
+            <field name="description">Distro for Buildings Administration</field>
+            <field name="is_public">1</field>
             <field name="active">1</field>
+        </record>
+
+        <!-- First Version for Edif -->
+
+        <record id="version_edif" model="unison.version">
+            <field name="distro_id" ref="distro_edif"/>
+            <field name="name">1.0.0</field>
+            <field name="major">1</field>
+            <field name="minor">0</field>
+            <field name="revision">0</field>
+            <field name="description">First Version</field>
         </record>
 
         <!-- Repositories added to Code Template (code available to install modules) -->
 
-        <record id="code_repo_branch_repo_odoo" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_odoo" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_odoo"/>
         </record>
 
-        <record id="code_repo_branch_repo_oca_account_financial_reporting" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_oca_account_financial_reporting" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_oca_account_financial_reporting"/>
         </record>
 
-        <record id="code_repo_branch_repo_oca_account_invoicing" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_oca_account_invoicing" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_oca_account_invoicing"/>
         </record>
 
-        <record id="code_repo_branch_repo_oca_knowledge" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_oca_knowledge" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_oca_knowledge"/>
         </record>
 
-        <record id="code_repo_branch_repo_oca_reporting_engine_oca" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_oca_reporting_engine_oca" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_oca_reporting_engine_oca"/>
         </record>
 
-        <record id="code_repo_branch_repo_oca_server_tools" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_oca_server_tools" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_oca_server_tools"/>
         </record>
 
-        <record id="code_repo_branch_repo_oca_stock_logistics_workflow" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_oca_stock_logistics_workflow" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_oca_stock_logistics_workflow"/>
         </record>
 
-        <record id="code_repo_branch_repo_oca_web" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_oca_web" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_oca_web"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_account_analytic" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_account_analytic" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_account_analytic"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_account_financial_tools" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_account_financial_tools" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_account_financial_tools"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_account_invoicing" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_account_invoicing" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_account_invoicing"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_account_payment" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_account_payment" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_account_payment"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_aeroo_reports" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_aeroo_reports" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_aeroo_reports"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_crm" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_crm" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_crm"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_hr" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_hr" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_hr"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_manufacture" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_manufacture" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_manufacture"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_miscellaneous" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_miscellaneous" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_miscellaneous"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_multi_company" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_multi_company" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_multi_company"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_odoo_academic" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_odoo_academic" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_odoo_academic"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_odoo_argentina" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_odoo_argentina" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_odoo_argentina"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_odoo_clinic" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_odoo_clinic" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_odoo_clinic"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_odoo_etl" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_odoo_etl" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_odoo_etl"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_odoo_help" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_odoo_help" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_odoo_help"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_odoo_infrastructure" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_odoo_infrastructure" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_odoo_infrastructure"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_odoo_law_tracking" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_odoo_law_tracking" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_odoo_law_tracking"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_odoo_legal" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_odoo_legal" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_odoo_legal"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_odoo_logistic" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_odoo_logistic" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_odoo_logistic"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_odoo_nautical" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_odoo_nautical" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_odoo_nautical"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_odoo_public_administration" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_odoo_public_administration" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_odoo_public_administration"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_odoo_setup" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_odoo_setup" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_odoo_setup"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_odoo_support" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_odoo_support" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_odoo_support"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_odoo_usability" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_odoo_usability" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_odoo_usability"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_odoo_web" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_odoo_web" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_odoo_web"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_partner" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_partner" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_partner"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_product" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_product" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_product"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_project" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_project" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_project"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_purchase" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_purchase" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_purchase"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_reporting_engine" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_reporting_engine" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_reporting_engine"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_sale" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_sale" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_sale"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_stock" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_stock" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_stock"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_survey" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_survey" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_survey"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_surveyor" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_surveyor" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_surveyor"/>
         </record>
 
-        <record id="code_repo_branch_repo_adhoc_website" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_adhoc_website" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_adhoc_website"/>
         </record>
 
-        <record id="code_repo_branch_repo_unisis_addons" model="unison.code_repo">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_repo_branch_repo_unisis_addons" model="unison.version_repo">
+            <field name="version_id" ref="version_edif"/>
             <field name="branch_id" ref="branch_repo_unisis_addons"/>
         </record>
 
         <!-- Modules to be automatically installed on default Template for UniSis -->
 
-        <record id="code_module_account" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account</field>
         </record>
 
-        <record id="code_module_account_accountant" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_accountant" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_accountant</field>
         </record>
 
-        <record id="code_module_account_cancel" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_cancel" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_cancel</field>
         </record>
 
-        <record id="code_module_account_check" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_check" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_check</field>
         </record>
 
-        <record id="code_module_account_clean_cancelled_invoice_number" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_clean_cancelled_invoice_number" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_clean_cancelled_invoice_number</field>
         </record>
 
-        <record id="code_module_account_financial_report_webkit" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_financial_report_webkit" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_financial_report_webkit</field>
         </record>
 
-        <record id="code_module_account_financial_report_webkit_xls" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_financial_report_webkit_xls" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_financial_report_webkit_xls</field>
         </record>
 
-        <record id="code_module_account_followup" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_followup" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_followup</field>
         </record>
 
-        <record id="code_module_account_invoice_company_search" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_invoice_company_search" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_invoice_company_search</field>
         </record>
 
-        <record id="code_module_account_invoice_journal_filter" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_invoice_journal_filter" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_invoice_journal_filter</field>
         </record>
 
-        <record id="code_module_account_invoice_prices_update" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_invoice_prices_update" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_invoice_prices_update</field>
         </record>
 
-        <record id="code_module_account_invoice_tax_wizard" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_invoice_tax_wizard" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_invoice_tax_wizard</field>
         </record>
 
-        <record id="code_module_account_journal_active" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_journal_active" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_journal_active</field>
         </record>
 
-        <record id="code_module_account_journal_book" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_journal_book" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_journal_book</field>
         </record>
 
-        <record id="code_module_account_journal_payment_subtype" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_journal_payment_subtype" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_journal_payment_subtype</field>
         </record>
 
-        <record id="code_module_account_journal_sequence" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_journal_sequence" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_journal_sequence</field>
         </record>
 
-        <record id="code_module_account_move_line_no_filter" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_move_line_no_filter" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_move_line_no_filter</field>
         </record>
 
-        <record id="code_module_account_move_voucher" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_move_voucher" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_move_voucher</field>
         </record>
 
-        <record id="code_module_account_multic_fix" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_multic_fix" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_multic_fix</field>
         </record>
 
-        <record id="code_module_account_onchange_fix" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_onchange_fix" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_onchange_fix</field>
         </record>
 
-        <record id="code_module_account_partner_account_summary" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_partner_account_summary" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_partner_account_summary</field>
         </record>
 
-        <record id="code_module_account_partner_balance" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_partner_balance" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_partner_balance</field>
         </record>
 
-        <record id="code_module_account_reconciliation_menu" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_reconciliation_menu" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_reconciliation_menu</field>
         </record>
 
-        <record id="code_module_account_security_modifications" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_security_modifications" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_security_modifications</field>
         </record>
 
-        <record id="code_module_account_statement_move_import" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_statement_move_import" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_statement_move_import</field>
         </record>
 
-        <record id="code_module_account_tax_settlement" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_tax_settlement" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_tax_settlement</field>
         </record>
 
-        <record id="code_module_account_tax_settlement_withholding" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_tax_settlement_withholding" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_tax_settlement_withholding</field>
         </record>
 
-        <record id="code_module_account_transfer" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_transfer" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_transfer</field>
         </record>
 
-        <record id="code_module_account_voucher" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_voucher" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_voucher</field>
         </record>
 
-        <record id="code_module_account_voucher_account_fix" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_voucher_account_fix" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_voucher_account_fix</field>
         </record>
 
-        <record id="code_module_account_voucher_fix" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_voucher_fix" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_voucher_fix</field>
         </record>
 
-        <record id="code_module_account_voucher_multic_fix" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_voucher_multic_fix" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_voucher_multic_fix</field>
         </record>
 
-        <record id="code_module_account_voucher_payline" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_voucher_payline" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_voucher_payline</field>
         </record>
 
-        <record id="code_module_account_voucher_withholding" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_account_voucher_withholding" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">account_voucher_withholding</field>
         </record>
 
-        <record id="code_module_adhoc_base_account" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_adhoc_base_account" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">adhoc_base_account</field>
         </record>
 
-        <record id="code_module_adhoc_base_product" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_adhoc_base_product" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">adhoc_base_product</field>
         </record>
 
-        <record id="code_module_adhoc_base_purchase" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_adhoc_base_purchase" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">adhoc_base_purchase</field>
         </record>
 
-        <record id="code_module_adhoc_base_sale" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_adhoc_base_sale" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">adhoc_base_sale</field>
         </record>
 
-        <record id="code_module_adhoc_base_setup" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_adhoc_base_setup" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">adhoc_base_setup</field>
         </record>
 
-        <record id="code_module_adhoc_base_stock" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_adhoc_base_stock" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">adhoc_base_stock</field>
         </record>
 
-        <record id="code_module_adhoc_base_website" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_adhoc_base_website" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">adhoc_base_website</field>
         </record>
 
-        <record id="code_module_admin_useful_groups" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_admin_useful_groups" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">admin_useful_groups</field>
         </record>
 
-        <record id="code_module_analytic" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_analytic" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">analytic</field>
         </record>
 
-        <record id="code_module_auditlog" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_auditlog" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">auditlog</field>
         </record>
 
-        <record id="code_module_auth_admin_passkey" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_auth_admin_passkey" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">auth_admin_passkey</field>
         </record>
 
-        <record id="code_module_auth_crypt" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_auth_crypt" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">auth_crypt</field>
         </record>
 
-        <record id="code_module_auth_server_admin_passwd_passkey" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_auth_server_admin_passwd_passkey" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">auth_server_admin_passwd_passkey</field>
         </record>
 
-        <record id="code_module_auth_signup" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_auth_signup" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">auth_signup</field>
         </record>
 
-        <record id="code_module_base_action_rule" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_base_action_rule" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">base_action_rule</field>
         </record>
 
-        <record id="code_module_base_currency_inverse_rate" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_base_currency_inverse_rate" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">base_currency_inverse_rate</field>
         </record>
 
-        <record id="code_module_base_setup" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_base_setup" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">base_setup</field>
         </record>
 
-        <record id="code_module_base_state_active" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_base_state_active" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">base_state_active</field>
         </record>
 
-        <record id="code_module_base_vat" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_base_vat" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">base_vat</field>
         </record>
 
-        <record id="code_module_board" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_board" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">board</field>
         </record>
 
-        <record id="code_module_calendar" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_calendar" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">calendar</field>
         </record>
 
-        <record id="code_module_contacts" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_contacts" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">contacts</field>
         </record>
 
-        <record id="code_module_crm" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_crm" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">crm</field>
         </record>
 
-        <record id="code_module_crm_partner_history" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_crm_partner_history" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">crm_partner_history</field>
         </record>
 
-        <record id="code_module_cron_run_manually" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_cron_run_manually" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">cron_run_manually</field>
         </record>
 
-        <record id="code_module_decimal_precision" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_decimal_precision" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">decimal_precision</field>
         </record>
 
-        <record id="code_module_delivery" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_delivery" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">delivery</field>
         </record>
 
-        <record id="code_module_disable_openerp_online" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_disable_openerp_online" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">disable_openerp_online</field>
         </record>
 
-        <record id="code_module_document" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_document" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">document</field>
         </record>
 
-        <record id="code_module_document_url" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_document_url" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">document_url</field>
         </record>
 
-        <record id="code_module_edi" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_edi" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">edi</field>
         </record>
 
-        <record id="code_module_email_template" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_email_template" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">email_template</field>
         </record>
 
-        <record id="code_module_etl" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_etl" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">etl</field>
         </record>
 
-        <record id="code_module_fetchmail" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_fetchmail" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">fetchmail</field>
         </record>
 
-        <record id="code_module_help_doc" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_help_doc" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">help_doc</field>
         </record>
 
-        <record id="code_module_hr" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_hr" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">hr</field>
         </record>
 
-        <record id="code_module_hr_evaluation" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_hr_evaluation" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">hr_evaluation</field>
         </record>
 
-        <record id="code_module_hr_expense" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_hr_expense" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">hr_expense</field>
         </record>
 
-        <record id="code_module_hr_holidays" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_hr_holidays" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">hr_holidays</field>
         </record>
 
-        <record id="code_module_hr_recruitment" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_hr_recruitment" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">hr_recruitment</field>
         </record>
 
-        <record id="code_module_invoice_fiscal_position_update" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_invoice_fiscal_position_update" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">invoice_fiscal_position_update</field>
         </record>
 
-        <record id="code_module_knowledge" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_knowledge" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">knowledge</field>
         </record>
 
-        <record id="code_module_l10n_ar_account_check" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_account_check" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_account_check</field>
         </record>
 
-        <record id="code_module_l10n_ar_account_followup" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_account_followup" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_account_followup</field>
         </record>
 
-        <record id="code_module_l10n_ar_account_vat_ledger" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_account_vat_ledger" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_account_vat_ledger</field>
         </record>
 
-        <record id="code_module_l10n_ar_account_vat_ledger_city" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_account_vat_ledger_city" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_account_vat_ledger_city</field>
         </record>
 
-        <record id="code_module_l10n_ar_account_voucher" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_account_voucher" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_account_voucher</field>
         </record>
 
-        <record id="code_module_l10n_ar_aeroo_base" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_aeroo_base" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_aeroo_base</field>
         </record>
 
-        <record id="code_module_l10n_ar_aeroo_einvoice" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_aeroo_einvoice" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_aeroo_einvoice</field>
         </record>
 
-        <record id="code_module_l10n_ar_aeroo_invoice" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_aeroo_invoice" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_aeroo_invoice</field>
         </record>
 
-        <record id="code_module_l10n_ar_aeroo_purchase" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_aeroo_purchase" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_aeroo_purchase</field>
         </record>
 
-        <record id="code_module_l10n_ar_aeroo_sale" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_aeroo_sale" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_aeroo_sale</field>
         </record>
 
-        <record id="code_module_l10n_ar_aeroo_stock" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_aeroo_stock" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_aeroo_stock</field>
         </record>
 
-        <record id="code_module_l10n_ar_aeroo_voucher" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_aeroo_voucher" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_aeroo_voucher</field>
         </record>
 
-        <record id="code_module_l10n_ar_afipws" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_afipws" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_afipws</field>
         </record>
 
-        <record id="code_module_l10n_ar_afipws_fe" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_afipws_fe" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_afipws_fe</field>
         </record>
 
-        <record id="code_module_l10n_ar_bank" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_bank" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_bank</field>
         </record>
 
-        <record id="code_module_l10n_ar_bank_cbu" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_bank_cbu" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_bank_cbu</field>
         </record>
 
-        <record id="code_module_l10n_ar_base" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_base" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_base</field>
         </record>
 
-        <record id="code_module_l10n_ar_base_vat" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_base_vat" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_base_vat</field>
         </record>
 
-        <record id="code_module_l10n_ar_chart_generic" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_chart_generic" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_chart_generic</field>
         </record>
 
-        <record id="code_module_l10n_ar_chart_generic_tax_settlement" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_chart_generic_tax_settlement" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_chart_generic_tax_settlement</field>
         </record>
 
-        <record id="code_module_l10n_ar_chart_generic_withholding" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_chart_generic_withholding" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_chart_generic_withholding</field>
         </record>
 
-        <record id="code_module_l10n_ar_hide_receipts" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_hide_receipts" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_hide_receipts</field>
         </record>
 
-        <record id="code_module_l10n_ar_invoice" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_invoice" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_invoice</field>
         </record>
 
-        <record id="code_module_l10n_ar_invoice_sale" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_invoice_sale" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_invoice_sale</field>
         </record>
 
-        <record id="code_module_l10n_ar_states" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_ar_states" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_ar_states</field>
         </record>
 
-        <record id="code_module_l10n_multilang" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_l10n_multilang" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">l10n_multilang</field>
         </record>
 
-        <record id="code_module_mail" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_mail" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">mail</field>
         </record>
 
-        <record id="code_module_mass_editing" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_mass_editing" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">mass_editing</field>
         </record>
 
-        <record id="code_module_note" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_note" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">note</field>
         </record>
 
-        <record id="code_module_partner_search_by_ref" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_partner_search_by_ref" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">partner_search_by_ref</field>
         </record>
 
-        <record id="code_module_partner_search_by_vat" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_partner_search_by_vat" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">partner_search_by_vat</field>
         </record>
 
-        <record id="code_module_partner_vat_unique" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_partner_vat_unique" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">partner_vat_unique</field>
         </record>
 
-        <record id="code_module_payment" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_payment" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">payment</field>
         </record>
 
-        <record id="code_module_payment_transfer" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_payment_transfer" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">payment_transfer</field>
         </record>
 
-        <record id="code_module_portal" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_portal" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">portal</field>
         </record>
 
-        <record id="code_module_portal_fix" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_portal_fix" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">portal_fix</field>
         </record>
 
-        <record id="code_module_portal_partner_fix" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_portal_partner_fix" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">portal_partner_fix</field>
         </record>
 
-        <record id="code_module_portal_sale" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_portal_sale" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">portal_sale</field>
         </record>
 
-        <record id="code_module_portal_sale_l10n_ar_aeroo_sale" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_portal_sale_l10n_ar_aeroo_sale" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">portal_sale_l10n_ar_aeroo_sale</field>
         </record>
 
-        <record id="code_module_portal_stock" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_portal_stock" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">portal_stock</field>
         </record>
 
-        <record id="code_module_procurement" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_procurement" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">procurement</field>
         </record>
 
-        <record id="code_module_product" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_product" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">product</field>
         </record>
 
-        <record id="code_module_product_catalog_aeroo_report" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_product_catalog_aeroo_report" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">product_catalog_aeroo_report</field>
         </record>
 
-        <record id="code_module_product_catalog_aeroo_report_public_categ" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_product_catalog_aeroo_report_public_categ" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">product_catalog_aeroo_report_public_categ</field>
         </record>
 
-        <record id="code_module_product_prices_update" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_product_prices_update" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">product_prices_update</field>
         </record>
 
-        <record id="code_module_product_price_currency" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_product_price_currency" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">product_price_currency</field>
         </record>
 
-        <record id="code_module_product_reference_required" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_product_reference_required" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">product_reference_required</field>
         </record>
 
-        <record id="code_module_product_stock_location" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_product_stock_location" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">product_stock_location</field>
         </record>
 
-        <record id="code_module_product_template_search_by_ean13" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_product_template_search_by_ean13" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">product_template_search_by_ean13</field>
         </record>
 
-        <record id="code_module_product_unique" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_product_unique" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">product_unique</field>
         </record>
 
-        <record id="code_module_product_website_categ_search" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_product_website_categ_search" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">product_website_categ_search</field>
         </record>
 
-        <record id="code_module_project" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_project" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">project</field>
         </record>
 
-        <record id="code_module_purchase" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_purchase" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">purchase</field>
         </record>
 
-        <record id="code_module_purchase_multic_fix" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_purchase_multic_fix" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">purchase_multic_fix</field>
         </record>
 
-        <record id="code_module_purchase_usability_extension" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_purchase_usability_extension" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">purchase_usability_extension</field>
         </record>
 
-        <record id="code_module_report" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_report" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">report</field>
         </record>
 
-        <record id="code_module_report_aeroo" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_report_aeroo" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">report_aeroo</field>
         </record>
 
-        <record id="code_module_report_aeroo_portal_fix" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_report_aeroo_portal_fix" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">report_aeroo_portal_fix</field>
         </record>
 
-        <record id="code_module_report_extended" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_report_extended" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">report_extended</field>
         </record>
 
-        <record id="code_module_report_extended_account" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_report_extended_account" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">report_extended_account</field>
         </record>
 
-        <record id="code_module_report_extended_purchase" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_report_extended_purchase" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">report_extended_purchase</field>
         </record>
 
-        <record id="code_module_report_extended_sale" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_report_extended_sale" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">report_extended_sale</field>
         </record>
 
-        <record id="code_module_report_extended_stock" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_report_extended_stock" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">report_extended_stock</field>
         </record>
 
-        <record id="code_module_report_extended_voucher" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_report_extended_voucher" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">report_extended_voucher</field>
         </record>
 
-        <record id="code_module_report_webkit" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_report_webkit" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">report_webkit</field>
         </record>
 
-        <record id="code_module_report_xls" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_report_xls" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">report_xls</field>
         </record>
 
-        <record id="code_module_resource" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_resource" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">resource</field>
         </record>
 
-        <record id="code_module_sale" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_sale" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">sale</field>
         </record>
 
-        <record id="code_module_sales_team" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_sales_team" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">sales_team</field>
         </record>
 
-        <record id="code_module_sale_crm" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_sale_crm" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">sale_crm</field>
         </record>
 
-        <record id="code_module_sale_multic_fix" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_sale_multic_fix" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">sale_multic_fix</field>
         </record>
 
-        <record id="code_module_sale_prices_update" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_sale_prices_update" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">sale_prices_update</field>
         </record>
 
-        <record id="code_module_sale_stock" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_sale_stock" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">sale_stock</field>
         </record>
 
-        <record id="code_module_sale_usability_extension" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_sale_usability_extension" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">sale_usability_extension</field>
         </record>
 
-        <record id="code_module_server_global_parameters" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_server_global_parameters" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">server_global_parameters</field>
         </record>
 
-        <record id="code_module_server_mode" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_server_mode" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">server_mode</field>
         </record>
 
-        <record id="code_module_server_mode_fetchmail" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_server_mode_fetchmail" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">server_mode_fetchmail</field>
         </record>
 
-        <record id="code_module_server_mode_mail" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_server_mode_mail" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">server_mode_mail</field>
         </record>
 
-        <record id="code_module_share" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_share" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">share</field>
         </record>
 
-        <record id="code_module_stock" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_stock" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">stock</field>
         </record>
 
-        <record id="code_module_stock_account" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_stock_account" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">stock_account</field>
         </record>
 
-        <record id="code_module_stock_display_destination_move" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_stock_display_destination_move" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">stock_display_destination_move</field>
         </record>
 
-        <record id="code_module_stock_display_sale_id" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_stock_display_sale_id" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">stock_display_sale_id</field>
         </record>
 
-        <record id="code_module_stock_multic_fix" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_stock_multic_fix" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">stock_multic_fix</field>
         </record>
 
-        <record id="code_module_stock_picking_invoice_link" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_stock_picking_invoice_link" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">stock_picking_invoice_link</field>
         </record>
 
-        <record id="code_module_stock_picking_labels" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_stock_picking_labels" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">stock_picking_labels</field>
         </record>
 
-        <record id="code_module_stock_picking_list" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_stock_picking_list" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">stock_picking_list</field>
         </record>
 
-        <record id="code_module_stock_picking_locations" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_stock_picking_locations" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">stock_picking_locations</field>
         </record>
 
-        <record id="code_module_stock_voucher" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_stock_voucher" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">stock_voucher</field>
         </record>
 
-        <record id="code_module_support_branding" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_support_branding" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">support_branding</field>
         </record>
 
-        <record id="code_module_support_branding_adhoc" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_support_branding_adhoc" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">support_branding_adhoc</field>
         </record>
 
-        <record id="code_module_web" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_web" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">web</field>
         </record>
 
-        <record id="code_module_website" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_website" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">website</field>
         </record>
 
-        <record id="code_module_website_mail" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_website_mail" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">website_mail</field>
         </record>
 
-        <record id="code_module_website_report" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_website_report" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">website_report</field>
         </record>
 
-        <record id="code_module_website_sale" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_website_sale" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">website_sale</field>
         </record>
 
-        <record id="code_module_web_calendar" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_web_calendar" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">web_calendar</field>
         </record>
 
-        <record id="code_module_web_diagram" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_web_diagram" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">web_diagram</field>
         </record>
 
-        <record id="code_module_web_export_view" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_web_export_view" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">web_export_view</field>
         </record>
 
-        <record id="code_module_web_favicon" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_web_favicon" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">web_favicon</field>
         </record>
 
-        <record id="code_module_web_gantt" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_web_gantt" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">web_gantt</field>
         </record>
 
-        <record id="code_module_web_graph" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_web_graph" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">web_graph</field>
         </record>
 
-        <record id="code_module_web_kanban" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_web_kanban" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">web_kanban</field>
         </record>
 
-        <record id="code_module_web_kanban_gauge" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_web_kanban_gauge" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">web_kanban_gauge</field>
         </record>
 
-        <record id="code_module_web_kanban_sparkline" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_web_kanban_sparkline" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">web_kanban_sparkline</field>
         </record>
 
-        <record id="code_module_web_tests" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_web_tests" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">web_tests</field>
         </record>
 
-        <record id="code_module_web_view_editor" model="unison.code_module">
-            <field name="code_id" ref="code_unisis"/>
+        <record id="version_module_web_view_editor" model="unison.version_module">
+            <field name="version_id" ref="version_edif"/>
             <field name="module_name">web_view_editor</field>
         </record>
 

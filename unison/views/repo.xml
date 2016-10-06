@@ -28,7 +28,7 @@
                     <field name="repo_group_id"/>
                     <field name="name"/>
                     <field name="is_private"/>
-                    <field name="core_code"/>
+                    <field name="is_main"/>
                 </tree>
             </field>
         </record>
@@ -48,7 +48,7 @@
                                 <field name="repo_group_id"/>
                                 <field name="name"/>
                                 <field name="description"/>
-                                <field name="core_code"/>
+                                <field name="is_main"/>
                                 <field name="type"/>
                                 <field name="is_private"/>
                             </group>

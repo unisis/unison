@@ -21,7 +21,6 @@ class Module(models.Model):
     application = fields.Boolean('Application')
     author = fields.Char('Author')
     website = fields.Char('Website')
-    db_config = fields.Text('DB Config')
     notes = fields.Text('Notes')
     active = fields.Boolean('Active', default=True)
 

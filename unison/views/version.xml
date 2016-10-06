@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Versions list -->
+        <act_window 
+            id="action_version"
+            name="Versions"
+            res_model="unison.version"
+            view_mode="tree,form"
+        />
+        
+        <!-- Menu item to open Versions List -->
+        <menuitem 
+            id="menu_versions"
+            name="Versions"
+            parent="unison.menu_code"
+            sequence="50"
+            action="action_version"
+        />
+
+        <!-- Versions Tree -->
+        <record id="view_tree_version" model="ir.ui.view">
+            <field name="name">Version Tree</field>
+            <field name="model">unison.version</field>
+            <field name="arch" type="xml">
+                <tree create="top" delete="false" editable="false">
+                    <field name="distro_id"/>
+                    <field name="install_id"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Version Form -->
+        <record id="view_form_version" model="ir.ui.view">
+            <field name="name">Version Form</field>
+            <field name="model">unison.version</field>
+            <field name="arch" type="xml">
+                <form string="Version" create="true" delete="true" editable="true">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="distro_id" readonly="1"/>
+                                <field name="install_id" readonly="1"/>
+                                <field name="name" readonly="1"/>
+                                <field name="major" readonly="1"/>
+                                <field name="minor" readonly="1"/>
+                                <field name="revision" readonly="1"/>
+                                <field name="description"/>
+                                <field name="install_db_script"/>
+                                <field name="upgrade_db_script"/>
+                                <field name="notes"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>
