@@ -24,7 +24,7 @@
             <field name="name">Version Modules Tree</field>
             <field name="model">unison.version_module</field>
             <field name="arch" type="xml">
-                <tree create="top" delete="false" editable="false">
+                <tree create="true" delete="false" editable="false">
                     <field name="version_id"/>
                     <field name="module_name"/>
                 </tree>

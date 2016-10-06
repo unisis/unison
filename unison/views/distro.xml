@@ -24,7 +24,7 @@
             <field name="name">Distros Tree</field>
             <field name="model">unison.distro</field>
             <field name="arch" type="xml">
-                <tree create="top" delete="false" editable="false">
+                <tree create="true" delete="false" editable="false">
                     <field name="name"/>
                     <field name="description"/>
                     <field name="is_public"/>

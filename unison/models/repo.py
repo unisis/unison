@@ -5,6 +5,7 @@ from openerp import models, fields
 # This model is used to store the data about Git repositories
 class Repo(models.Model):
     _name = 'unison.repo'
+    _order = 'name'
 
     types = [
         ('git', 'Git'),

@@ -24,7 +24,7 @@
             <field name="name">Repository Tree</field>
             <field name="model">unison.repo</field>
             <field name="arch" type="xml">
-                <tree create="top" delete="false" editable="false">
+                <tree create="true" delete="false" editable="false">
                     <field name="repo_group_id"/>
                     <field name="name"/>
                     <field name="is_private"/>

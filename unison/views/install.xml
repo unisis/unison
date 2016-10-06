@@ -24,7 +24,7 @@
             <field name="name">Installation Tree</field>
             <field name="model">unison.install</field>
             <field name="arch" type="xml">
-                <tree create="top" delete="false" editable="false">
+                <tree create="true" delete="false" editable="false">
                     <field name="distro_id"/>
                     <field name="partner_id"/>
                     <field name="site_url"/>

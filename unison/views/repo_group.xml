@@ -24,7 +24,7 @@
             <field name="name">Repository Groups Tree</field>
             <field name="model">unison.repo_group</field>
             <field name="arch" type="xml">
-                <tree create="top" delete="false" editable="false">
+                <tree create="true" delete="false" editable="false">
                     <field name="name"/>
                     <field name="url"/>
                     <field name="sequence"/>
