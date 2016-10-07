@@ -53,6 +53,8 @@
                                 <field name="description"/>
                                 <field name="install_db_script"/>
                                 <field name="upgrade_db_script"/>
+                                <field name="serialization" readonly="1"/>
+                                <field name="hash" readonly="1"/>
                                 <field name="notes"/>
                             </group>
                         </group>

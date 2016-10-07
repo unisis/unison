@@ -19,5 +19,3 @@ class Cloud(models.Model):
     sizes = fields.One2many('unison.size', 'cloud_id', 'Cloud Sizes')
     keys = fields.One2many('unison.key', 'cloud_id', 'Cloud Keys')
 
-    def get_droplets_list(self, cr, uid, ids, context={}):
-        return self.pool.get('unison.digital_ocean').get_droplets_list(cr, uid)

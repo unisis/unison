@@ -41,7 +41,6 @@
                     </header>
                     <sheet>
                         <group name="group_center">
-                            <button type="object" name="get_droplets_list" string="Get Droplets" />
                             <field name="code"/>
                             <field name="name"/>
                             <field name="api_key"/>
