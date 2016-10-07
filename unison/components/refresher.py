@@ -25,14 +25,20 @@ class Refresher(models.Model):
         cloud_id = clouds[0].id
 
         # Refresh Regions
-        print "Refreshing Regions..."
+        print "UNISON: Refreshing Regions..."
         digital_ocean = self.env['unison.digital_ocean']
         regions = digital_ocean.get_regions()
         for regionItem in regions:
             code = regionItem['slug']
             region = self.env['unison.region']
             regions = region.search([('code', '=', code)])
-            if len(regions) == 0:
+            if len(regions) > 0:
+                # Update 'available' field
+                region = region.search([('code', '=', code)])
+                region.write({
+                    'available': regionItem['available'],
+                })
+            else:
                 # Create region
                 region = region.create({
                     'code': regionItem['slug'], 
@@ -42,22 +48,22 @@ class Refresher(models.Model):
                     'notes': '',
                     'active': True
                 })
-            else:
-                # Update 'available' field
-                region = region.search([('code', '=', code)])
-                region.write({
-                    'available': regionItem['available'],
-                })
 
         # Refresh Sizes
-        print "Refreshing Sizes..."
+        print "UNISON: Refreshing Sizes..."
         digital_ocean = self.env['unison.digital_ocean']
         sizes = digital_ocean.get_sizes()
         for sizeItem in sizes:
             code = sizeItem['slug']
             size = self.env['unison.size']
             sizes = size.search([('code', '=', code)])
-            if len(sizes) == 0:
+            if len(sizes) > 0:
+                # Update available status
+                size = size.search([('code', '=', code)])
+                size.write({
+                    'available': sizeItem['available'],
+                })
+            else:
                 # Create size
                 size = size.create({
                     'code': sizeItem['slug'], 
@@ -72,15 +78,16 @@ class Refresher(models.Model):
                     'notes': '',
                     'active': True
                 })
-            else:
-                # Update available status
-                size = size.search([('code', '=', code)])
-                region.write({
-                    'available': sizeItem['available'],
-                })
 
+                # Assign regions where this size is available
+                regions = sizeItem['regions']
+                for regionCode in regions:
+                    region = self.env['unison.region']
+                    region = region.search([('code', '=', regionCode)])
+                    if region.id != False:
+                        size.region_ids += region
 
-        print "Process completed"
+        print "UNISON: Process completed"
 
         return True
 
