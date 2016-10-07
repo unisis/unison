@@ -4,7 +4,6 @@ import logging
 from openerp import models, fields, osv, exceptions, api
 
 _logger = logging.getLogger(__name__)
-
 # This component is invoked regularly (see data/cron.xml for details) 
 # to perform the "refresh" of models which reflects external entities
 # like cloud resources, repos information etc. Since several models
@@ -25,6 +24,8 @@ class Refresher(models.Model):
         clouds = cloud.search([('code', '=', 'digitalocean')])
         cloud_id = clouds[0].id
 
+        # Refresh Regions
+        print "Refreshing Regions..."
         digital_ocean = self.env['unison.digital_ocean']
         regions = digital_ocean.get_regions()
         for regionItem in regions:
@@ -42,12 +43,44 @@ class Refresher(models.Model):
                     'active': True
                 })
             else:
-                # Update available status
+                # Update 'available' field
                 region = region.search([('code', '=', code)])
-                print regionItem['available']
                 region.write({
                     'available': regionItem['available'],
                 })
+
+        # Refresh Sizes
+        print "Refreshing Sizes..."
+        digital_ocean = self.env['unison.digital_ocean']
+        sizes = digital_ocean.get_sizes()
+        for sizeItem in sizes:
+            code = sizeItem['slug']
+            size = self.env['unison.size']
+            sizes = size.search([('code', '=', code)])
+            if len(sizes) == 0:
+                # Create size
+                size = size.create({
+                    'code': sizeItem['slug'], 
+                    'name': sizeItem['slug'], # Size doesn't have a friendly name, but we can edit it
+                    'cloud_id': cloud_id,
+                    'ram_mb': sizeItem['memory'],
+                    'cpu_cores': sizeItem['vcpus'],
+                    'disk_gb': sizeItem['disk'],
+                    'transfer_tb': sizeItem['transfer'],
+                    'available': sizeItem['available'],
+                    'hourly_price_usd': sizeItem['price_hourly'],
+                    'notes': '',
+                    'active': True
+                })
+            else:
+                # Update available status
+                size = size.search([('code', '=', code)])
+                region.write({
+                    'available': sizeItem['available'],
+                })
+
+
+        print "Process completed"
 
         return True
 

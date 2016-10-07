@@ -44,7 +44,7 @@
                         <group name="group_top">
                             <group name="group_left">
                                 <field name="cloud_id" readonly="1"/>
-                                <field name="name" readonly="1"/>
+                                <field name="name"/>
                                 <field name="active" readonly="1"/>
                                 <field name="notes"/>
                             </group>

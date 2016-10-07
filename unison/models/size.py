@@ -15,6 +15,7 @@ class Size(models.Model):
     disk_gb = fields.Integer('Disk GB')
     transfer_tb = fields.Integer('Transfer TB')
     hourly_price_usd = fields.Float('Hourly Price (USD)')
+    available = fields.Boolean('Available', default=True, help='Available to create new droplets, setting provided by DigitalOcean')
     notes = fields.Text('Notes')
     active = fields.Boolean('Active', default=True)
 
