@@ -11,8 +11,9 @@ class Volume(models.Model):
     code = fields.Char('Code') # DigitalOcean code, assigned after create
     name = fields.Char('Name', required=True, index=True)
     size_gb = fields.Integer('Size GB', required=True)
-    cloud_id = fields.Many2one('unison.cloud', 'Cloud', ondelete='restrict')
+    region_id = fields.Many2one('unison.region', 'Region', ondelete='restrict')
     node_id = fields.Many2one('unison.node', 'Node', ondelete='restrict')
+    filesystem = fields.Char('Filesystem')
     mount_point = fields.Char('Mount Point')
     notes = fields.Text('Notes')
     active = fields.Boolean('Active', default=True)

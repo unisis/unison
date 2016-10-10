@@ -288,6 +288,49 @@ class Refresher(models.Model):
                     'active': True
                 })
 
+        # Refresh Volumes
+        print "UNISON: Refreshing Volumes..."
+        digital_ocean = self.env['unison.digital_ocean']
+        volumes = digital_ocean.get_volumes()
+        for volumeItem in volumes:
+            code = volumeItem['id']
+            region_code = volumeItem['region']['slug']
+            region = self.env['unison.region']
+            region = region.search([('code', '=', region_code)])
+            region_id = region.id
+
+            # Check if volume is attached to node
+            if len(volumeItem['droplet_ids']) == 0:
+                node_id = None
+            else:
+                droplet_code = volumeItem['droplet_ids'][0]
+                node = self.env['unison.node']
+                node = node.search([('code', '=', droplet_code)])
+                node_id = node.id
+
+            volume = self.env['unison.volume']
+            volume = volume.search([('code', '=', code)])
+            if len(volume) > 0:
+                # Update info about the volume (attach info and size)
+                volume.write({
+                    'node_id': node_id,
+                    'size_gb': volumeItem['size_gigabytes']
+                })
+            else:
+                # Create volume
+                print "UNISON: Creating volume " + code
+                volume = volume.create({
+                    'code': code,
+                    'name': volumeItem['name'],
+                    'size_gb': volumeItem['size_gigabytes'],
+                    'region_id': region_id,
+                    'node_id': node_id,
+                    'filesystem': None, # Will be provided by UniSon
+                    'mount_point': None, # Will be provided by UniSon
+                    'notes': '',
+                    'active': True
+                })
+
         return True
 
     # This function is used to refresh the information about

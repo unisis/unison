@@ -25,8 +25,9 @@
             <field name="model">unison.volume</field>
             <field name="arch" type="xml">
                 <tree create="false" delete="false" editable="false">
-                    <field name="cloud_id"/>
-                    <field name="name"/>
+                    <field name="region_id"/>
+                    <field name="size_gb"/>
+                    <field name="node_id"/>
                 </tree>
             </field>
         </record>
@@ -43,13 +44,14 @@
                     <sheet>
                         <group name="group_top">
                             <group name="group_left">
-                                <field name="cloud_id" readonly="1"/>
+                                <field name="region_id" readonly="1"/>
                                 <field name="name" readonly="1"/>
                                 <field name="size_gb" readonly="1"/>
                                 <field name="active" readonly="1"/>
                             </group>
                             <group name="group_right">
                                 <field name="node_id" readonly="1"/>
+                                <field name="filesystem" readonly="1"/>
                                 <field name="mount_point" readonly="1"/>
                                 <field name="notes"/>
                             </group>
