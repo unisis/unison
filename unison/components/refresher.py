@@ -291,6 +291,68 @@ class Refresher(models.Model):
                     'active': True
                 })
 
+        # Refresh Nodes
+        print "UNISON: Refreshing Nodes..."
+        digital_ocean = self.env['unison.digital_ocean']
+        nodes = digital_ocean.get_nodes()
+        for nodeItem in nodes:
+            code = nodeItem['id']
+
+            # Get region_id
+            region_code = nodeItem['region']['slug']
+            region = self.env['unison.region']
+            region = region.search([('code', '=', region_code)])
+            region_id = region.id
+
+            # Get size_id
+            size_code = nodeItem['size']['slug']
+            size = self.env['unison.size']
+            size = size.search([('code', '=', size_code)])
+            size_id = size.id
+
+            # Get image_id
+            image_code = nodeItem['image']['id']
+            image = self.env['unison.image']
+            image = image.search([('code', '=', image_code)])
+            image_id = image.id
+
+            # Get IPv4 network info
+            public_ip = None
+            private_ip = None
+            for network in nodeItem['networks']['v4']:
+                if network['type'] == 'public':
+                    public_ip = network['ip_address']
+                else:
+                    private_ip = network['ip_address']
+
+            node = self.env['unison.node']
+            node = node.search([('code', '=', code)])
+            if len(node) > 0:
+                # Update node info
+                node.write({
+                    'size_id': size_id,
+                    'public_ip': public_ip,
+                    'private_ip': private_ip,
+                    'status': nodeItem['status'],
+                })
+            else:
+                # Create node
+                print "UNISON: Creating node " + str(code)
+                node = node.create({
+                    'code': code, 
+                    'name': nodeItem['name'],
+                    'image_id': image_id,
+                    'size_id': size_id,
+                    'region_id': region_id,
+                    'key_id': None,   # TO-DO ASSIGN
+                    'record_id': None, # TO-DO ASSIGN
+                    'public_ip': public_ip,
+                    'private_ip': private_ip,
+                    'status': nodeItem['status'],
+                    'notes': '',
+                    'active': True
+                })
+
         # Refresh Floating IPs
         print "UNISON: Refreshing Floating IPs..."
         digital_ocean = self.env['unison.digital_ocean']
