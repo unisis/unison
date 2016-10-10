@@ -17,7 +17,7 @@
 
     'category': 'Administration',
 
-    'version': '0.80',
+    'version': '0.83',
 
     # any module necessary for this one to work correctly
     'depends': ['base'],
@@ -28,6 +28,7 @@
         'data/data.xml',
         'security/ir.model.access.csv',
         'views/menu_sections.xml',
+        'views/action.xml',
         'views/backup.xml',
         'views/branch.xml',
         'views/cloud.xml',

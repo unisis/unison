@@ -64,8 +64,8 @@ class DigitalOcean(models.Model):
         return self.run_doctl(command)
 
     @api.model
-    def get_actions(self):
-        command = "compute action list"
+    def get_actions(self, after):
+        command = "compute action list --after '" + after + "'"
         return self.run_doctl(command)
 
     # This function is used to run a doctl command using a json output

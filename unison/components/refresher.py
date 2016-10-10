@@ -159,6 +159,36 @@ class Refresher(models.Model):
         clouds = cloud.search([('code', '=', 'digitalocean')])
         cloud_id = clouds[0].id
 
+        # Refresh Actions (from last action)
+        print "UNISON: Refreshing Actions..."
+        digital_ocean = self.env['unison.digital_ocean']
+        after = self.env.cr.execute("SELECT MAX(date_start) FROM unison_action")
+        if after == None:
+            after = ''
+        actions = digital_ocean.get_actions(after) # We only retrieve new actions
+        for actionItem in actions:
+            # Create action
+
+            if 'region' in actionItem.keys():
+                region_code = actionItem['region']['slug']
+                region = self.env['unison.region']
+                region = region.search([('code', '=', region_code)])
+                region_id = region.id
+            else:
+                region_id = None
+
+            action = self.env['unison.action']
+            action = action.create({
+                'code': actionItem['id'],
+                'type': actionItem['type'],
+                'status': actionItem['status'],
+                'date_start': actionItem['started_at'],
+                'date_end': actionItem['completed_at'],
+                'resource_type': actionItem['resource_type'],
+                'resource_code': actionItem['resource_id'],
+                'region_id': region_id
+            })
+
         # Refresh Domains
         print "UNISON: Refreshing Domains..."
         digital_ocean = self.env['unison.digital_ocean']

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Actions list -->
+        <act_window 
+            id="action_action"
+            name="Actions"
+            res_model="unison.action"
+            view_mode="tree"
+        />
+        
+        <!-- Menu item to open Actions List -->
+        <menuitem 
+            id="menu_action"
+            name="Actions"
+            parent="unison.menu_nodes"
+            sequence="100"
+            action="action_action"
+        />
+
+        <!-- Actions Tree -->
+        <record id="view_tree_actions" model="ir.ui.view">
+            <field name="name">Actions Tree</field>
+            <field name="model">unison.action</field>
+            <field name="arch" type="xml">
+                <tree create="false" delete="false" editable="false">
+                    <field name="code" readonly="1"/>
+                    <field name="type" readonly="1"/>
+                    <field name="status" readonly="1"/>
+                    <field name="date_start" readonly="1"/>
+                    <field name="date_end" readonly="1"/>
+                    <field name="resource_type" readonly="1"/>
+                    <field name="resource_code" readonly="1"/>
+                    <field name="region_id" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- We don't need a Form view for Actions -->
+
+    </data>
+</openerp>
