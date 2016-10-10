@@ -97,13 +97,13 @@ class Refresher(models.Model):
                     'active': True
                 })
 
-                # Assign regions where this size is available
-                regions = sizeItem['regions']
-                for regionCode in regions:
-                    region = self.env['unison.region']
-                    region = region.search([('code', '=', regionCode)])
-                    if region.id != False:
-                        size.region_ids += region
+            # Update regions where this size is available
+            regions = sizeItem['regions']
+            for regionCode in regions:
+                region = self.env['unison.region']
+                region = region.search([('code', '=', regionCode)])
+                if region.id != False:
+                    size.region_ids += region
 
         # Refresh Images
         print "UNISON: Refreshing Images..."
@@ -112,8 +112,8 @@ class Refresher(models.Model):
         for imageItem in images:
             code = imageItem['id']
             image = self.env['unison.image']
-            images = image.search([('code', '=', code)])
-            if len(images) == 0:
+            image = image.search([('code', '=', code)])
+            if len(image) == 0:
                 # Create image
                 print "UNISON: Creating image " + imageItem['name']
 
@@ -137,6 +137,14 @@ class Refresher(models.Model):
                     'active': True
                 })
 
+            # Refresh regions where this image is available
+            regions = imageItem['regions']
+            for regionCode in regions:
+                region = self.env['unison.region']
+                region = region.search([('code', '=', regionCode)])
+                if region.id != False:
+                    image.region_ids += region
+
         print "UNISON: Process completed"
 
         return True
@@ -146,6 +154,41 @@ class Refresher(models.Model):
     # to the launching of new installations etc.
     @api.model
     def cloud_hot_refresh(self):
+        # Right now we only have support for just one cloud
+        cloud = self.env['unison.cloud']
+        clouds = cloud.search([('code', '=', 'digitalocean')])
+        cloud_id = clouds[0].id
+
+        # Refresh Keys
+        print "UNISON: Refreshing Keys..."
+        digital_ocean = self.env['unison.digital_ocean']
+        keys = digital_ocean.get_keys()
+        for keyItem in keys:
+            fingerprint = keyItem['fingerprint']
+            key = self.env['unison.key']
+            key = key.search([('fingerprint', '=', fingerprint)])
+            if len(key) > 0:
+                # Indicate that this key was added to DigitalOcean
+                key.write({
+                    'code': keyItem['id'],
+                    'name': keyItem['name'],
+                    'cloud_id': cloud_id,
+                })
+            else:
+                # Create key
+                print "UNISON: Creating key " + fingerprint
+                key = key.create({
+                    'code': keyItem['id'], 
+                    'name': keyItem['name'],
+                    'cloud_id': cloud_id,
+                    'fingerprint': keyItem['fingerprint'],
+                    'public_key': keyItem['public_key'],
+                    'private_key': '', # This information should be provided manually
+                    'putty_key': '', # This information should be provided manually
+                    'notes': '',
+                    'active': True
+                })
+
         return True
 
     # This function is used to refresh the information about

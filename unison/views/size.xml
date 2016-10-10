@@ -45,15 +45,15 @@
                             <group name="group_left">
                                 <field name="cloud_id" readonly="1"/>
                                 <field name="name"/>
-                                <field name="active" readonly="1"/>
-                                <field name="notes"/>
-                            </group>
-                            <group name="group_right">
                                 <field name="ram_mb" readonly="1"/>
                                 <field name="cpu_cores" readonly="1"/>
                                 <field name="disk_gb" readonly="1"/>
                                 <field name="transfer_tb" readonly="1"/>
                                 <field name="hourly_price_usd" readonly="1"/>
+                                <field name="active" readonly="1"/>
+                                <field name="notes"/>
+                            </group>
+                            <group name="group_right">
                                 <field name="region_ids" widget="many2many_tags" readonly="1" options="{'no_create_edit': True}"/>
                             </group>
                         </group>
