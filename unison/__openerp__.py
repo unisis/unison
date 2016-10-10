@@ -37,7 +37,7 @@
         'views/distro.xml',
         'views/execution.xml',
         'views/feature.xml',
-        'views/float_ip.xml',
+        'views/floating_ip.xml',
         'views/image.xml',
         'views/install.xml',
         'views/key.xml',

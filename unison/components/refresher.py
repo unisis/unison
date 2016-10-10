@@ -159,36 +159,6 @@ class Refresher(models.Model):
         clouds = cloud.search([('code', '=', 'digitalocean')])
         cloud_id = clouds[0].id
 
-        # Refresh Keys
-        print "UNISON: Refreshing Keys..."
-        digital_ocean = self.env['unison.digital_ocean']
-        keys = digital_ocean.get_keys()
-        for keyItem in keys:
-            fingerprint = keyItem['fingerprint']
-            key = self.env['unison.key']
-            key = key.search([('fingerprint', '=', fingerprint)])
-            if len(key) > 0:
-                # Indicate that this key was added to DigitalOcean
-                key.write({
-                    'code': keyItem['id'],
-                    'name': keyItem['name'],
-                    'cloud_id': cloud_id,
-                })
-            else:
-                # Create key
-                print "UNISON: Creating key " + fingerprint
-                key = key.create({
-                    'code': keyItem['id'], 
-                    'name': keyItem['name'],
-                    'cloud_id': cloud_id,
-                    'fingerprint': keyItem['fingerprint'],
-                    'public_key': keyItem['public_key'],
-                    'private_key': '', # This information should be provided manually
-                    'putty_key': '', # This information should be provided manually
-                    'notes': '',
-                    'active': True
-                })
-
         # Refresh Domains
         print "UNISON: Refreshing Domains..."
         digital_ocean = self.env['unison.digital_ocean']
@@ -249,6 +219,74 @@ class Refresher(models.Model):
                         'notes': '',
                         'active': True
                     })
+
+        # Refresh Keys
+        print "UNISON: Refreshing Keys..."
+        digital_ocean = self.env['unison.digital_ocean']
+        keys = digital_ocean.get_keys()
+        for keyItem in keys:
+            fingerprint = keyItem['fingerprint']
+            key = self.env['unison.key']
+            key = key.search([('fingerprint', '=', fingerprint)])
+            if len(key) > 0:
+                # Indicate that this key was added to DigitalOcean
+                key.write({
+                    'code': keyItem['id'],
+                    'name': keyItem['name'],
+                    'cloud_id': cloud_id,
+                })
+            else:
+                # Create key
+                print "UNISON: Creating key " + fingerprint
+                key = key.create({
+                    'code': keyItem['id'], 
+                    'name': keyItem['name'],
+                    'cloud_id': cloud_id,
+                    'fingerprint': keyItem['fingerprint'],
+                    'public_key': keyItem['public_key'],
+                    'private_key': '', # This information should be provided manually
+                    'putty_key': '', # This information should be provided manually
+                    'notes': '',
+                    'active': True
+                })
+
+        # Refresh Floating IPs
+        print "UNISON: Refreshing Floating IPs..."
+        digital_ocean = self.env['unison.digital_ocean']
+        floating_ips = digital_ocean.get_floating_ips()
+        for floatingItem in floating_ips:
+            address = floatingItem['ip']
+            region_code = floatingItem['region']['slug']
+            region = self.env['unison.region']
+            region = region.search([('code', '=', region_code)])
+            region_id = region.id
+
+            # Check if floating ip is attached to node
+            if floatingItem['droplet'] == None:
+                node_id = None
+            else:
+                droplet = floatingItem['droplet']
+                node = self.env['unison.node']
+                node = node.search([('code', '=', droplet['id'])])
+                node_id = node.id
+
+            floating_ip = self.env['unison.floating_ip']
+            floating_ip = floating_ip.search([('address', '=', address)])
+            if len(floating_ip) > 0:
+                # Update info about the floating ip (attach info)
+                floating_ip.write({
+                    'node_id': node_id,
+                })
+            else:
+                # Create floating ip
+                print "UNISON: Creating floating ip " + address
+                floating_ip = floating_ip.create({
+                    'address': address,
+                    'region_id': region_id,
+                    'node_id': node_id,
+                    'notes': '',
+                    'active': True
+                })
 
         return True
 

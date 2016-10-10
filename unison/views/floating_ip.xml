@@ -2,56 +2,54 @@
 <openerp>
     <data>
 
-        <!-- Action to open Float IPs list -->
+        <!-- Action to open Floating IPs list -->
         <act_window 
-            id="action_float_ip"
-            name="Float IPs"
-            res_model="unison.float_ip"
+            id="action_floating_ip"
+            name="Floating IPs"
+            res_model="unison.floating_ip"
             view_mode="tree,form"
         />
         
-        <!-- Menu item to open Float IPs List -->
+        <!-- Menu item to open Floating IPs List -->
         <menuitem 
-            id="menu_float_ip"
-            name="Float IPs"
+            id="menu_floating_ip"
+            name="Floating IPs"
             parent="unison.menu_nodes"
             sequence="80"
-            action="action_float_ip"
+            action="action_floating_ip"
         />
 
-        <!-- Float IPs Tree -->
-        <record id="view_tree_float_ip" model="ir.ui.view">
-            <field name="name">Float IPs Tree</field>
-            <field name="model">unison.float_ip</field>
+        <!-- Floating IPs Tree -->
+        <record id="view_tree_floating_ip" model="ir.ui.view">
+            <field name="name">Floating IPs Tree</field>
+            <field name="model">unison.floating_ip</field>
             <field name="arch" type="xml">
                 <tree create="false" delete="false" editable="false">
-                    <field name="cloud_id"/>
+                    <field name="region_id"/>
                     <field name="address"/>
                     <field name="node_id"/>
-                    <field name="date_attach"/>
                 </tree>
             </field>
         </record>
 
-        <!-- Float IP Form -->
-        <record id="view_form_float_ip" model="ir.ui.view">
-            <field name="name">Float IP Form</field>
-            <field name="model">unison.float_ip</field>
+        <!-- Floating IP Form -->
+        <record id="view_form_floating_ip" model="ir.ui.view">
+            <field name="name">Floating IP Form</field>
+            <field name="model">unison.floating_ip</field>
             <field name="arch" type="xml">
-                <form string="Float IP" create="false" delete="false" editable="true">
+                <form string="Floating IP" create="false" delete="false" editable="true">
                     <header>
                         <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
                     </header>
                     <sheet>
                         <group name="group_top">
                             <group name="group_left">
-                                <field name="cloud_id" readonly="1"/>
+                                <field name="region_id" readonly="1"/>
                                 <field name="address" readonly="1"/>
                                 <field name="active" readonly="1"/>
                             </group>
                             <group name="group_right">
                                 <field name="node_id" readonly="1"/>
-                                <field name="date_attach" readonly="1"/>
                                 <field name="notes"/>
                             </group>
                         </group>

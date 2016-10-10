@@ -7,7 +7,7 @@ import distro
 import domain
 import execution
 import feature
-import float_ip
+import floating_ip
 import image
 import install
 import key

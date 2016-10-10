@@ -26,7 +26,7 @@ class Install(models.Model):
     node_id = fields.Many2one('unison.node', 'Node', ondelete='restrict')
     volume_gb = fields.Integer('Volume Desired GB', required=True)
     volume_id = fields.Many2one('unison.volume', 'Volume', ondelete='restrict')
-    float_ip_id = fields.Many2one('unison.float_ip', 'Float IP', ondelete='restrict')
+    floating_ip_id = fields.Many2one('unison.floating_ip', 'Floating IP', ondelete='restrict')
     mail_subaccount = fields.Char('Mail Subaccount')
     mail_api_key = fields.Char('Mail API Key')
     ssl_enabled = fields.Boolean('Enable HTTPS via a SSL certificate', default=True)

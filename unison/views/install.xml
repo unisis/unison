@@ -62,7 +62,7 @@
                                 <field name="node_id" readonly="1"/>
                                 <field name="volume_gb"/>
                                 <field name="volume_id" readonly="1"/>
-                                <field name="float_ip_id" readonly="1"/>
+                                <field name="floating_ip_id" readonly="1"/>
                                 <field name="mail_subaccount" readonly="1"/>
                                 <field name="mail_api_key" readonly="1"/>
                                 <field name="active"/>

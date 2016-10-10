@@ -14,6 +14,7 @@ class Record(models.Model):
         ('CNAME', 'CNAME'),
         ('MX', 'MX'),
         ('NS', 'NS'),
+        ('PTR', 'PTR'),
         ('SRV', 'SRV'),
         ('TXT', 'TXT'),
     ]
