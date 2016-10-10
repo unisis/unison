@@ -7,10 +7,15 @@ class Record(models.Model):
     _name = 'unison.record'
     _order = 'name'
 
+    # Record types supported by DigitalOcean DNS system
     types = [
-        ('a', 'A'),
-        ('cname', 'CNAME'),
-        ('mx', 'MX'),
+        ('A', 'A'),
+        ('AAAA', 'AAAA'),
+        ('CNAME', 'CNAME'),
+        ('MX', 'MX'),
+        ('NS', 'NS'),
+        ('SRV', 'SRV'),
+        ('TXT', 'TXT'),
     ]
 
     code = fields.Char('Code') # DigitalOcean code, assigned after create

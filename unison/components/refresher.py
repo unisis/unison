@@ -214,6 +214,42 @@ class Refresher(models.Model):
                     'active': True
                 })
 
+            # Refresh Records of this domain
+            print "UNISON: Refreshing records for domain " + name + "..."
+            digital_ocean = self.env['unison.digital_ocean']
+            records = digital_ocean.get_records(name)
+            for recordItem in records:
+                code = recordItem['id']
+                record = self.env['unison.record']
+                record = record.search([('code', '=', code)])
+                if len(record) > 0:
+                    # Update record
+                    record.write({
+                        'type': recordItem['type'],
+                        'name': recordItem['name'],
+                        'content': recordItem['data'],
+                    })
+                else:
+                    # Create record
+                    print "UNISON: Creating record"
+
+                    # Priority field is only available on certain records
+                    if 'priority' in recordItem.keys():
+                        priority = recordItem['priority']
+                    else:
+                        priority = None
+
+                    record = record.create({
+                        'code': recordItem['id'], 
+                        'type': recordItem['type'],
+                        'name': recordItem['name'],
+                        'content': recordItem['data'],
+                        'priority': priority,
+                        'domain_id': domain.id,
+                        'notes': '',
+                        'active': True
+                    })
+
         return True
 
     # This function is used to refresh the information about

@@ -60,7 +60,7 @@ class DigitalOcean(models.Model):
 
     @api.model
     def get_records(self, domain_name):
-        command = "compute records list " + domain_name
+        command = "compute domain records list " + domain_name
         return self.run_doctl(command)
 
     @api.model
