@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import datetime
 import logging
+import dateutil.parser as dateparser
 from openerp import models, fields, osv, exceptions, api
 
 _logger = logging.getLogger(__name__)
@@ -162,9 +164,22 @@ class Refresher(models.Model):
         # Refresh Actions (from last action)
         print "UNISON: Refreshing Actions..."
         digital_ocean = self.env['unison.digital_ocean']
-        after = self.env.cr.execute("SELECT MAX(date_start) FROM unison_action")
-        if after == None:
+
+        date_last = self.query_scalar("SELECT MAX(date_start) FROM unison_action")
+        if date_last == None:
             after = ''
+        else:
+            # We will retrieve from one second after last event
+            print date_last
+            time_parsed = dateparser.parse(date_last)
+            time_seconds = time_parsed.strftime('%s')
+            print time_seconds
+            time_seconds = int(time_seconds) + 1
+            print time_seconds
+            date_time = datetime.datetime.utcfromtimestamp(time_seconds)
+            after = date_time.isoformat("T") + "Z"
+            print after
+
         actions = digital_ocean.get_actions(after) # We only retrieve new actions
         for actionItem in actions:
             # Create action
@@ -368,3 +383,15 @@ class Refresher(models.Model):
     @api.model
     def repos_refresh(self):
         return True
+
+    # This function is a wrapper to perform a query and return a scalar value
+    def query_scalar(self, query):
+        self.env.cr.execute(query)
+        result = self.env.cr.fetchall()
+        if result == None:
+            return None
+        row = result[0]
+        for value in row:
+            return value
+
+
