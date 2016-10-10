@@ -189,6 +189,31 @@ class Refresher(models.Model):
                     'active': True
                 })
 
+        # Refresh Domains
+        print "UNISON: Refreshing Domains..."
+        digital_ocean = self.env['unison.digital_ocean']
+        domains = digital_ocean.get_domains()
+        for domainItem in domains:
+            name = domainItem['name']
+            domain = self.env['unison.domain']
+            domain = domain.search([('name', '=', name)])
+            if len(domain) > 0:
+                # Update their zone file
+                domain.write({
+                    'zone_file': domainItem['zone_file'],
+                })
+            else:
+                # Create domain
+                print "UNISON: Creating domain " + name
+                domain = domain.create({
+                    'name': domainItem['name'],
+                    'cloud_id': cloud_id,
+                    'ttl': domainItem['ttl'],
+                    'zone_file': domainItem['zone_file'],
+                    'notes': '',
+                    'active': True
+                })
+
         return True
 
     # This function is used to refresh the information about

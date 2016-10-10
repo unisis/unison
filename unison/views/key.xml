@@ -44,15 +44,16 @@
                         <group name="group_top">
                             <group name="group_left">
                                 <field name="cloud_id" readonly="1"/>
-                                <field name="name" readonly="1"/>
-                                <field name="fingerprint" readonly="1"/>
-                                <field name="active" readonly="1"/>
+                                <field name="code" readonly="1"/>
+                                <field name="name"/>
+                                <field name="fingerprint"/>
+                                <field name="active"/>
                                 <field name="notes"/>
                             </group>
                             <group name="group_right">
-                                <field name="public_key" readonly="1"/>
-                                <field name="private_key" readonly="1"/>
-                                <field name="putty_key" readonly="1"/>
+                                <field name="public_key"/>
+                                <field name="private_key"/>
+                                <field name="putty_key"/>
                             </group>
                         </group>
                     </sheet>

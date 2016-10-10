@@ -50,7 +50,6 @@
                                 <field name="content" readonly="1"/>
                             </group>
                             <group name="group_right">
-                                <field name="ttl" readonly="1"/>
                                 <field name="priority" readonly="1"/>
                                 <field name="active" readonly="1"/>
                                 <field name="notes"/>

@@ -9,6 +9,10 @@ class Domain(models.Model):
 
     code = fields.Char('Code') # DigitalOcean code, assigned after create
     name = fields.Char('Name', required=True, index=True)
+    cloud_id = fields.Many2one('unison.cloud', 'Cloud', ondelete='restrict')
+    ttl = fields.Integer('TTL', required=True, index=True)
+    zone_file = fields.Text('Zone File', required=True, index=True)
+    notes = fields.Text('Notes')
     active = fields.Boolean('Active', default=True)
 
     records = fields.One2many('unison.record', 'domain_id', 'Domain Records')
