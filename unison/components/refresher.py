@@ -40,6 +40,7 @@ class Refresher(models.Model):
                 })
             else:
                 # Create region
+                print "UNISON: Creating region " + code
                 region = region.create({
                     'code': regionItem['slug'], 
                     'name': regionItem['name'],
@@ -65,6 +66,7 @@ class Refresher(models.Model):
                 })
             else:
                 # Create size
+                print "UNISON: Creating size " + code
                 size = size.create({
                     'code': sizeItem['slug'], 
                     'name': sizeItem['slug'], # Size doesn't have a friendly name, but we can edit it
@@ -86,6 +88,38 @@ class Refresher(models.Model):
                     region = region.search([('code', '=', regionCode)])
                     if region.id != False:
                         size.region_ids += region
+
+        # Refresh Images
+        print "UNISON: Refreshing Images..."
+        digital_ocean = self.env['unison.digital_ocean']
+        images = digital_ocean.get_images()
+        for imageItem in images:
+            code = imageItem['id']
+            image = self.env['unison.image']
+            images = image.search([('code', '=', code)])
+            if len(images) == 0:
+                # Create image
+                print "UNISON: Creating image " + imageItem['name']
+
+                is_backup = (imageItem['type'] != 'snapshot')
+                if 'public' in imageItem.keys():
+                    is_private = (imageItem['public'] == False)
+                else:
+                    # Private snapshots doesn't have the 'public' item
+                    is_private = True
+                
+                image = image.create({
+                    'code': imageItem['id'], 
+                    'name': imageItem['name'],
+                    'cloud_id': cloud_id,
+                    'is_backup': is_backup,
+                    'is_private': is_private,
+                    'min_disk_size': imageItem['min_disk_size'],
+                    'distribution': imageItem['distribution'],
+                    'created_at': imageItem['created_at'],
+                    'notes': '',
+                    'active': True
+                })
 
         print "UNISON: Process completed"
 
