@@ -50,6 +50,22 @@ class Refresher(models.Model):
                     'active': True
                 })
 
+            # Refresh Features
+            for featureItem in regionItem['features']:
+                code = featureItem
+                feature = self.env['unison.feature']
+                feature = feature.search([('code', '=', code)])
+                if len(feature) == 0:
+                    # Create new feature
+                    print "UNISON: Creating feature " + code
+                    feature = feature.create({
+                        'code': code, 
+                        'cloud_id': cloud_id,
+                        'notes': '',
+                        'active': True
+                    })
+                region.feature_ids += feature
+
         # Refresh Sizes
         print "UNISON: Refreshing Sizes..."
         digital_ocean = self.env['unison.digital_ocean']
