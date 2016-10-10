@@ -165,20 +165,16 @@ class Refresher(models.Model):
         print "UNISON: Refreshing Actions..."
         digital_ocean = self.env['unison.digital_ocean']
 
-        date_last = self.query_scalar("SELECT MAX(date_start) FROM unison_action")
+        date_last = self.query_scalar("SELECT MAX(date_end) FROM unison_action")
         if date_last == None:
             after = ''
         else:
             # We will retrieve from one second after last event
-            print date_last
             time_parsed = dateparser.parse(date_last)
             time_seconds = time_parsed.strftime('%s')
-            print time_seconds
             time_seconds = int(time_seconds) + 1
-            print time_seconds
             date_time = datetime.datetime.utcfromtimestamp(time_seconds)
             after = date_time.isoformat("T") + "Z"
-            print after
 
         actions = digital_ocean.get_actions(after) # We only retrieve new actions
         for actionItem in actions:
@@ -375,6 +371,8 @@ class Refresher(models.Model):
                     'notes': '',
                     'active': True
                 })
+
+        print "UNISON: Process completed"
 
         return True
 
