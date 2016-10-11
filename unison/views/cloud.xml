@@ -43,7 +43,6 @@
                         <group name="group_center">
                             <field name="code"/>
                             <field name="name"/>
-                            <field name="api_key"/>
                             <field name="notes"/>
                             <field name="active"/>
                         </group>

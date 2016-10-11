@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
+import os
 import datetime
 import logging
+import subprocess
 import dateutil.parser as dateparser
 from openerp import models, fields, osv, exceptions, api
 
@@ -30,31 +32,31 @@ class Refresher(models.Model):
         print "UNISON: Refreshing Regions..."
         digital_ocean = self.env['unison.digital_ocean']
         regions = digital_ocean.get_regions()
-        for regionItem in regions:
-            code = regionItem['slug']
+        for region_item in regions:
+            code = region_item['slug']
             region = self.env['unison.region']
             regions = region.search([('code', '=', code)])
             if len(regions) > 0:
                 # Update 'available' field
                 region = region.search([('code', '=', code)])
                 region.write({
-                    'available': regionItem['available'],
+                    'available': region_item['available'],
                 })
             else:
                 # Create region
                 print "UNISON: Creating region " + code
                 region = region.create({
-                    'code': regionItem['slug'], 
-                    'name': regionItem['name'],
+                    'code': region_item['slug'], 
+                    'name': region_item['name'],
                     'cloud_id': cloud_id,
-                    'available': regionItem['available'],
+                    'available': region_item['available'],
                     'notes': '',
                     'active': True
                 })
 
             # Refresh Features
-            for featureItem in regionItem['features']:
-                code = featureItem
+            for feature_item in region_item['features']:
+                code = feature_item
                 feature = self.env['unison.feature']
                 feature = feature.search([('code', '=', code)])
                 if len(feature) == 0:
@@ -72,38 +74,38 @@ class Refresher(models.Model):
         print "UNISON: Refreshing Sizes..."
         digital_ocean = self.env['unison.digital_ocean']
         sizes = digital_ocean.get_sizes()
-        for sizeItem in sizes:
-            code = sizeItem['slug']
+        for size_item in sizes:
+            code = size_item['slug']
             size = self.env['unison.size']
             sizes = size.search([('code', '=', code)])
             if len(sizes) > 0:
                 # Update available status
                 size = size.search([('code', '=', code)])
                 size.write({
-                    'available': sizeItem['available'],
+                    'available': size_item['available'],
                 })
             else:
                 # Create size
                 print "UNISON: Creating size " + code
                 size = size.create({
-                    'code': sizeItem['slug'], 
-                    'name': sizeItem['slug'], # Size doesn't have a friendly name, but we can edit it
+                    'code': size_item['slug'], 
+                    'name': size_item['slug'], # Size doesn't have a friendly name, but we can edit it
                     'cloud_id': cloud_id,
-                    'ram_mb': sizeItem['memory'],
-                    'cpu_cores': sizeItem['vcpus'],
-                    'disk_gb': sizeItem['disk'],
-                    'transfer_tb': sizeItem['transfer'],
-                    'available': sizeItem['available'],
-                    'hourly_price_usd': sizeItem['price_hourly'],
+                    'ram_mb': size_item['memory'],
+                    'cpu_cores': size_item['vcpus'],
+                    'disk_gb': size_item['disk'],
+                    'transfer_tb': size_item['transfer'],
+                    'available': size_item['available'],
+                    'hourly_price_usd': size_item['price_hourly'],
                     'notes': '',
                     'active': True
                 })
 
             # Update regions where this size is available
-            regions = sizeItem['regions']
-            for regionCode in regions:
+            regions = size_item['regions']
+            for region_code in regions:
                 region = self.env['unison.region']
-                region = region.search([('code', '=', regionCode)])
+                region = region.search([('code', '=', region_code)])
                 if region.id != False:
                     size.region_ids += region
 
@@ -111,39 +113,39 @@ class Refresher(models.Model):
         print "UNISON: Refreshing Images..."
         digital_ocean = self.env['unison.digital_ocean']
         images = digital_ocean.get_images()
-        for imageItem in images:
-            code = imageItem['id']
+        for image_item in images:
+            code = image_item['id']
             image = self.env['unison.image']
             image = image.search([('code', '=', code)])
             if len(image) == 0:
                 # Create image
-                print "UNISON: Creating image " + imageItem['name']
+                print "UNISON: Creating image " + image_item['name']
 
-                is_backup = (imageItem['type'] != 'snapshot')
-                if 'public' in imageItem.keys():
-                    is_private = (imageItem['public'] == False)
+                is_backup = (image_item['type'] != 'snapshot')
+                if 'public' in image_item.keys():
+                    is_private = (image_item['public'] == False)
                 else:
                     # Private snapshots doesn't have the 'public' item
                     is_private = True
                 
                 image = image.create({
-                    'code': imageItem['id'], 
-                    'name': imageItem['name'],
+                    'code': image_item['id'], 
+                    'name': image_item['name'],
                     'cloud_id': cloud_id,
                     'is_backup': is_backup,
                     'is_private': is_private,
-                    'min_disk_size': imageItem['min_disk_size'],
-                    'distribution': imageItem['distribution'],
-                    'created_at': imageItem['created_at'],
+                    'min_disk_size': image_item['min_disk_size'],
+                    'distribution': image_item['distribution'],
+                    'created_at': image_item['created_at'],
                     'notes': '',
                     'active': True
                 })
 
             # Refresh regions where this image is available
-            regions = imageItem['regions']
-            for regionCode in regions:
+            regions = image_item['regions']
+            for region_code in regions:
                 region = self.env['unison.region']
-                region = region.search([('code', '=', regionCode)])
+                region = region.search([('code', '=', region_code)])
                 if region.id != False:
                     image.region_ids += region
 
@@ -177,11 +179,11 @@ class Refresher(models.Model):
             after = date_time.isoformat("T") + "Z"
 
         actions = digital_ocean.get_actions(after) # We only retrieve new actions
-        for actionItem in actions:
+        for action_item in actions:
             # Create action
 
-            if 'region' in actionItem.keys():
-                region_code = actionItem['region']['slug']
+            if 'region' in action_item.keys():
+                region_code = action_item['region']['slug']
                 region = self.env['unison.region']
                 region = region.search([('code', '=', region_code)])
                 region_id = region.id
@@ -190,13 +192,13 @@ class Refresher(models.Model):
 
             action = self.env['unison.action']
             action = action.create({
-                'code': actionItem['id'],
-                'type': actionItem['type'],
-                'status': actionItem['status'],
-                'date_start': actionItem['started_at'],
-                'date_end': actionItem['completed_at'],
-                'resource_type': actionItem['resource_type'],
-                'resource_code': actionItem['resource_id'],
+                'code': action_item['id'],
+                'type': action_item['type'],
+                'status': action_item['status'],
+                'date_start': action_item['started_at'],
+                'date_end': action_item['completed_at'],
+                'resource_type': action_item['resource_type'],
+                'resource_code': action_item['resource_id'],
                 'region_id': region_id
             })
 
@@ -204,23 +206,23 @@ class Refresher(models.Model):
         print "UNISON: Refreshing Domains..."
         digital_ocean = self.env['unison.digital_ocean']
         domains = digital_ocean.get_domains()
-        for domainItem in domains:
-            name = domainItem['name']
+        for domain_item in domains:
+            name = domain_item['name']
             domain = self.env['unison.domain']
             domain = domain.search([('name', '=', name)])
             if len(domain) > 0:
                 # Update their zone file
                 domain.write({
-                    'zone_file': domainItem['zone_file'],
+                    'zone_file': domain_item['zone_file'],
                 })
             else:
                 # Create domain
                 print "UNISON: Creating domain " + name
                 domain = domain.create({
-                    'name': domainItem['name'],
+                    'name': domain_item['name'],
                     'cloud_id': cloud_id,
-                    'ttl': domainItem['ttl'],
-                    'zone_file': domainItem['zone_file'],
+                    'ttl': domain_item['ttl'],
+                    'zone_file': domain_item['zone_file'],
                     'notes': '',
                     'active': True
                 })
@@ -229,32 +231,32 @@ class Refresher(models.Model):
             print "UNISON: Refreshing records for domain " + name + "..."
             digital_ocean = self.env['unison.digital_ocean']
             records = digital_ocean.get_records(name)
-            for recordItem in records:
-                code = recordItem['id']
+            for record_item in records:
+                code = record_item['id']
                 record = self.env['unison.record']
                 record = record.search([('code', '=', code)])
                 if len(record) > 0:
                     # Update record
                     record.write({
-                        'type': recordItem['type'],
-                        'name': recordItem['name'],
-                        'content': recordItem['data'],
+                        'type': record_item['type'],
+                        'name': record_item['name'],
+                        'content': record_item['data'],
                     })
                 else:
                     # Create record
                     print "UNISON: Creating record"
 
                     # Priority field is only available on certain records
-                    if 'priority' in recordItem.keys():
-                        priority = recordItem['priority']
+                    if 'priority' in record_item.keys():
+                        priority = record_item['priority']
                     else:
                         priority = None
 
                     record = record.create({
-                        'code': recordItem['id'], 
-                        'type': recordItem['type'],
-                        'name': recordItem['name'],
-                        'content': recordItem['data'],
+                        'code': record_item['id'], 
+                        'type': record_item['type'],
+                        'name': record_item['name'],
+                        'content': record_item['data'],
                         'priority': priority,
                         'domain_id': domain.id,
                         'notes': '',
@@ -265,26 +267,26 @@ class Refresher(models.Model):
         print "UNISON: Refreshing Keys..."
         digital_ocean = self.env['unison.digital_ocean']
         keys = digital_ocean.get_keys()
-        for keyItem in keys:
-            fingerprint = keyItem['fingerprint']
+        for key_item in keys:
+            fingerprint = key_item['fingerprint']
             key = self.env['unison.key']
             key = key.search([('fingerprint', '=', fingerprint)])
             if len(key) > 0:
                 # Indicate that this key was added to DigitalOcean
                 key.write({
-                    'code': keyItem['id'],
-                    'name': keyItem['name'],
+                    'code': key_item['id'],
+                    'name': key_item['name'],
                     'cloud_id': cloud_id,
                 })
             else:
                 # Create key
                 print "UNISON: Creating key " + fingerprint
                 key = key.create({
-                    'code': keyItem['id'], 
-                    'name': keyItem['name'],
+                    'code': key_item['id'], 
+                    'name': key_item['name'],
                     'cloud_id': cloud_id,
-                    'fingerprint': keyItem['fingerprint'],
-                    'public_key': keyItem['public_key'],
+                    'fingerprint': key_item['fingerprint'],
+                    'public_key': key_item['public_key'],
                     'private_key': '', # This information should be provided manually
                     'putty_key': '', # This information should be provided manually
                     'notes': '',
@@ -295,23 +297,23 @@ class Refresher(models.Model):
         print "UNISON: Refreshing Nodes..."
         digital_ocean = self.env['unison.digital_ocean']
         nodes = digital_ocean.get_nodes()
-        for nodeItem in nodes:
-            code = nodeItem['id']
+        for node_item in nodes:
+            code = node_item['id']
 
             # Get region_id
-            region_code = nodeItem['region']['slug']
+            region_code = node_item['region']['slug']
             region = self.env['unison.region']
             region = region.search([('code', '=', region_code)])
             region_id = region.id
 
             # Get size_id
-            size_code = nodeItem['size']['slug']
+            size_code = node_item['size']['slug']
             size = self.env['unison.size']
             size = size.search([('code', '=', size_code)])
             size_id = size.id
 
             # Get image_id
-            image_code = nodeItem['image']['id']
+            image_code = node_item['image']['id']
             image = self.env['unison.image']
             image = image.search([('code', '=', image_code)])
             image_id = image.id
@@ -319,7 +321,7 @@ class Refresher(models.Model):
             # Get IPv4 network info
             public_ip = None
             private_ip = None
-            for network in nodeItem['networks']['v4']:
+            for network in node_item['networks']['v4']:
                 if network['type'] == 'public':
                     public_ip = network['ip_address']
                 else:
@@ -333,14 +335,14 @@ class Refresher(models.Model):
                     'size_id': size_id,
                     'public_ip': public_ip,
                     'private_ip': private_ip,
-                    'status': nodeItem['status'],
+                    'status': node_item['status'],
                 })
             else:
                 # Create node
                 print "UNISON: Creating node " + str(code)
                 node = node.create({
                     'code': code, 
-                    'name': nodeItem['name'],
+                    'name': node_item['name'],
                     'image_id': image_id,
                     'size_id': size_id,
                     'region_id': region_id,
@@ -348,7 +350,7 @@ class Refresher(models.Model):
                     'record_id': None, # TO-DO ASSIGN
                     'public_ip': public_ip,
                     'private_ip': private_ip,
-                    'status': nodeItem['status'],
+                    'status': node_item['status'],
                     'notes': '',
                     'active': True
                 })
@@ -357,18 +359,18 @@ class Refresher(models.Model):
         print "UNISON: Refreshing Floating IPs..."
         digital_ocean = self.env['unison.digital_ocean']
         floating_ips = digital_ocean.get_floating_ips()
-        for floatingItem in floating_ips:
-            address = floatingItem['ip']
-            region_code = floatingItem['region']['slug']
+        for floating_item in floating_ips:
+            address = floating_item['ip']
+            region_code = floating_item['region']['slug']
             region = self.env['unison.region']
             region = region.search([('code', '=', region_code)])
             region_id = region.id
 
             # Check if floating ip is attached to node
-            if floatingItem['droplet'] == None:
+            if floating_item['droplet'] == None:
                 node_id = None
             else:
-                droplet = floatingItem['droplet']
+                droplet = floating_item['droplet']
                 node = self.env['unison.node']
                 node = node.search([('code', '=', droplet['id'])])
                 node_id = node.id
@@ -395,18 +397,18 @@ class Refresher(models.Model):
         print "UNISON: Refreshing Volumes..."
         digital_ocean = self.env['unison.digital_ocean']
         volumes = digital_ocean.get_volumes()
-        for volumeItem in volumes:
-            code = volumeItem['id']
-            region_code = volumeItem['region']['slug']
+        for volume_item in volumes:
+            code = volume_item['id']
+            region_code = volume_item['region']['slug']
             region = self.env['unison.region']
             region = region.search([('code', '=', region_code)])
             region_id = region.id
 
             # Check if volume is attached to node
-            if len(volumeItem['droplet_ids']) == 0:
+            if len(volume_item['droplet_ids']) == 0:
                 node_id = None
             else:
-                droplet_code = volumeItem['droplet_ids'][0]
+                droplet_code = volume_item['droplet_ids'][0]
                 node = self.env['unison.node']
                 node = node.search([('code', '=', droplet_code)])
                 node_id = node.id
@@ -417,15 +419,15 @@ class Refresher(models.Model):
                 # Update info about the volume (attach info and size)
                 volume.write({
                     'node_id': node_id,
-                    'size_gb': volumeItem['size_gigabytes']
+                    'size_gb': volume_item['size_gigabytes']
                 })
             else:
                 # Create volume
                 print "UNISON: Creating volume " + code
                 volume = volume.create({
                     'code': code,
-                    'name': volumeItem['name'],
-                    'size_gb': volumeItem['size_gigabytes'],
+                    'name': volume_item['name'],
+                    'size_gb': volume_item['size_gigabytes'],
                     'region_id': region_id,
                     'node_id': node_id,
                     'filesystem': None, # Will be provided by UniSon
@@ -442,6 +444,36 @@ class Refresher(models.Model):
     # registered repos (branches, modules, etc)
     @api.model
     def repos_refresh(self):
+        home_path = os.getenv("HOME")
+        repos_path = home_path + '/repos/'
+        if not os.path.isdir(repos_path):
+            os.mkdir(repos_path)
+
+        repos = self.env['unison.repo']
+        repos = repos.search([])
+        for repo in repos:
+            group_name = repo.repo_group_id.name
+            repo_path = repos_path + group_name + '/' + repo.name
+            if not os.path.isdir(repo_path + '/.git'):
+                print 'Cloning ' + repo.repo_url() + ' into ' + repo_path
+
+                if repo.clone_command == False:
+                    # If no special clone command was configured, clone via https
+                    clone_command = "git clone " + repo.repo_url() + ' ' + repo_path
+                else:
+                    # Otherwise clone the repo using the provided command
+                    clone_command = repo.clone_command + ' ' + repo_path
+
+                if repo.is_private:
+                    # We should use ssh cloning with the provided key
+                    key_path = home_path + '/.ssh/' + group_name + '_' + repo.name
+                    file = open(key_path, 'w')
+                    file.write(repo.ssh_private_key)
+                    clone_command = "export GIT_SSH_COMMAND='ssh -i " + key_path + "'; " + clone_command + ' ' + repo_path
+
+                print "Executing " + clone_command
+                self.run_command(clone_command)
+
         return True
 
     # This function is a wrapper to perform a query and return a scalar value
@@ -454,4 +486,9 @@ class Refresher(models.Model):
         for value in row:
             return value
 
+    # This function is used to run a shell command and return their output
+    def run_command(self, command):
+        process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
+        output = process.stdout.read()
+        return output
 

@@ -38,12 +38,20 @@
             <field name="sequence">3</field>
         </record>
 
+        <!-- Akretion Repo Group -->
+        <record id="repo_group_akretion" model="unison.repo_group">
+            <field name="name">akretion</field>
+            <field name="description">Akretion Repos</field>
+            <field name="url">https://github.com/akretion</field>
+            <field name="sequence">4</field>
+        </record>
+
         <!-- UniSis Repo Group -->
         <record id="repo_group_unisis" model="unison.repo_group">
             <field name="name">unisis</field>
             <field name="description">UniSis Repos</field>
             <field name="url">https://github.com/unisis</field>
-            <field name="sequence">4</field>
+            <field name="sequence">5</field>
         </record>
 
         <!-- Repositories used on Generic Code Template 8.0 -->
@@ -72,9 +80,9 @@
             <field name="name">knowledge</field>
         </record>
 
-        <record id="repo_oca_reporting_engine_oca" model="unison.repo">
+        <record id="repo_oca_reporting_engine" model="unison.repo">
             <field name="repo_group_id" ref="repo_group_oca"/>
-            <field name="name">reporting-engine-oca</field>
+            <field name="name">reporting-engine</field>
         </record>
 
         <record id="repo_oca_server_tools" model="unison.repo">
@@ -209,7 +217,7 @@
         </record>
 
         <record id="repo_adhoc_odoo_usability" model="unison.repo">
-            <field name="repo_group_id" ref="repo_group_adhoc"/>
+            <field name="repo_group_id" ref="repo_group_akretion"/>
             <field name="name">odoo-usability</field>
         </record>
 

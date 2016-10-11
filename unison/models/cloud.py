@@ -9,7 +9,6 @@ class Cloud(models.Model):
 
     code = fields.Char('Code') # DigitalOcean code, assigned after create
     name = fields.Char('Name', required=True, index=True)
-    api_key = fields.Char('API Key', required=True, help='API Key used to automated operations')
     notes = fields.Text('Notes')
     active = fields.Boolean('Active', default=True)
 

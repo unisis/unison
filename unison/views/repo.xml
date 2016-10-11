@@ -53,6 +53,7 @@
                                 <field name="is_private"/>
                             </group>
                             <group name="group_right">
+                                <field name="clone_command"/>
                                 <field name="ssh_private_key"/>
                                 <field name="fork_repo_id"/>
                                 <field name="notes"/>
