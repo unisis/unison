@@ -475,6 +475,40 @@ class Refresher(models.Model):
                 print "Executing " + clone_command
                 self.run_command(clone_command)
 
+        # Refreshing branches information
+        repos = repos.search([])
+        for repo in repos:
+            group_name = repo.repo_group_id.name
+            repo_path = repos_path + group_name + '/' + repo.name
+            command = "cd " + repo_path + " && git branch -r | grep -v HEAD | cut -d '/' -f 2 | tr '\n' ' '"
+            output = self.run_command(command)
+            branches = output.split(" ")
+            for branch_name in branches:
+                if len(branch_name) > 0:
+                    print "UNISON: Analyzing branch " + group_name + "/" + repo.name + "/" + branch_name + "..."
+
+                    # Change to branch, pull last changes
+                    command = "cd " + repo_path + " && git clean -d -fx '' && git checkout " + branch_name + " && git pull origin " + branch_name
+                    self.run_command(command)
+
+                    # Get last commit on branch (we use a separate command to not mix the output of other commands)
+                    command = "cd " + repo_path + " && git log -1 --pretty=format:%H"
+                    last_commit = self.run_command(command)
+
+                    branch = self.env['unison.branch']
+                    branch = branch.search([('repo_id', '=', repo.id), ('name', '=', branch_name)])
+                    if len(branch) == 0:
+                        print "UNISON: Registering branch " + branch_name
+                        branch = branch.create({
+                            'name': branch_name,
+                            'repo_id': repo.id,
+                            'last_commit': last_commit,
+                        })
+                    else:
+                        branch.write({
+                            'last_commit': last_commit,
+                        })
+
         print "UNISON: Completed refresh of repos"
 
         return True

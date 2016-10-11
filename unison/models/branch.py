@@ -9,5 +9,6 @@ class Branch(models.Model):
 
     name = fields.Char('Name', required=True, index=True)
     repo_id = fields.Many2one('unison.repo', 'Repository', ondelete='restrict')
+    last_commit = fields.Char('Last Commit')
     notes = fields.Text('Notes')
     active = fields.Boolean('Active', default=True)
