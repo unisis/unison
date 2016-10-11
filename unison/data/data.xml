@@ -7,7 +7,6 @@
         <record id="cloud_digitalocean" model="unison.cloud">
             <field name="code">digitalocean</field>
             <field name="name">DigitalOcean</field>
-            <field name="api_key">[ENTER-API-KEY]</field>
             <field name="notes"></field>
             <field name="active">1</field>
         </record>
@@ -216,7 +215,7 @@
             <field name="name">odoo-support</field>
         </record>
 
-        <record id="repo_adhoc_odoo_usability" model="unison.repo">
+        <record id="repo_akretion_odoo_usability" model="unison.repo">
             <field name="repo_group_id" ref="repo_group_akretion"/>
             <field name="name">odoo-usability</field>
         </record>
@@ -304,8 +303,8 @@
             <field name="name">8.0</field>
         </record>
 
-        <record id="branch_repo_oca_reporting_engine_oca" model="unison.branch">
-            <field name="repo_id" ref="repo_oca_reporting_engine_oca"/>
+        <record id="branch_repo_oca_reporting_engine" model="unison.branch">
+            <field name="repo_id" ref="repo_oca_reporting_engine"/>
             <field name="name">8.0</field>
         </record>
 
@@ -439,8 +438,8 @@
             <field name="name">8.0</field>
         </record>
 
-        <record id="branch_repo_adhoc_odoo_usability" model="unison.branch">
-            <field name="repo_id" ref="repo_adhoc_odoo_usability"/>
+        <record id="branch_repo_akretion_odoo_usability" model="unison.branch">
+            <field name="repo_id" ref="repo_akretion_odoo_usability"/>
             <field name="name">8.0</field>
         </record>
 
@@ -546,9 +545,9 @@
             <field name="branch_id" ref="branch_repo_oca_knowledge"/>
         </record>
 
-        <record id="version_repo_branch_repo_oca_reporting_engine_oca" model="unison.version_repo">
+        <record id="version_repo_branch_repo_oca_reporting_engine" model="unison.version_repo">
             <field name="version_id" ref="version_edif"/>
-            <field name="branch_id" ref="branch_repo_oca_reporting_engine_oca"/>
+            <field name="branch_id" ref="branch_repo_oca_reporting_engine"/>
         </record>
 
         <record id="version_repo_branch_repo_oca_server_tools" model="unison.version_repo">
@@ -681,9 +680,9 @@
             <field name="branch_id" ref="branch_repo_adhoc_odoo_support"/>
         </record>
 
-        <record id="version_repo_branch_repo_adhoc_odoo_usability" model="unison.version_repo">
+        <record id="version_repo_branch_repo_akretion_odoo_usability" model="unison.version_repo">
             <field name="version_id" ref="version_edif"/>
-            <field name="branch_id" ref="branch_repo_adhoc_odoo_usability"/>
+            <field name="branch_id" ref="branch_repo_akretion_odoo_usability"/>
         </record>
 
         <record id="version_repo_branch_repo_adhoc_odoo_web" model="unison.version_repo">
