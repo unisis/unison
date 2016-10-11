@@ -149,7 +149,7 @@ class Refresher(models.Model):
                 if region.id != False:
                     image.region_ids += region
 
-        print "UNISON: Process completed"
+        print "UNISON: Completed cold refresh of clouds"
 
         return True
 
@@ -436,7 +436,7 @@ class Refresher(models.Model):
                     'active': True
                 })
 
-        print "UNISON: Process completed"
+        print "UNISON: Completed hot refresh of clouds"
 
         return True
 
@@ -444,6 +444,7 @@ class Refresher(models.Model):
     # registered repos (branches, modules, etc)
     @api.model
     def repos_refresh(self):
+        print "UNISON: Refreshing repositories information"
         home_path = os.getenv("HOME")
         repos_path = home_path + '/repos/'
         if not os.path.isdir(repos_path):
@@ -469,10 +470,12 @@ class Refresher(models.Model):
                     key_path = home_path + '/.ssh/' + group_name + '_' + repo.name
                     file = open(key_path, 'w')
                     file.write(repo.ssh_private_key)
-                    clone_command = "export GIT_SSH_COMMAND='ssh -i " + key_path + "'; " + clone_command + ' ' + repo_path
+                    clone_command = "export GIT_SSH_COMMAND='ssh -i " + key_path + "'; " + clone_command
 
                 print "Executing " + clone_command
                 self.run_command(clone_command)
+
+        print "UNISON: Completed refresh of repos"
 
         return True
 
