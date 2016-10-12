@@ -488,7 +488,7 @@ class Refresher(models.Model):
                     print "UNISON: Analyzing branch " + group_name + "/" + repo.name + "/" + branch_name + "..."
 
                     # Change to branch, pull last changes
-                    command = "cd " + repo_path + " && git clean -d -fx '' && git checkout " + branch_name + " && git pull origin " + branch_name
+                    command = "cd " + repo_path + " && git clean -d -fx '' && git reset --hard && git checkout " + branch_name + " && git pull origin " + branch_name
                     self.run_command(command)
 
                     # Get last commit on branch (we use a separate command to not mix the output of other commands)
