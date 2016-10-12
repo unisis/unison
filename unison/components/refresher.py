@@ -509,6 +509,71 @@ class Refresher(models.Model):
                             'last_commit': last_commit,
                         })
 
+                    # Check the modules included on this branch of the repo
+                    # If this repo is a main repo, modules are placed below
+                    # of the /addons subdirectory
+                    modules_dir = repo_path
+                    if branch.repo_id.is_main:
+                        modules_dir = modules_dir + "/addons"
+
+                    # Check all the subdirectories (just one sublevel)
+                    for dirname in os.listdir(modules_dir):
+                        if os.path.isdir(os.path.join(modules_dir, dirname)):
+                            module_code = dirname
+                            module_path = modules_dir + "/" + module_code
+                            # Check if this directory is really a module
+                            manifest_file = module_path + "/__openerp__.py"
+                            if os.path.isfile(manifest_file):
+                                # Get information from Module configuration
+                                name = self.get_module_config(manifest_file, 'name');
+                                description = self.get_module_config(manifest_file, 'description');
+                                summary = self.get_module_config(manifest_file, 'summary');
+                                category = self.get_module_config(manifest_file, 'category');
+                                version = self.get_module_config(manifest_file, 'version');
+                                license = self.get_module_config(manifest_file, 'license');
+                                installable = self.get_module_config(manifest_file, 'installable');
+                                auto_install = self.get_module_config(manifest_file, 'auto_install');
+                                application = self.get_module_config(manifest_file, 'application');
+                                author = self.get_module_config(manifest_file, 'author');
+                                website = self.get_module_config(manifest_file, 'website');
+
+                                # Check if this module exists
+                                module = self.env['unison.module']
+                                module = module.search([('branch_id', '=', branch.id), ('code', '=', module_code)])
+                                if len(module) == 0:
+                                    print "UNISON: Registering module " + module_code + " on branch " + branch_name
+                                    module = module.create({
+                                        'code': module_code,
+                                        'name': name,
+                                        'branch_id': branch.id,
+                                        'description': description,
+                                        'summary': summary,
+                                        'category': category,
+                                        'version': version,
+                                        'license': license,
+                                        'installable': installable,
+                                        'auto_install': auto_install,
+                                        'application': application,
+                                        'author': author,
+                                        'website': website,
+                                    })
+                                else:
+                                    module.write({
+                                        'code': module_code,
+                                        'name': name,
+                                        'branch_id': branch.id,
+                                        'description': description,
+                                        'summary': summary,
+                                        'category': category,
+                                        'version': version,
+                                        'license': license,
+                                        'installable': installable,
+                                        'auto_install': auto_install,
+                                        'application': application,
+                                        'author': author,
+                                        'website': website,
+                                    })
+
         print "UNISON: Completed refresh of repos"
 
         return True
@@ -528,4 +593,26 @@ class Refresher(models.Model):
         process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
         output = process.stdout.read()
         return output
+
+    # This function returns some configuration from a module
+    def get_module_config(self, manifest_file, config_name):
+        # Try to find the config value surrounded by simple quotes
+        grep_command = 'grep "\'' + config_name + '\'"'
+        command = "cat " + manifest_file + " | " + grep_command + " | cut -d ':' -f 2"
+        output = self.run_command(command)
+        if len(output) == 0:
+            # Try to find the config value surrounded by double quotes
+            grep_command = 'grep \'"' + config_name + '"\''
+            command = "cat " + manifest_file + " | " + grep_command + " | cut -d ':' -f 2"
+            output = self.run_command(command)
+
+        # Remove special characters
+        output = output.strip()
+        output = output.replace("\n", "")
+        output = output.replace("'", "")
+        output = output.replace('"', "")
+        output = output.replace(",", "")
+
+        return output
+
 

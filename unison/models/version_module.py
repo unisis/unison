@@ -11,3 +11,4 @@ class VersionModule(models.Model):
 
     version_id = fields.Many2one('unison.version', 'Version', ondelete='restrict')
     module_name = fields.Char('Module', required=True, index=True)
+    version = fields.Char('Version')

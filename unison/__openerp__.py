@@ -17,7 +17,7 @@
 
     'category': 'Administration',
 
-    'version': '0.85',
+    'version': '0.86',
 
     # any module necessary for this one to work correctly
     'depends': ['base'],
