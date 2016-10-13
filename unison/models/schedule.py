@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 # We provide support for "intermitent" use of installations (just certain hours of the day)
 # This model is used to schedule which hours the node should be running each week day.

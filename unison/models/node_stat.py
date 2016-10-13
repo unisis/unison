@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 # This model is used to store statistics about a node.
 # cpu_cores, mem_db and disk_gb shows the total current capacity of the node (disk is referred to the data volume)

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 # This model is used to store the features available on regions (datacenters)
 class Feature(models.Model):

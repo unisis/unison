@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 # This model store the backups created to installations (on their production or test database)
 # We just include database backup and data files backup. Regarding the code, we store the

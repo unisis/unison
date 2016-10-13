@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 # This model is used to store information about images stored by each Cloud provider
 # This also includes custom images that we can prepare for our own needs.

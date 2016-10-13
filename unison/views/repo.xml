@@ -47,6 +47,7 @@
                             <group name="group_left">
                                 <field name="repo_group_id"/>
                                 <field name="name"/>
+                                <field name="url" readonly="1"/>
                                 <field name="description"/>
                                 <field name="is_main"/>
                                 <field name="type"/>

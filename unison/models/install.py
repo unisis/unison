@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 # This model is used to store information about Odoo installations requested by clients
 # Each installation has a production installation and a test installation on the same node.

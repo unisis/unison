@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 # We provide support for "intermitent" use of installations (just certain hours of the day)
 # This model is used to regiter the different periods of execution for log and billing purposes

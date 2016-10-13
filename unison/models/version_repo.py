@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 # This model is used to indicate which repositories should be cloned so their modules
 # are available to be installed on certain installations (via their "version" snapshot)

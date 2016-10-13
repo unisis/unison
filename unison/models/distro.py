@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 # This model is used to indicate the different distros (products) we offer to users
 # However, some distros can be private (is_public = False) meaning that only the admin

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 # This table is used to store the volumes which can be live without a node
 # and can be mounted on different nodes (just one at the same time)

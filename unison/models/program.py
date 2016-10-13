@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 # Clients are able to program backups at different hours of the day on each week day
 class Program(models.Model):

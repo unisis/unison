@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 # This model is used to store the data about Git repositories
 class Repo(models.Model):
@@ -25,7 +25,18 @@ class Repo(models.Model):
     notes = fields.Text('Notes')
     active = fields.Boolean('Active', default=True)
 
-    # This function returns the url of the current repo
+    # This function calculates the url of the current repo. 
+    # It's recalculated if the name or repo_group_id fields changes
+    @api.one
+    @api.depends('name', 'repo_group_id')
     def _compute_url(self):
-        return self.repo_group_id.url + '/' + self.name
+        if len(self.repo_group_id) == 0:
+            repo_group_url = ''
+        else:
+            repo_group_url = self.repo_group_id.url
+        if self.name == False:
+            repo_name = ''
+        else:
+            repo_name = self.name
+        self.url = repo_group_url + '/' + repo_name
 

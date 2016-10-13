@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 # This model store the restores performed on installations (on their production or test database)
 class Restore(models.Model):
