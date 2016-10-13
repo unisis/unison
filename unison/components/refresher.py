@@ -456,11 +456,11 @@ class Refresher(models.Model):
             group_name = repo.repo_group_id.name
             repo_path = repos_path + group_name + '/' + repo.name
             if not os.path.isdir(repo_path + '/.git'):
-                print 'Cloning ' + repo.repo_url() + ' into ' + repo_path
+                print 'Cloning ' + repo.url + ' into ' + repo_path
 
                 if repo.clone_command == False:
                     # If no special clone command was configured, clone via https
-                    clone_command = "git clone " + repo.repo_url() + ' ' + repo_path
+                    clone_command = "git clone " + repo.url + ' ' + repo_path
                 else:
                     # Otherwise clone the repo using the provided command
                     clone_command = repo.clone_command + ' ' + repo_path

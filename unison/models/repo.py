@@ -13,6 +13,7 @@ class Repo(models.Model):
     ]
 
     name = fields.Char('Name') # This is the repo name, will be added as suffix to the repo_group.url
+    url = fields.Char('Url', compute='_compute_url')
     repo_group_id = fields.Many2one('unison.repo_group', 'Repository Group', ondelete='restrict')
     description = fields.Char('Description')
     is_main = fields.Boolean('Is Main', default=False) # True to indicate an Odoo main repo (which have addons on their ./addons subirectory)
@@ -25,5 +26,6 @@ class Repo(models.Model):
     active = fields.Boolean('Active', default=True)
 
     # This function returns the url of the current repo
-    def repo_url(self):
+    def _compute_url(self):
         return self.repo_group_id.url + '/' + self.name
+
