@@ -20,63 +20,73 @@ class DigitalOcean(models.Model):
 
     @api.model
     def get_regions(self):
-        command = "compute region list"
+        command = "region list"
         return self.run_doctl(command)
 
     @api.model
     def get_images(self):
-        command = "compute image list"
+        command = "image list"
         return self.run_doctl(command)
 
     @api.model
     def get_sizes(self):
-        command = "compute size list"
+        command = "size list"
         return self.run_doctl(command)
 
     @api.model
     def get_keys(self):
-        command = "compute ssh-key list"
+        command = "ssh-key list"
         return self.run_doctl(command)
 
     @api.model
     def get_nodes(self):
-        command = "compute droplet list"
+        command = "droplet list"
         return self.run_doctl(command)
 
     @api.model
     def get_volumes(self):
-        command = "compute volume list"
+        command = "volume list"
         return self.run_doctl(command)
 
     @api.model
     def get_floating_ips(self):
-        command = "compute floating-ip list"
+        command = "floating-ip list"
         return self.run_doctl(command)
 
     @api.model
     def get_domains(self):
-        command = "compute domain list"
+        command = "domain list"
         return self.run_doctl(command)
 
     @api.model
     def get_records(self, domain_name):
-        command = "compute domain records list " + domain_name
+        command = "domain records list " + domain_name
         return self.run_doctl(command)
 
     @api.model
     def get_actions(self, after):
-        command = "compute action list --after '" + after + "'"
+        command = "action list --after '" + after + "'"
+        return self.run_doctl(command)
+
+    @api.model
+    def create_floating_ip(self, region_code):
+        command = "floating-ip create --region " + region_code
         return self.run_doctl(command)
 
     # This function is used to run a doctl command using a json output
     # but returning the result as a Python list
     def run_doctl(self, command):
-        output = self.run_command("/usr/bin/doctl " + command + " --output json")
-        list = json.loads(output)
+        output = self.run_command("/usr/bin/doctl compute " + command + " --output json")
+        try:
+            list = json.loads(output)
+        except ValueError:
+            print "ERROR: " + output
+            list = ""
         return list
 
     # This function is used to run a shell command and return their output
     def run_command(self, command):
+        print command
         process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
         output = process.stdout.read()
         return output

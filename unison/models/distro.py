@@ -19,7 +19,7 @@ class Distro(models.Model):
     image_id = fields.Many2one('unison.image', 'Image', ondelete='restrict', help='Private snapshot used to launch new nodes for this distro')
     version_id = fields.Many2one('unison.version', 'Version for New Installations', ondelete='restrict')
     min_size_id = fields.Many2one('unison.size', 'Minimal Image Size', ondelete='restrict')
-    min_volume_gb = fields.Many2one('unison.size', 'Minimal Volume GB', ondelete='restrict')
+    min_volume_gb = fields.Integer('Minimal Volume GB')
     manual_config = fields.Text('Manual Configuration Instructions')
     notes = fields.Text('Notes')
     active = fields.Boolean('Active', default=True)

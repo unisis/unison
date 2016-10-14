@@ -2,3 +2,4 @@
 
 import digital_ocean
 import refresher
+import worker

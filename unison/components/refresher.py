@@ -445,6 +445,11 @@ class Refresher(models.Model):
     @api.model
     def repos_refresh(self):
         print "UNISON: Refreshing repositories information"
+        return True
+
+
+
+
         home_path = os.getenv("HOME")
         repos_path = home_path + '/repos/'
         if not os.path.isdir(repos_path):
