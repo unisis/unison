@@ -27,7 +27,7 @@ class Worker(models.Model):
             print "UNISON: Provisioning installation " + install.name
 
             # Create floating IP for installation
-            if not install.floating_ip_id:
+            if install.use_floating_ip and not install.floating_ip_id:
                 print "Creating Floating IP..."
                 digital_ocean = self.env['unison.digital_ocean']
                 region = install.distro_id.region_id

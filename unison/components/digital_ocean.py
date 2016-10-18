@@ -86,7 +86,6 @@ class DigitalOcean(models.Model):
 
     # This function is used to run a shell command and return their output
     def run_command(self, command):
-        print command
         process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
         output = process.stdout.read()
         return output

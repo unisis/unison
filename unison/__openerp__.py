@@ -17,7 +17,7 @@
 
     'category': 'Administration',
 
-    'version': '0.94',
+    'version': '0.98',
 
     # any module necessary for this one to work correctly
     'depends': ['base'],
@@ -31,6 +31,7 @@
         'views/action.xml',
         'views/backup.xml',
         'views/branch.xml',
+        'views/certificate.xml',
         'views/cloud.xml',
         'views/version.xml',
         'views/version_module.xml',

@@ -43,6 +43,11 @@
                         <group name="group_center">
                             <field name="code"/>
                             <field name="name"/>
+                            <field name="nodes_limit"/>
+                            <field name="floating_ips_limit"/>
+                            <field name="domains_limit"/>
+                            <field name="volumes_limit"/>
+                            <field name="volumes_gb_limit"/>
                             <field name="notes"/>
                             <field name="active"/>
                         </group>

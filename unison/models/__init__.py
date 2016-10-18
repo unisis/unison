@@ -3,6 +3,7 @@
 import action
 import backup
 import branch
+import certificate
 import cloud
 import distro
 import domain

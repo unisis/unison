@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Certificates list -->
+        <act_window 
+            id="action_certificate"
+            name="Certificates"
+            res_model="unison.certificate"
+            view_mode="tree,form"
+        />
+
+        <!-- Menu item to open Certificates List -->
+        <menuitem 
+            id="menu_certificate"
+            name="Certificates"
+            parent="unison.menu_installs"
+            sequence="20"
+            action="action_certificate"
+        />
+
+        <!-- Certificate Tree -->
+        <record id="view_tree_certificate" model="ir.ui.view">
+            <field name="name">Certificates Tree</field>
+            <field name="model">unison.certificate</field>
+            <field name="arch" type="xml">
+                <tree create="false" delete="false" editable="false">
+                    <field name="name"/>
+                    <field name="wildcard"/>
+                    <field name="partner_id"/>
+                    <field name="date_expire"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Certificates Form -->
+        <record id="view_form_certificate" model="ir.ui.view">
+            <field name="name">Certificate Form</field>
+            <field name="model">unison.certificate</field>
+            <field name="arch" type="xml">
+                <form string="Certificate" create="false" delete="false" editable="true">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="name"/>
+                                <field name="wildcard"/>
+                                <field name="partner_id" readonly="1"/>
+                                <field name="issued_by"/>
+                                <field name="private_key"/>
+                                <field name="request"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="intermediate"/>
+                                <field name="certificate"/>
+                                <field name="date_issued"/>
+                                <field name="date_expire"/>
+                                <field name="notes"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>
