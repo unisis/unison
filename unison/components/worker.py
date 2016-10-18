@@ -130,10 +130,14 @@ class Worker(models.Model):
             # Attach volume to node when status is active
             node = install.node_id
             volume = install.volume_id
-            if node.status == 'active' and volume.node_id == None:
+            if node.status == 'active' and not volume.node_id:
                 print "Attaching Volume to Node..."
                 volume_code = install.volume_id.code
                 node_code = install.node_id.code
-                volume = digital_ocean.attach_volume(volume_code, node_code)
+                digital_ocean = self.env['unison.digital_ocean']
+                digital_ocean.attach_volume(volume_code, node_code)
+                volume.write({
+                    'node_id': node.id,
+                })
      
         print "UNISON: Finalized Installation tasks"
