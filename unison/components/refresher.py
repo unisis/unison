@@ -279,19 +279,23 @@ class Refresher(models.Model):
                     'cloud_id': cloud_id,
                 })
             else:
-                # Create key
-                print "UNISON: Creating key " + fingerprint
-                key = key.create({
-                    'code': key_item['id'], 
-                    'name': key_item['name'],
-                    'cloud_id': cloud_id,
-                    'fingerprint': key_item['fingerprint'],
-                    'public_key': key_item['public_key'],
-                    'private_key': '', # This information should be provided manually
-                    'putty_key': '', # This information should be provided manually
-                    'notes': '',
-                    'active': True
-                })
+                # Create key (if it's not an installation key using
+                # the inst- preffix, if that's the case it's being created
+                # by the worker class and will be inserted in a few seconds)
+                name = key_item['name']
+                if name[5:] != "inst-":
+                    print "UNISON: Creating key " + name
+                    key = key.create({
+                        'code': key_item['id'], 
+                        'name': key_item['name'],
+                        'cloud_id': cloud_id,
+                        'fingerprint': key_item['fingerprint'],
+                        'public_key': key_item['public_key'],
+                        'private_key': '', # This information should be provided manually
+                        'putty_key': '', # This information should be provided manually
+                        'notes': '',
+                        'active': True
+                    })
 
         # Refresh Nodes
         print "UNISON: Refreshing Nodes..."
@@ -338,22 +342,26 @@ class Refresher(models.Model):
                     'status': node_item['status'],
                 })
             else:
-                # Create node
-                print "UNISON: Creating node " + str(code)
-                node = node.create({
-                    'code': code, 
-                    'name': node_item['name'],
-                    'image_id': image_id,
-                    'size_id': size_id,
-                    'region_id': region_id,
-                    'key_id': None,   # TO-DO ASSIGN
-                    'record_id': None, # TO-DO ASSIGN
-                    'public_ip': public_ip,
-                    'private_ip': private_ip,
-                    'status': node_item['status'],
-                    'notes': '',
-                    'active': True
-                })
+                # Create node (if it's not an installation node using
+                # the inst- preffix, if that's the case it's being created
+                # by the worker class and will be inserted in a few seconds)
+                name = node_item['name']
+                if name[5:] != "inst-":
+                    print "UNISON: Creating node " + str(code)
+                    node = node.create({
+                        'code': code, 
+                        'name': node_item['name'],
+                        'image_id': image_id,
+                        'size_id': size_id,
+                        'region_id': region_id,
+                        'key_id': None,   # TO-DO ASSIGN
+                        'record_id': None, # TO-DO ASSIGN
+                        'public_ip': public_ip,
+                        'private_ip': private_ip,
+                        'status': node_item['status'],
+                        'notes': '',
+                        'active': True
+                    })
 
         # Refresh Floating IPs
         print "UNISON: Refreshing Floating IPs..."
@@ -399,6 +407,7 @@ class Refresher(models.Model):
         volumes = digital_ocean.get_volumes()
         for volume_item in volumes:
             code = volume_item['id']
+            name = volume_item['name']
             region_code = volume_item['region']['slug']
             region = self.env['unison.region']
             region = region.search([('code', '=', region_code)])
@@ -422,19 +431,22 @@ class Refresher(models.Model):
                     'size_gb': volume_item['size_gigabytes']
                 })
             else:
-                # Create volume
-                print "UNISON: Creating volume " + code
-                volume = volume.create({
-                    'code': code,
-                    'name': volume_item['name'],
-                    'size_gb': volume_item['size_gigabytes'],
-                    'region_id': region_id,
-                    'node_id': node_id,
-                    'filesystem': None, # Will be provided by UniSon
-                    'mount_point': None, # Will be provided by UniSon
-                    'notes': '',
-                    'active': True
-                })
+                # Create volume (if it's not an installation volume using
+                # the inst- preffix, if that's the case it's being created
+                # by the worker class and will be inserted in a few seconds)
+                if name[5:] != "inst-":
+                    print "UNISON: Creating volume " + name
+                    volume = volume.create({
+                        'code': code,
+                        'name': volume_item['name'],
+                        'size_gb': volume_item['size_gigabytes'],
+                        'region_id': region_id,
+                        'node_id': node_id,
+                        'filesystem': None, # Will be provided by UniSon
+                        'mount_point': None, # Will be provided by UniSon
+                        'notes': '',
+                        'active': True
+                    })
 
         print "UNISON: Completed hot refresh of clouds"
 
@@ -445,10 +457,8 @@ class Refresher(models.Model):
     @api.model
     def repos_refresh(self):
         print "UNISON: Refreshing repositories information"
+        ################## REMOVE RETURN TRUE - TEMPORARILY DISABLED #######################
         return True
-
-
-
 
         home_path = os.getenv("HOME")
         repos_path = home_path + '/repos/'

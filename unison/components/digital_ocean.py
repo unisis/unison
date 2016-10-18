@@ -73,6 +73,33 @@ class DigitalOcean(models.Model):
         command = "floating-ip create --region " + region_code
         return self.run_doctl(command)
 
+    @api.model
+    def create_key(self, name, public_key):
+        command = "ssh-key create " + name + " --public-key '" + public_key + "'"
+        return self.run_doctl(command)
+
+    @api.model
+    def create_volume(self, name, region_code, size_gb):
+        command = "volume create " + name + " --size " + str(size_gb) + "GiB --region " + region_code
+        return self.run_doctl(command)
+
+    @api.model
+    def attach_volume(self, volume_code, node_code):
+        command = "volume-action attach " + str(volume_code) + " " + str(node_code)
+        return self.run_doctl(command)
+
+    @api.model
+    def detach_volume(self, volume_code):
+        command = "volume-action detach " + str(volume_code)
+        return self.run_doctl(command)
+
+    @api.model
+    def create_node(self, name, size_code, image_code, region_code, key_fingerprint=None):
+        command = "droplet create " + name + " --size " + size_code + " --image " + image_code + " --region " + region_code
+        if key_fingerprint != False:
+            command = command + " --ssh-keys " + key_fingerprint
+        return self.run_doctl(command)
+
     # This function is used to run a doctl command using a json output
     # but returning the result as a Python list
     def run_doctl(self, command):

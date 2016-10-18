@@ -8,10 +8,16 @@ class Certificate(models.Model):
     _name = 'unison.certificate'
     _order = 'name'
 
+    issuers = [
+        ('namecheap', 'NameCheap'),    
+        ('letsencrypt', 'LetsEncrypt'),
+        ('other', 'Other/External'),
+    ]
+
     name = fields.Char('Name', required=True, index=True)
     wildcard = fields.Boolean('Wildcard')
     partner_id = fields.Many2one('res.partner', 'Client', ondelete='restrict')
-    issued_by = fields.Char('Issued By')
+    issued_by = fields.Selection(issuers, 'Issued By')
     private_key = fields.Text('Private Key')
     request = fields.Text('Cert Request (CSR)')
     intermediate = fields.Text('Intermediate Cert')

@@ -2,6 +2,9 @@
 
 Unisis Management Module
 
+Required Packages:
+- putty-tools
+
 # The following models are populated based on extracted info (from DigitalOcean, Git, Linux stats, etc):
 
 - domain
