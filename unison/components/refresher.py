@@ -180,27 +180,27 @@ class Refresher(models.Model):
 
         actions = digital_ocean.get_actions(after) # We only retrieve new actions
         for action_item in actions:
-            # Create action
+            if isinstance(action_item, dict):
+                # Create action
+                if 'region' in action_item.keys():
+                    region_code = action_item['region']['slug']
+                    region = self.env['unison.region']
+                    region = region.search([('code', '=', region_code)])
+                    region_id = region.id
+                else:
+                    region_id = None
 
-            if 'region' in action_item.keys():
-                region_code = action_item['region']['slug']
-                region = self.env['unison.region']
-                region = region.search([('code', '=', region_code)])
-                region_id = region.id
-            else:
-                region_id = None
-
-            action = self.env['unison.action']
-            action = action.create({
-                'code': action_item['id'],
-                'type': action_item['type'],
-                'status': action_item['status'],
-                'date_start': action_item['started_at'],
-                'date_end': action_item['completed_at'],
-                'resource_type': action_item['resource_type'],
-                'resource_code': action_item['resource_id'],
-                'region_id': region_id
-            })
+                action = self.env['unison.action']
+                action = action.create({
+                    'code': action_item['id'],
+                    'type': action_item['type'],
+                    'status': action_item['status'],
+                    'date_start': action_item['started_at'],
+                    'date_end': action_item['completed_at'],
+                    'resource_type': action_item['resource_type'],
+                    'resource_code': action_item['resource_id'],
+                    'region_id': region_id
+                })
 
         # Refresh Domains
         print "UNISON: Refreshing Domains..."
@@ -283,7 +283,7 @@ class Refresher(models.Model):
                 # the inst- preffix, if that's the case it's being created
                 # by the worker class and will be inserted in a few seconds)
                 name = key_item['name']
-                if name[5:] != "inst-":
+                if name[:5] != "inst-":
                     print "UNISON: Creating key " + name
                     key = key.create({
                         'code': key_item['id'], 
@@ -346,7 +346,7 @@ class Refresher(models.Model):
                 # the inst- preffix, if that's the case it's being created
                 # by the worker class and will be inserted in a few seconds)
                 name = node_item['name']
-                if name[5:] != "inst-":
+                if name[:5] != "inst-":
                     print "UNISON: Creating node " + str(code)
                     node = node.create({
                         'code': code, 
@@ -434,7 +434,7 @@ class Refresher(models.Model):
                 # Create volume (if it's not an installation volume using
                 # the inst- preffix, if that's the case it's being created
                 # by the worker class and will be inserted in a few seconds)
-                if name[5:] != "inst-":
+                if name[:5] != "inst-":
                     print "UNISON: Creating volume " + name
                     volume = volume.create({
                         'code': code,

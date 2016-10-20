@@ -29,19 +29,13 @@ class Key(models.Model):
 
     # This function generates a new SSH Key and loads the values in the temp model
     def generate(self):
-        print "Creating SSH key ..."
         name = "sshkey"
 
         self.run_command("rm -rf /tmp/" + name + "*")
         self.run_command("ssh-keygen -t rsa -b 4096 -f /tmp/" + name + " -N ''")
 
         private_key = self.read_file("/tmp/" + name)
-        private_key = private_key.replace("\n", "")
-        print "PRIVATE KEY: " + private_key
-
         public_key = self.read_file("/tmp/" + name + ".pub")
-        public_key = public_key.replace("\n", "")
-        print "PUBLIC KEY: " + public_key
 
         fingerprint = self.run_command("ssh-keygen -lf /tmp/" + name + ".pub | cut -d ' ' -f 2")
         fingerprint = fingerprint.replace("\n", "")
@@ -51,8 +45,6 @@ class Key(models.Model):
         self.run_command("rm -rf " + putty_file)
         self.run_command("puttygen /tmp/" + name + " -o " + putty_file)
         putty_key = self.read_file(putty_file)
-        putty_key = putty_key.replace("\n", "")
-        print "PUTTY KEY: " + putty_key
 
         # Return values in a dictionary
         return {'fingerprint': fingerprint, 'private_key': private_key, 'public_key': public_key, 'putty_key': putty_key}

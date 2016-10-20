@@ -34,7 +34,7 @@ class Worker(models.Model):
 
             # If this installation use a floating IP, create it if it's not assigned yet
             if install.use_floating_ip and not install.floating_ip_id:
-                print "Creating Floating IP..."
+                print "UNISON: Creating Floating IP..."
                 digital_ocean = self.env['unison.digital_ocean']
                 floating_ip = digital_ocean.create_floating_ip(region.code)
                 floating_ip = floating_ip[0]
@@ -53,7 +53,7 @@ class Worker(models.Model):
 
             # Create volume for installation
             if not install.volume_id:
-                print "Creating Volume..."
+                print "UNISON: Creating Volume..."
                 digital_ocean = self.env['unison.digital_ocean']
                 volume = digital_ocean.create_volume(install_name, region.code, install.volume_gb)
                 volume_code = volume[0]['id']
@@ -75,7 +75,7 @@ class Worker(models.Model):
             
             if not install.node_id:
                 # Create SSH key for installation
-                print "Creating SSH Key..."
+                print "UNISON: Creating SSH Key..."
                 key = self.env['unison.key']
                 values = key.generate()
                 key = key.create({
@@ -99,7 +99,7 @@ class Worker(models.Model):
                 })
 
                 # Create node for installation
-                print "Creating Node..."
+                print "UNISON: Creating Node..."
                 digital_ocean = self.env['unison.digital_ocean']
                 node = digital_ocean.create_node(install_name, size.code, image.code, region.code, key.fingerprint)
                 node = node[0]
@@ -122,22 +122,44 @@ class Worker(models.Model):
                     'notes': '',
                     'active': True
                 })
-
                 install.write({
                     'node_id': node.id,
                 })
 
-            # Attach volume to node when status is active
-            node = install.node_id
-            volume = install.volume_id
-            if node.status == 'active' and not volume.node_id:
-                print "Attaching Volume to Node..."
-                volume_code = install.volume_id.code
-                node_code = install.node_id.code
-                digital_ocean = self.env['unison.digital_ocean']
-                digital_ocean.attach_volume(volume_code, node_code)
-                volume.write({
-                    'node_id': node.id,
-                })
-     
+            # The following actions should be performed when the node is ready
+            if install.node_id and install.node_id.status == 'active':
+                # Attach volume to node
+                node = install.node_id
+                volume = install.volume_id
+                if node.status == 'active' and not volume.node_id:
+                    print "UNISON: Attaching Volume to Node..."
+                    volume_code = install.volume_id.code
+                    node_code = install.node_id.code
+                    digital_ocean = self.env['unison.digital_ocean']
+                    digital_ocean.attach_volume(volume_code, node_code)
+                    volume.write({
+                        'node_id': node.id,
+                    })
+
+                # If this volume is new, format it. 
+                filesystem = "ext4"
+                if not volume.filesystem:
+                    print "UNISON: Formatting volume..."
+                    command = "mkfs." + filesystem + " -F /dev/disk/by-id/scsi-0DO_Volume_" + install_name
+                    node.execute(command)
+                    volume.write({
+                        'filesystem': filesystem,
+                    })
+
+                # Mount it if it's not mounted.
+                if not volume.mount_point:
+                    print "UNISON: Mounting Volume on Node..."
+                    mount_point = "/mnt/vol"
+                    node.execute("mkdir -p " + mount_point)
+                    node.execute("mount -o discard,defaults /dev/disk/by-id/scsi-0DO_Volume_" + install_name + " " + mount_point)
+                    node.execute("echo '/dev/disk/by-id/scsi-0DO_Volume_" + install_name + " " + mount_point + " " + filesystem + " defaults,nofail,discard 0 0' >> /etc/fstab")
+                    volume.write({
+                        'mount_point': mount_point,
+                    })
+
         print "UNISON: Finalized Installation tasks"

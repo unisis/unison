@@ -28,6 +28,7 @@
                     <field name="distro_id"/>
                     <field name="install_id"/>
                     <field name="name"/>
+                    <field name="date_released"/>
                 </tree>
             </field>
         </record>
@@ -53,9 +54,10 @@
                                 <field name="description"/>
                                 <field name="install_db_script"/>
                                 <field name="upgrade_db_script"/>
+                                <field name="date_released"/>
+                                <field name="notes"/>
                                 <field name="hash" readonly="1"/>
                                 <field name="serialization" readonly="1"/>
-                                <field name="notes"/>
                             </group>
                         </group>
                     </sheet>

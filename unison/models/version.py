@@ -38,6 +38,7 @@ class Version(models.Model):
     upgrade_db_script = fields.Text('Upgrade DB Script')
     serialization = fields.Text('Serialization', compute='_compute_serialization') # Text representation of every repo+branch+commit+installed modules
     hash = fields.Char('Hash', index=True) # Hash obtained from the serialization text, to identify if 2 versions are the same or not
+    date_released = fields.Datetime('Date Released') # When the version was considered ready for production use (after finish the tests)
     notes = fields.Text('Notes')
 
     # One to Many relations
