@@ -23,6 +23,7 @@ import repo
 import repo_group
 import restore
 import schedule
+import server
 import size
 import version
 import version_module

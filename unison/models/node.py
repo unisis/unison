@@ -25,27 +25,28 @@ class Node(models.Model):
     notes = fields.Text('Notes')
     active = fields.Boolean('Active', default=True)
 
+    # This function is used to copy a file remotely
+    def copy(self, local_file, remote_file):
+        # Prepare ssh requirements
+        self.prepare_ssh()
+
+        # Copy file
+        key_path = self.key_path()
+        command = "scp -i " + key_path + " " + local_file + " root@" + self.public_ip + ":" + remote_file
+        self.run_command(command)
+
+        return True
+
     # This function is used to run a command via ssh on this node and return their output
-    def execute(self, command):
-        # Ensure that private key is stored
-        home_path = os.getenv("HOME")
-        key_path = home_path + "/.ssh/node-" + str(self.id)
-        if not os.path.isfile(key_path):
-            key_content = self.key_id.private_key
-            with open(key_path,'w') as f:
-                f.write(key_content)
-            self.run_command("chmod 600 " + key_path)
+    # We use port 2222 for host SSH service, so port 22 is reserved for SSH on test installation (for remote debugging)
+    def execute(self, command, port=2222):
+        # Prepare ssh requirements
+        self.prepare_ssh()
 
-        # Ensure that host is trusted as a known host
-        known = self.run_command("ssh-keygen -F " + self.public_ip)
-        if not known:
-            print "Adding to known hosts " + self.public_ip
-            self.run_command("ssh-keyscan -H " + self.public_ip + " >> " + home_path + "/.ssh/known_hosts")
-
-        # Use a private key
+        # Configure SSH connection
         shell = spur.SshShell(
             hostname = self.public_ip,
-            port = 22,
+            port = port,
             username = "root",
             private_key_file = key_path,
             connect_timeout = 30,
@@ -64,6 +65,29 @@ class Node(models.Model):
             output = ""
 
         return output
+
+    # This function returns the location of the ssh private key
+    def key_path(self):
+        home_path = os.getenv("HOME")
+        key_path = home_path + "/.ssh/node-" + str(self.id)
+        return key_path
+
+    # This function is used to prepare the requirements needed to
+    # execute a ssh or scp command (create private key and add known host)
+    def prepare_ssh(self):
+        # Ensure that private key is stored
+        key_path = self.key_path()
+        if not os.path.isfile(key_path):
+            key_content = self.key_id.private_key
+            with open(key_path,'w') as f:
+                f.write(key_content)
+            self.run_command("chmod 600 " + key_path)
+
+        # Ensure that host is trusted as a known host
+        known = self.run_command("ssh-keygen -F " + self.public_ip)
+        if not known:
+            print "Adding to known hosts " + self.public_ip
+            self.run_command("ssh-keyscan -H " + self.public_ip + " >> " + home_path + "/.ssh/known_hosts")
 
     # This function is used to run a shell command and return their output
     def run_command(self, command):

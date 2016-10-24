@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import os
 import json
 import logging
 import subprocess
@@ -103,6 +104,14 @@ class DigitalOcean(models.Model):
     # This function is used to run a doctl command using a json output
     # but returning the result as a Python list
     def run_doctl(self, command):
+        # Check that authentication variable is configured
+        do_access_token = os.getenv("DIGITALOCEAN_ACCESS_TOKEN")
+        print do_access_token
+        if not do_access_token:
+            print "Environment variable DIGITALOCEAN_ACCESS_TOKEN not found!"
+            return ""
+
+        # Execute doctl command
         output = self.run_command("/usr/bin/doctl compute " + command + " --output json")
         try:
             list = json.loads(output)

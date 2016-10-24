@@ -17,7 +17,7 @@
 
     'category': 'Administration',
 
-    'version': '0.99',
+    'version': '8.0.2',
 
     # any module necessary for this one to work correctly
     'depends': ['base'],
@@ -54,6 +54,7 @@
         'views/repo_group.xml',
         'views/restore.xml',
         'views/schedule.xml',
+        'views/server.xml',
         'views/size.xml',
         'views/volume.xml',
         'wizards/install_wizard.xml',
