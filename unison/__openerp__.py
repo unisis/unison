@@ -17,7 +17,7 @@
 
     'category': 'Administration',
 
-    'version': '8.0.2',
+    'version': '8.0.3',
 
     # any module necessary for this one to work correctly
     'depends': ['base'],
@@ -33,6 +33,7 @@
         'views/branch.xml',
         'views/certificate.xml',
         'views/cloud.xml',
+        'views/config.xml',
         'views/version.xml',
         'views/version_module.xml',
         'views/version_repo.xml',

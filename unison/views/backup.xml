@@ -15,7 +15,7 @@
             id="menu_backup"
             name="Backups"
             parent="unison.menu_installs"
-            sequence="90"
+            sequence="100"
             action="action_backup"
         />
 

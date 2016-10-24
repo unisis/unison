@@ -15,7 +15,7 @@
             id="menu_distro"
             name="Distros"
             parent="unison.menu_installs"
-            sequence="10"
+            sequence="20"
             action="action_distro"
         />
 

@@ -2,6 +2,16 @@
 <openerp>
     <data noupdate="0">
 
+        <!-- Configuration -->
+
+        <record id="config" model="unison.config">
+            <field name="port_nginx">443</field>
+            <field name="port_odoo">8069</field>
+            <field name="port_pgsql">5432</field>
+            <field name="port_aeroo">8989</field>
+            <field name="active">1</field>
+        </record>
+
         <!-- Clouds -->
 
         <record id="cloud_digitalocean" model="unison.cloud">

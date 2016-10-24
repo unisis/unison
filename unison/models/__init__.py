@@ -5,6 +5,7 @@ import backup
 import branch
 import certificate
 import cloud
+import config
 import distro
 import domain
 import execution

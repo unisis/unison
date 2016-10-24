@@ -106,8 +106,7 @@ class DigitalOcean(models.Model):
     def run_doctl(self, command):
         # Check that authentication variable is configured
         do_access_token = os.getenv("DIGITALOCEAN_ACCESS_TOKEN")
-        print do_access_token
-        if not do_access_token:
+        if do_access_token == None:
             print "Environment variable DIGITALOCEAN_ACCESS_TOKEN not found!"
             return ""
 

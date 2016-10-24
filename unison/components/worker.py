@@ -18,22 +18,29 @@ class Worker(models.Model):
     # to the lifecycle of installations that should be performed
     @api.model
     def install_tasks(self):
-        print "UNISON: Checking Installation tasks..."
+        print "UNISON: Checking Server tasks..."
 
-        # Check if there are installations inserted (to be created)
-        install = self.env['unison.install']
-        installs = install.search([('status', '=', 'inserted')])
-        for install in installs:
-            print "UNISON: Provisioning installation " + install.name
-            install_code = "00000" + str(install.id)
-            install_name = "inst-" + install_code[-5:]
+        # Check if there are servers inserted or provisioning
+        server = self.env['unison.server']
+        servers = server.search([('status', '=', 'inserted')])
+        for server in servers:
+            print "UNISON: Provisioning server " + server.name
+            # Indicate that we are provisioning
+            server.write({
+                 'status': 'provisioning',
+            })
+
+            # Prepare variables
+            server_number = "00000" + str(server.id)
+            server_name = "server-" + server_number[-5:]
+            install = server.install_id
             distro = install.distro_id
             region = distro.region_id
             size = distro.min_size_id # Node is created using the smaller size allowed for this distro
             image = distro.image_id
 
-            # If this installation use a floating IP, create it if it's not assigned yet
-            if install.use_floating_ip and not install.floating_ip_id:
+            # If this server use a floating IP, create it if it's not assigned yet
+            if not server.is_test and install_id.use_floating_ip and not install.floating_ip_id:
                 print "UNISON: Creating Floating IP..."
                 digital_ocean = self.env['unison.digital_ocean']
                 floating_ip = digital_ocean.create_floating_ip(region.code)
@@ -47,20 +54,20 @@ class Worker(models.Model):
                     'notes': '',
                     'active': True
                 })
-                install.write({
+                server.write({
                     'floating_ip_id': floating_ip['id'],
                 })
 
-            # Create volume for installation
-            if not install.volume_id:
+            # Create volume for server
+            if not server.volume_id:
                 print "UNISON: Creating Volume..."
                 digital_ocean = self.env['unison.digital_ocean']
-                volume = digital_ocean.create_volume(install_name, region.code, install.volume_gb)
+                volume = digital_ocean.create_volume(server_name, region.code, install.volume_gb)
                 volume_code = volume[0]['id']
                 volume = self.env['unison.volume']
                 volume = volume.create({
                     'code': volume_code,
-                    'name': install_name,
+                    'name': server_name,
                     'size_gb': install.volume_gb,
                     'region_id': region.id,
                     'node_id': None,
@@ -69,18 +76,18 @@ class Worker(models.Model):
                     'notes': '',
                     'active': True
                 })
-                install.write({
+                server.write({
                     'volume_id': volume['id'],
                 })
             
-            if not install.node_id:
-                # Create SSH key for installation
+            if not server.node_id:
+                # Create SSH key for server
                 print "UNISON: Creating SSH Key..."
                 key = self.env['unison.key']
                 values = key.generate()
                 key = key.create({
                     'code': "no-code", # It's assigned later, see below
-                    'name': install_name,
+                    'name': server_name,
                     'cloud_id': image.cloud_id.id,
                     'fingerprint': values['fingerprint'],
                     'private_key': values['private_key'],
@@ -92,16 +99,16 @@ class Worker(models.Model):
 
                 # Save key into digitalocean (and write code to model)
                 digital_ocean = self.env['unison.digital_ocean']
-                do_key = digital_ocean.create_key(install_name, key.public_key)
+                do_key = digital_ocean.create_key(server_name, key.public_key)
                 key_code = do_key[0]['id']
                 key.write({
                     'code': key_code,
                 })
 
-                # Create node for installation
+                # Create node for server
                 print "UNISON: Creating Node..."
                 digital_ocean = self.env['unison.digital_ocean']
-                node = digital_ocean.create_node(install_name, size.code, image.code, region.code, key.fingerprint)
+                node = digital_ocean.create_node(server_name, size.code, image.code, region.code, key.fingerprint)
                 node = node[0]
                 node_code = node['id']
                 node_status = node['status']
@@ -110,7 +117,7 @@ class Worker(models.Model):
                 node = self.env['unison.node']
                 node = node.create({
                     'code': node_code,
-                    'name': install_name,
+                    'name': server_name,
                     'image_id': image.id,
                     'size_id': size.id,
                     'region_id': region.id,
@@ -122,19 +129,24 @@ class Worker(models.Model):
                     'notes': '',
                     'active': True
                 })
-                install.write({
+                server.write({
                     'node_id': node.id,
                 })
 
-            # The following actions should be performed when the node is ready
-            if install.node_id and install.node_id.status == 'active':
+        server = self.env['unison.server']
+        servers = server.search([('status', '=', 'provisioning')])
+        for server in servers:
+            print "UNISON: Finalizing provisioning of server " + server.name
+
+            # The following actions should be performed when the server is ready
+            if server.node_id and server.node_id.status == 'active':
                 # Attach volume to node
-                node = install.node_id
-                volume = install.volume_id
+                node = server.node_id
+                volume = server.volume_id
                 if node.status == 'active' and not volume.node_id:
                     print "UNISON: Attaching Volume to Node..."
-                    volume_code = install.volume_id.code
-                    node_code = install.node_id.code
+                    volume_code = server.volume_id.code
+                    node_code = server.node_id.code
                     digital_ocean = self.env['unison.digital_ocean']
                     digital_ocean.attach_volume(volume_code, node_code)
                     volume.write({
@@ -145,7 +157,7 @@ class Worker(models.Model):
                 filesystem = "ext4"
                 if not volume.filesystem:
                     print "UNISON: Formatting volume..."
-                    command = "mkfs." + filesystem + " -F /dev/disk/by-id/scsi-0DO_Volume_" + install_name
+                    command = "mkfs." + filesystem + " -F /dev/disk/by-id/scsi-0DO_Volume_" + server_name
                     node.execute(command)
                     volume.write({
                         'filesystem': filesystem,
@@ -156,10 +168,55 @@ class Worker(models.Model):
                     print "UNISON: Mounting Volume on Node..."
                     mount_point = "/mnt/vol"
                     node.execute("mkdir -p " + mount_point)
-                    node.execute("mount -o discard,defaults /dev/disk/by-id/scsi-0DO_Volume_" + install_name + " " + mount_point)
-                    node.execute("echo '/dev/disk/by-id/scsi-0DO_Volume_" + install_name + " " + mount_point + " " + filesystem + " defaults,nofail,discard 0 0' >> /etc/fstab")
+                    node.execute("mount -o discard,defaults /dev/disk/by-id/scsi-0DO_Volume_" + server_name + " " + mount_point)
+                    node.execute("echo '/dev/disk/by-id/scsi-0DO_Volume_" + server_name + " " + mount_point + " " + filesystem + " defaults,nofail,discard 0 0' >> /etc/fstab")
                     volume.write({
                         'mount_point': mount_point,
                     })
 
-        print "UNISON: Finalized Installation tasks"
+                # Install the node if their requirements are ready
+                if node.status == 'active' and volume.node_id and volume.filesystem and volume.mount_point:
+                    # Indicate that we are installing
+                    server.write({
+                        'status': 'installing',
+                    })
+
+                    # Configure hostname
+                    host_name = node.name + '.' + install.domain_id.name
+                    node.execute("echo " + host_name + " > /etc/hostname")
+                    node.execute("hostname " + host_name)
+
+                    # Copy SSL certificate to production server
+                    if not server.is_test and install.certificate_id:
+                        # Copy private key of certificate
+                        certificate = install.certificate_id
+                        temp_file = "/tmp/" + str(install.id)
+                        node.copy(temp_file, "/mnt/vol/unisis/cert/cert.key")
+
+                        # Copy certificate (concatenating intermediate cert if exists)
+                        cert_content = ""
+                        if certificate.intermediate:
+                            cert_content = certificate.intermediate
+                        cert_content = cert_content + "\n" + certificate.certificate
+                        with open(temp_file,'w') as f:
+                            f.write(cert_content)
+                        node.copy(temp_file, "/mnt/vol/unisis/cert/cert.crt")
+
+                    current_dir = os.path.dirname(os.path.realpath(__file__))
+                    image_dir = current_dir + "/../image/"
+                    node.copy(image_dir + "install.sh", "/root/install.sh")
+                    node.copy(image_dir + "install.sh", "/root/install.sh")
+
+                    # Indicate that Odoo is starting
+                    server.write({
+                        'status': 'starting',
+                    })
+
+        # Check if servers starting their containers are already up/online
+        server = self.env['unison.server']
+        servers = server.search([('status', '=', 'starting')])
+        for server in servers:
+            print "Checking if server " + server.name + " has started..."
+            # TO-DO Check Odoo status
+
+        print "UNISON: Finalized server tasks"

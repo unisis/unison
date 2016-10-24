@@ -15,7 +15,7 @@
             id="menu_server"
             name="Servers"
             parent="unison.menu_installs"
-            sequence="40"
+            sequence="50"
             action="action_server"
         />
 

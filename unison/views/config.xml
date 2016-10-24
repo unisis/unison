@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Config list -->
+        <act_window 
+            id="action_config"
+            name="Config"
+            res_model="unison.config"
+            view_mode="tree,form"
+        />
+        
+        <!-- Menu item to open Config List -->
+        <menuitem 
+            id="menu_config"
+            name="Config"
+            parent="unison.menu_installs"
+            sequence="10"
+            action="action_config"
+        />
+
+        <!-- Config Tree -->
+        <record id="view_tree_config" model="ir.ui.view">
+            <field name="name">Config Tree</field>
+            <field name="model">unison.config</field>
+            <field name="arch" type="xml">
+                <tree create="true" delete="false" editable="false">
+                    <field name="smtp_sender_address"/>
+                    <field name="smtp_alerts_recipient"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Config Form -->
+        <record id="view_form_config" model="ir.ui.view">
+            <field name="name">Config Form</field>
+            <field name="model">unison.config</field>
+            <field name="arch" type="xml">
+                <form string="Config" create="true" delete="true" editable="true">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="port_nginx"/>
+                                <field name="port_odoo"/>
+                                <field name="port_pgsql"/>
+                                <field name="port_aeroo"/>
+                                <field name="s3_access_key"/>
+                                <field name="s3_secret_key"/>
+                                <field name="s3_backups_bucket"/>
+                                <field name="smtp_host_name"/>
+                                <field name="smtp_port_number"/>
+                                <field name="smtp_user_name"/>
+                                <field name="smtp_user_pwd"/>
+                                <field name="smtp_sender_address"/>
+                                <field name="smtp_alerts_recipient"/>
+                                <field name="notes"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>
