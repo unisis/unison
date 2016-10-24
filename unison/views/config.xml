@@ -25,6 +25,10 @@
             <field name="model">unison.config</field>
             <field name="arch" type="xml">
                 <tree create="true" delete="false" editable="false">
+                    <field name="port_nginx"/>
+                    <field name="port_odoo"/>
+                    <field name="port_pgsql"/>
+                    <field name="port_aeroo"/>
                     <field name="smtp_sender_address"/>
                     <field name="smtp_alerts_recipient"/>
                 </tree>
@@ -50,6 +54,7 @@
                                 <field name="s3_access_key"/>
                                 <field name="s3_secret_key"/>
                                 <field name="s3_backups_bucket"/>
+                                <field name="digital_ocean_token"/>
                                 <field name="smtp_host_name"/>
                                 <field name="smtp_port_number"/>
                                 <field name="smtp_user_name"/>

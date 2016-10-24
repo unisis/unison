@@ -15,6 +15,7 @@ class Config(models.Model):
     s3_access_key = fields.Char('S3 Access Key')
     s3_secret_key = fields.Char('S3 Secret Key')
     s3_backups_bucket = fields.Char('S3 Backups Bucket')
+    digital_ocean_token = fields.Char('DigitalOcean API Access Token')
     smtp_host_name = fields.Char('SMTP Host Name')
     smtp_port_number = fields.Char('SMTP Port Number')
     smtp_user_name = fields.Char('SMTP User Name')

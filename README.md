@@ -9,5 +9,3 @@ Packages: (see requirements.txt)
 Utilities:
 - doctl (see extras subdirectory)
 
-Environment variables:
-- DIGITALOCEAN_ACCESS_TOKEN (used by doctl)

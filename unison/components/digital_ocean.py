@@ -104,14 +104,16 @@ class DigitalOcean(models.Model):
     # This function is used to run a doctl command using a json output
     # but returning the result as a Python list
     def run_doctl(self, command):
-        # Check that authentication variable is configured
-        do_access_token = os.getenv("DIGITALOCEAN_ACCESS_TOKEN")
-        if do_access_token == None:
-            print "Environment variable DIGITALOCEAN_ACCESS_TOKEN not found!"
+        # Load DigitalOcean API Access Token
+        config = self.env['unison.config']
+        configs = config.search([])
+        do_access_token = configs[0].digital_ocean_token
+        if not do_access_token:
+            print "DigitalOcean Access Token not configured!"
             return ""
 
         # Execute doctl command
-        output = self.run_command("/usr/bin/doctl compute " + command + " --output json")
+        output = self.run_command("/usr/bin/doctl compute " + command + " --access-token " + do_access_token + " --output json")
         try:
             list = json.loads(output)
         except ValueError:
