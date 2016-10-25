@@ -107,13 +107,13 @@ class DigitalOcean(models.Model):
         # Load DigitalOcean API Access Token
         config = self.env['unison.config']
         configs = config.search([])
-        do_access_token = configs[0].digital_ocean_token
-        if not do_access_token:
+        digitalocean_api = configs[0].digitalocean_api
+        if not digitalocean_api:
             print "DigitalOcean Access Token not configured!"
             return ""
 
         # Execute doctl command
-        output = self.run_command("/usr/bin/doctl compute " + command + " --access-token " + do_access_token + " --output json")
+        output = self.run_command("/usr/bin/doctl compute " + command + " --access-token " + digitalocean_api + " --output json")
         try:
             list = json.loads(output)
         except ValueError:

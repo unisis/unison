@@ -54,7 +54,10 @@
                                 <field name="s3_access_key"/>
                                 <field name="s3_secret_key"/>
                                 <field name="s3_backups_bucket"/>
-                                <field name="digital_ocean_token"/>
+                                <field name="digitalocean_api"/>
+                                <field name="sparkpost_api"/>
+                                <field name="dockerhub_email"/>
+                                <field name="dockerhub_auth"/>
                                 <field name="smtp_host_name"/>
                                 <field name="smtp_port_number"/>
                                 <field name="smtp_user_name"/>
