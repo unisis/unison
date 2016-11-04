@@ -6,7 +6,10 @@ from openerp import models, fields, api
 # However, some distros can be private (is_public = False) meaning that only the admin
 # can requeste an installation of those distros. Private distros are used for internal
 # projects (like Step or TodoLimpio) or for in-progress (beta) production distros (not
-# released yet)
+# released yet). When we have updated containers and we want create or update the image,
+# the field custom_image_id should be cleared. Then, UniSon will automatically create
+# a temporary node using stock_image_id as image, will execute prepare-image.sh and
+# will save a new image (custom_image_id) which will be used on new installations.
 class Distro(models.Model):
     _name = 'unison.distro'
     _order = 'name'
@@ -16,7 +19,8 @@ class Distro(models.Model):
     is_public = fields.Boolean('Is Public')
     domain_id = fields.Many2one('unison.domain', 'Domain', ondelete='restrict')  # For example, edif.com.ar
     region_id = fields.Many2one('unison.region', 'Region', ondelete='restrict', help='Region used to launch new nodes for this distro')
-    image_id = fields.Many2one('unison.image', 'Image', ondelete='restrict', help='Private snapshot used to launch new nodes for this distro')
+    stock_image_id = fields.Many2one('unison.image', 'Stock Image', ondelete='restrict', help='Standard base image provided by DigitalOcean used to run prepare-image.sh and create the Custom image used on installations')
+    custom_image_id = fields.Many2one('unison.image', 'Custom Image', ondelete='restrict', help='Custom image (private snapshot) automatically created using a base image, used to launch new nodes for this distro')
     version_id = fields.Many2one('unison.version', 'Version for New Installations', ondelete='restrict')
     min_size_id = fields.Many2one('unison.size', 'Minimal Image Size', ondelete='restrict')
     min_volume_gb = fields.Integer('Minimal Volume GB')

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import uuid
 import subprocess
 from openerp import models, fields, api
 
@@ -29,21 +30,21 @@ class Key(models.Model):
 
     # This function generates a new SSH Key and loads the values in the temp model
     def generate(self):
-        name = "sshkey"
+        temp_file = self.get_temp_path()
 
-        self.run_command("rm -rf /tmp/" + name + "*")
-        self.run_command("ssh-keygen -t rsa -b 4096 -f /tmp/" + name + " -N ''")
+        self.run_command("rm -rf " + temp_file + "*")
+        self.run_command("ssh-keygen -t rsa -b 4096 -f " + temp_file + " -N ''")
 
-        private_key = self.read_file("/tmp/" + name)
-        public_key = self.read_file("/tmp/" + name + ".pub")
+        private_key = self.read_file(temp_file)
+        public_key = self.read_file(temp_file + ".pub")
 
-        fingerprint = self.run_command("ssh-keygen -lf /tmp/" + name + ".pub | cut -d ' ' -f 2")
+        fingerprint = self.run_command("ssh-keygen -lf " + temp_file + ".pub | cut -d ' ' -f 2")
         fingerprint = fingerprint.replace("\n", "")
 
         # Create putty version (.ppk) for Windows users
-        putty_file = "/tmp/" + name + ".ppk"
+        putty_file = temp_file + ".ppk"
         self.run_command("rm -rf " + putty_file)
-        self.run_command("puttygen /tmp/" + name + " -o " + putty_file)
+        self.run_command("puttygen " + temp_file + " -o " + putty_file)
         putty_key = self.read_file(putty_file)
 
         # Return values in a dictionary
@@ -58,3 +59,9 @@ class Key(models.Model):
     # This function reads the content of a file
     def read_file(self, file_path):
         return self.run_command("cat " + file_path)
+
+    # This function returns a temporary file path
+    def get_temp_path(self):
+        filename = str(uuid.uuid4())
+        path = "/tmp/" + filename
+        return path

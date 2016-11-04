@@ -17,7 +17,9 @@
 
     'category': 'Administration',
 
-    'version': '8.0.5',
+    # Odoo version: 8.0.1 
+    # Module version: 0.2
+    'version': '8.0.1.0.2', 
 
     # any module necessary for this one to work correctly
     'depends': ['base'],

@@ -114,12 +114,21 @@ class Refresher(models.Model):
         digital_ocean = self.env['unison.digital_ocean']
         images = digital_ocean.get_images()
         for image_item in images:
-            code = image_item['id']
+            # Images can be referenced by id or slug. We prefer use the slug as code
+            # whenever it's possible because it's a more stable id (since images are 
+            # regularly patched by DigitalOcean). However, custom images doesn't have
+            # a slug data, therefore their id should be used.
+            if 'slug' in image_item.keys():
+                code = image_item['slug']
+            else:
+                code = image_item['id']
+
+            name = image_item['name']
             image = self.env['unison.image']
             image = image.search([('code', '=', code)])
             if len(image) == 0:
                 # Create image
-                print "UNISON: Creating image " + image_item['name']
+                print "UNISON: Creating image " + name
 
                 is_backup = (image_item['type'] != 'snapshot')
                 if 'public' in image_item.keys():
@@ -129,8 +138,8 @@ class Refresher(models.Model):
                     is_private = True
                 
                 image = image.create({
-                    'code': image_item['id'], 
-                    'name': image_item['name'],
+                    'code': code, 
+                    'name': name,
                     'cloud_id': cloud_id,
                     'is_backup': is_backup,
                     'is_private': is_private,
@@ -345,8 +354,10 @@ class Refresher(models.Model):
                 # Create node (if it's not an installation node using
                 # the inst- preffix, if that's the case it's being created
                 # by the worker class and will be inserted in a few seconds)
+                # Also, we don't create image- nodes because they are handled
+                # by worker.py when a new image is required
                 name = node_item['name']
-                if name[:5] != "inst-":
+                if name[:5] != "inst-" and name[:6] != "image-":
                     print "UNISON: Creating node " + str(code)
                     node = node.create({
                         'code': code, 

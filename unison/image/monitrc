@@ -1,0 +1,50 @@
+        # Monit Configuration
+        set daemon 30
+        set logfile /var/log/monit.log
+        set idfile /var/lib/monit/id
+        set statefile /var/lib/monit/state
+
+        set eventqueue
+            basedir /var/lib/monit/events # set the base directory where events will be stored
+            slots 100                     # optionally limit the queue size
+
+        include /etc/monit/conf.d/*
+
+        set httpd port 2812 and
+            use address localhost  # only accept connection from localhost, required by "monit status"
+            allow localhost
+
+        check system $HOST
+            if memory usage > 90% then alert
+            if swap usage > 80% then alert
+            if cpu usage (user) > 90% then alert
+            if cpu usage (system) > 70% then alert
+
+        # We have 5 TB of bandwidth transfer per month
+        check network eth0 with interface eth0
+            if upload > 10 MB/s then alert
+            if total upload > 10 GB in last 1 hours then alert
+            if total upload > 240 GB in last day then alert
+            if download > 1 MB/s then alert
+            if total download > 1 GB in last 1 hours then alert
+            if total download > 24 GB in last day then alert
+
+        set mailserver {SMTP_HOST} port {SMTP_PORT} username {SMTP_USER} password {SMTP_PWD}
+
+        # Only certain events are notified. Cycle is 15 seconds, so reminders are re-sent every hour (60 x 4 = 240)
+        set alert {SMTP_ALERTS} only on {invalid, nonexist, timeout, resource, size, timestamp } with reminder on 240 cycles
+
+        set mail-format {
+            from: {SMTP_SENDER}
+            subject: Event "$EVENT" for "$SERVICE" on "$HOST"
+            message: Monit notification:
+                Host:        $HOST
+                Service:     $SERVICE
+                Event:       $EVENT
+                Description: $DESCRIPTION
+                Date:        $DATE
+                Action:      $ACTION
+        }
+
+        check filesystem rootfs with path /
+            if space usage > 90% then alert

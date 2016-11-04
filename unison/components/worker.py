@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import os
+import uuid
 import datetime
 import logging
 import subprocess
 import dateutil.parser as dateparser
+from shutil import copyfile
 from openerp import models, fields, osv, exceptions, api
 
 _logger = logging.getLogger(__name__)
@@ -19,6 +21,118 @@ class Worker(models.Model):
     @api.model
     def install_tasks(self):
         print "UNISON: Checking Server tasks..."
+
+        # Check if there are custom images that should be created
+        distro = self.env['unison.distro']
+        distros = distro.search([('custom_image_id', '=', None)])
+        for distro in distros:
+            if distro.stock_image_id.name == False:
+                print "WARNING!!!: No base/custom image was indicated for distro " + distro.name
+                continue
+
+            server_name = "image-" + str(distro.id)
+
+            # The new custom image for this distro should be created or it's in creation.
+            # During the first stage, a new DigitalOcean droplet named image-<distro_id> is created and inserted in the database
+            # When that node is up, the prepare-image.sh script is executed. So, the first step is know if the droplet exists.
+            node = self.env['unison.node']
+            nodes = node.search([('name', '=', server_name)])
+            if len(nodes) == 0:
+                print "UNISON: Creating custom image for " + distro.name + " using as base image " + distro.stock_image_id.name + "..."
+
+                # As first step, we will select any SSH key to assign to the node that will be created
+                # to create the image. Since this will be a temporary node (destroyed after save snapshot)
+                # any SSH key that have their private key stored is ok for our purposes
+                key = self.env['unison.key']
+                keys = key.search([('private_key', '!=', '')])
+                key = keys[0]
+
+                # Load settings for new node
+                size = distro.min_size_id
+                image = distro.stock_image_id
+                region = distro.region_id
+
+                # Create node to create the image
+                print "UNISON: Creating Node " + server_name
+                digital_ocean = self.env['unison.digital_ocean']
+                node = digital_ocean.create_node(server_name, size.code, image.code, region.code, key.fingerprint)
+                node = node[0]
+                node_code = node['id']
+                node_status = node['status']
+
+                # Insert node record
+                node = self.env['unison.node']
+                node = node.create({
+                    'code': node_code,
+                    'name': server_name,
+                    'image_id': image.id,
+                    'size_id': size.id,
+                    'region_id': region.id,
+                    'key_id': key.id,
+                    'record_id': None,
+                    'public_ip': None, # Is not available at creation time
+                    'private_ip': None, # Is not available at creation time
+                    'status': node_status,
+                    'notes': '',
+                    'active': True
+                })
+                print "UNISON: Node " + server_name + " was created"
+
+                # That's all for now, once the node is active, the process will continue
+            else:
+                # The node was already created. Check if it's active
+                node = nodes[0]
+                if node.status == "active":
+                    # Create remote directory where config files will be stored
+                    unisis_dir = "/etc/unisis/"
+                    node.execute("mkdir -p " + unisis_dir, 22)
+
+                    # Get configurations
+                    config = self.env['unison.config']
+                    configs = config.search([])
+                    config = configs[0]
+
+                    # We will create a file named /etc/unisis/general.conf 
+                    # including all the general configs used by scripts
+                    local_file = self.get_temp_path()
+                    with open(local_file,'w') as f:
+                        f.write("PORT_NGINX=" + str(config.port_nginx) + '\n')
+                        f.write("PORT_ODOO=" + str(config.port_odoo) + '\n')
+                        f.write("PORT_PGSQL=" + str(config.port_pgsql) + '\n')
+                        f.write("PORT_AEROO=" + str(config.port_aeroo) + '\n')
+                        f.write("SMTP_HOST_NAME=" + config.smtp_host_name + '\n')
+                        f.write("SMTP_PORT_NUMBER=" + str(config.smtp_port_number) + '\n')
+                        f.write("SMTP_USER_NAME=" + config.smtp_user_name + '\n')
+                        f.write("SMTP_USER_PWD=" + config.smtp_user_pwd + '\n')
+                        f.write("SMTP_SENDER_ADDRESS=" + config.smtp_sender_address + '\n')
+                        f.write("SMTP_ALERTS_RECIPIENT=" + config.smtp_alerts_recipient + '\n')
+                        f.write("S3_ACCESS_KEY=" + config.s3_access_key + '\n')
+                        f.write("S3_SECRET_KEY=" + config.s3_secret_key + '\n')
+                        f.write("S3_BACKUPS_BUCKET=" + config.s3_backups_bucket + '\n')
+                        f.write("DOCKERHUB_EMAIL=" + config.dockerhub_email + '\n')
+                        f.write("DOCKERHUB_AUTH=" + config.dockerhub_auth + '\n')
+                    node.copy(local_file, unisis_dir + "general.conf")
+                    self.run_command("rm -rf " + local_file)
+
+                    # Get local directory where image files are stored
+                    current_dir = os.path.dirname(os.path.realpath(__file__))
+                    image_dir = current_dir + "/../image/"
+
+                    # Copy template files to node (/etc/unisis directory)
+                    node.copy(image_dir + "config.json", unisis_dir + "config.json")
+                    node.copy(image_dir + "monitrc", unisis_dir + "monitrc")
+                    node.copy(image_dir + "sshd_config", unisis_dir + "sshd_config")
+                    node.copy(image_dir + "sysctl.conf", unisis_dir + "sysctl.conf")
+                    node.copy(image_dir + "rc.local", unisis_dir + "rc.local")
+
+                    # Copy scripts to /root directory
+                    node.copy(image_dir + "prepare-dirs.sh", "/root/prepare-dirs.sh")
+                    node.copy(image_dir + "prepare-image.sh", "/root/prepare-image.sh")
+                    node.copy(image_dir + "prepare-node.sh", "/root/prepare-node.sh")
+
+                    # Run command to prepare image
+                    # node.execute("/bin/bash /root/prepare-image.sh", 22)   DDDDDDDDDDDEEEEEEEEEEEEBBBBBBBBBBBUUUUUUUUUUUUUUGGGGGGGGGGGGGGGGG
+                    print "UNISON: Launched preparation of " + server_name
 
         # Check if there are servers inserted or provisioning
         server = self.env['unison.server']
@@ -220,3 +334,22 @@ class Worker(models.Model):
             # TO-DO Check Odoo status
 
         print "UNISON: Finalized server tasks"
+
+    # This function returns a temporary file path
+    def get_temp_path(self):
+        filename = str(uuid.uuid4())
+        path = "/tmp/" + filename
+        return path
+
+    # This function repala a text/variable on a file with a value
+    def replace_variable(self, file_path, variable_name, variable_value):
+        command = "sed -i " + file_path + " -e 's|" + variable_name + "|" + str(variable_value) + "|g'"
+        print command
+        self.run_command(command)
+
+    # This function is used to run a shell command and return their output
+    def run_command(self, command):
+        process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
+        output = process.stdout.read()
+        return output
+

@@ -44,6 +44,7 @@ class Node(models.Model):
         self.prepare_ssh()
 
         # Configure SSH connection
+        key_path = self.key_path()
         shell = spur.SshShell(
             hostname = self.public_ip,
             port = port,
@@ -81,13 +82,19 @@ class Node(models.Model):
             key_content = self.key_id.private_key
             with open(key_path,'w') as f:
                 f.write(key_content)
-            self.run_command("chmod 600 " + key_path)
 
-        # Ensure that host is trusted as a known host
-        known = self.run_command("ssh-keygen -F " + self.public_ip)
-        if not known:
-            print "Adding to known hosts " + self.public_ip
-            self.run_command("ssh-keyscan -H " + self.public_ip + " >> " + home_path + "/.ssh/known_hosts")
+        # Endure that private key has the right permissions
+        self.run_command("chmod 600 " + key_path)
+
+        # Ensure that known_host file exists
+        home_path = os.getenv("HOME")
+        known_hosts = home_path + "/.ssh/known_hosts"
+        if not os.path.isfile(known_hosts):
+            self.run_command("touch " + known_hosts)
+
+        # Ensure that current key is added as known host
+        self.run_command("ssh-keygen -R " + self.public_ip + " 1>2 2>/dev/null")
+        self.run_command("ssh-keyscan -t rsa " + self.public_ip + " >> " + known_hosts)
 
     # This function is used to run a shell command and return their output
     def run_command(self, command):
