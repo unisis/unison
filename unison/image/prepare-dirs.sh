@@ -2,6 +2,11 @@
 
 # This script is used to prepare the different directories used
 # to store data that will be mounted on different containers
+
+# NOTE: Do not place "exit 0" at the end of this script, because
+# this script is sourced (executed on same subshell). Otherwise
+# it will stop the execution of the caller script.
+
 BASEDIR=/mnt/vol/unisis
 
 BARMAN_CONF=$BASEDIR/barman/conf
@@ -36,7 +41,7 @@ if [ ! -d $BASEDIR ]; then
     mkdir -p $PGSQL_DATA
     mkdir -p $PGSQL_LOGS
 
-    mkdir -p $NGINX_CERTS
+    mkdir -p $NGINX_CERT
     mkdir -p $NGINX_LOGS
 
     mkdir -p $ODOO_ADDONS
@@ -50,17 +55,17 @@ if [ ! -d $BASEDIR ]; then
     # Will copy the SSH key created for this droplet to be used on odoo, postgres and barman
     # so barman can communicate via SSH with Odoo (to backup their files) and Postgres (to backup their wal files)
     # Home dirs (in their containers) are /var/lib/odoo, /var/lib/postgresql and /var/lib/barman
-    mkdir -p $ODOO_SSH
-    mkdir -p $PGSQL_SSH
-    mkdir -p $BARMAN_SSH
+    if [ -e /root/.ssh/id_rsa ]; then
+        mkdir -p $ODOO_SSH
+        mkdir -p $PGSQL_SSH
+        mkdir -p $BARMAN_SSH
 
-    cp /root/.ssh/id_rsa* $ODOO_SSH/
-    cp /root/.ssh/id_rsa* $PGSQL_SSH/
-    cp /root/.ssh/id_rsa* $BARMAN_SSH/
+        cp /root/.ssh/id_rsa* $ODOO_SSH/
+        cp /root/.ssh/id_rsa* $PGSQL_SSH/
+        cp /root/.ssh/id_rsa* $BARMAN_SSH/
 
-    cp /root/.ssh/id_rsa.pub $ODOO_SSH/authorized_keys
-    cp /root/.ssh/id_rsa.pub $PGSQL_SSH/authorized_keys
-    cp /root/.ssh/id_rsa.pub $BARMAN_SSH/authorized_keys
+        cp /root/.ssh/id_rsa.pub $ODOO_SSH/authorized_keys
+        cp /root/.ssh/id_rsa.pub $PGSQL_SSH/authorized_keys
+        cp /root/.ssh/id_rsa.pub $BARMAN_SSH/authorized_keys
+    fi
 fi
-
-exit 0

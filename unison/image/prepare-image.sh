@@ -18,11 +18,12 @@ function get_config()
 set -e
 set -x
 
+# We don't need indicate that we are preparing the image because during
+# this execution the port of SSH is changed from 22 to 2222 and UniSon
+# try to connect via 22, so this script is not re-executed.
+
 # Receive variables to be used
-NGINX_PORT=$(get_config general NGINX_PORT)
-ODOO_PORT=$(get_config general ODOO_PORT)
-PGSQL_PORT=$(get_config general PGSQL_PORT)
-AEROO_PORT=$(get_config general AEROO_PORT)
+NGINX_PORT=$(get_config general PORT_NGINX)
 SMTP_HOST=$(get_config general SMTP_HOST_NAME)
 SMTP_PORT=$(get_config general SMTP_PORT_NUMBER)
 SMTP_USER=$(get_config general SMTP_USER_NAME)
@@ -103,9 +104,17 @@ rm -rf /etc/monitrc
 ln -s $CONFIG_FILE /etc/monitrc
 service monit restart
 
-# Define host mounts for volumes
-# NOTE: On real servers a volume will be mounted on /mnt/vol. This script creates the same dirs on the image disk just to launch the containers for first time.
-/bin/bash /root/prepare-dirs.sh
+# Define host mounts for volumes (we use source so it's executed in the same shell
+# and variables defined on prepare-dirs.sh are also available on this script)
+# NOTE: On real servers a volume will be mounted on /mnt/vol; this script creates the same dirs on the image disk just to launch the containers for first time.
+source /root/prepare-dirs.sh
+
+# Stop and delete any possible containers from a previous/failed
+# execution (useful when we test and debug this script)
+set +e
+docker stop $(docker ps -q) 2>/dev/null
+docker rm $(docker ps -aq) 2>/dev/null
+set -e
 
 ###################################
 # Create Aeroo Docs container
@@ -114,10 +123,7 @@ docker run --detach \
     --name=aeroo \
     --hostname aeroo \
     --env TERM=xterm \
-    --env AEROO_PORT=$AEROO_PORT \
 unisis/aeroo
-
-docker stop aeroo
 
 ###################################
 # Create BarMan container
@@ -131,8 +137,6 @@ docker run --detach \
     --env TERM=xterm \
     unisis/barman /bin/bash /root/start.sh
 
-docker stop barman
-
 ###################################
 # Create Postgresql container
 
@@ -144,8 +148,6 @@ docker run --detach \
     --volume $PGSQL_LOGS:/var/log/postgresql \
     --env TERM=xterm \
     unisis/pgsql /bin/bash /root/start.sh
-
-docker stop pgsql
 
 ###################################
 # Create Odoo container (we open
@@ -175,7 +177,7 @@ docker run --detach \
     --publish 0.0.0.0:80:80 \
     --publish 0.0.0.0:443:$NGINX_PORT \
     --env TERM=xterm \
-    --volume $NGINX_CERTS:/etc/nginx/certs \
+    --volume $NGINX_CERT:/etc/nginx/certs \
     --volume $NGINX_LOGS:/var/log/nginx \
     unisis/nginx /bin/bash /root/start.sh
 
@@ -199,5 +201,15 @@ docker run --detach \
     --volume=/var/lib/docker/:/var/lib/docker:ro \
     --publish=8080:8080 \
     google/cadvisor:latest
+
+###################################
+# Stop containers (to make snapshot)
+docker stop cadvisor
+docker stop phppgadmin
+docker stop nginx
+docker stop odoo
+docker stop pgsql
+docker stop barman
+docker stop aeroo
 
 exit 0
