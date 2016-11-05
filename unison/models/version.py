@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import hashlib
 from openerp import models, fields, api
 
 # A version represents the exact configuration (snapshot) of a code base, indicating
@@ -18,10 +17,13 @@ from openerp import models, fields, api
 # of such distro) or to an installation (custom code/modules to add just to that
 # installation)
 
-# The serialization field is a virtual/calculated field to be able to have a text
-# representation of each version (repos deployed, modules installed, db scripts)
-# which can be used as a handy summary or to compare two versions using a tool like
-# meld to easily see the differences between each version.
+# The fields repos_conf and modules_conf are virtual/calculated fields which includes
+# a text (denormalized) representation of the repos to be deployed and the modules to
+# be installed (detailed on the version_repo and version_module tables). These fields
+# are used to easily compare differences between versions using a tool like meld, 
+# but they are also used to provide a text-based configuration which will be used 
+# by the Odoo container to know which repos clone and which modules install before 
+# start the Odoo service.
 
 class Version(models.Model):
     _name = 'unison.version'
@@ -36,8 +38,8 @@ class Version(models.Model):
     description = fields.Char('Description', required=True, index=True)
     install_db_script = fields.Text('Install DB Script')
     upgrade_db_script = fields.Text('Upgrade DB Script')
-    serialization = fields.Text('Serialization', compute='_compute_serialization') # Text representation of every repo+branch+commit+installed modules
-    hash = fields.Char('Hash', index=True) # Hash obtained from the serialization text, to identify if 2 versions are the same or not
+    repos_conf = fields.Text('Repos Conf', compute='_compute_repos_conf') # Text representation of every repo to clone (repo+branch+commit)
+    modules_conf = fields.Text('Modules Conf', compute='_compute_modules_conf') # Text representation of every module name to install
     date_released = fields.Datetime('Date Released') # When the version was considered ready for production use (after finish the tests)
     notes = fields.Text('Notes')
 
@@ -45,39 +47,28 @@ class Version(models.Model):
     version_repos = fields.One2many('unison.version_repo', 'version_id', 'Repos')
     version_modules = fields.One2many('unison.version_module', 'version_id', 'Modules')
 
-    # This function calculates the serialization of the version.
-    # It's updated if the db scripts or the config of repos/modules are changed
+    # This function calculates the serialization of the repos_conf field
+    # It's updated if the config of the repos is changed
     @api.one
-    @api.depends('install_db_script', 'upgrade_db_script', 'version_repos.commit', 'version_modules.module_name')
-    def _compute_serialization(self):
-        serialization = 'Repositories:\n'
+    @api.depends('version_repos.commit')
+    def _compute_repos_conf(self):
+        repos_conf = ""
         for version_repo in self.version_repos:
-             serialization = serialization + version_repo.branch_id.repo_id.url + '/' + version_repo.branch_id.name + '\n'
+             repo_commit = ''
+             if version_repo.commit != False:
+                 repo_commit = version_repo.commit
+             repos_conf = repos_conf + version_repo.branch_id.repo_id.url + '|' + version_repo.branch_id.name + '|' + repo_commit + '\n'
+        self.repos_conf = repos_conf
 
-        serialization = serialization + '\nModules:\n'
+    # This function calculates the serialization of the modules_conf field
+    # It's updated if the config of the modules is changed
+    @api.one
+    @api.depends('version_modules.module_name')
+    def _compute_modules_conf(self):
+        modules_conf = ""
         for version_module in self.version_modules:
              module_version = ''
              if version_module.version != False:
                  module_version = version_module.version
-             serialization = serialization + version_module.module_name + '/' + module_version + '\n'
-
-        serialization = serialization + '\nInstall DB Script:\n'
-        install_db_script = ''
-        if self.install_db_script != False:
-             install_db_script = self.install_db_script
-        serialization = serialization + install_db_script + '\n'
-
-        serialization = serialization + '\nUpgrade DB Script:\n'
-        upgrade_db_script = ''
-        if self.upgrade_db_script != False:
-             upgrade_db_script = self.upgrade_db_script
-        serialization = serialization + upgrade_db_script + '\n'
-
-        # Save hash of serialization
-        md5 = hashlib.md5()
-        md5.update(serialization)
-        self.write({
-            'hash': md5.hexdigest(),
-        })
-
-        self.serialization = serialization
+             modules_conf = modules_conf + version_module.module_name + '|' + module_version + '\n'
+        self.modules_conf = modules_conf

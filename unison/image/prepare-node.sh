@@ -24,9 +24,9 @@ set -x
 S3_ACCESS_KEY=$(get_config general S3_ACCESS_KEY)
 S3_SECRET_KEY=$(get_config general S3_SECRET_KEY)
 S3_BUCKET_BACKUPS=$(get_config general S3_BUCKET_BACKUPS)
-PGSQL_PORT=$(get_config general PGSQL_PORT)
-ODOO_PORT=$(get_config general PGSQL_PORT)
-NGINX_PORT=$(get_config general NGINX_PORT)
+PGSQL_PORT=$(get_config general PORT_PGSQL)
+ODOO_PORT=$(get_config general PORT_ODOO)
+NGINX_PORT=$(get_config general PORT_NGINX)
 
 # Load values of variables from install.conf
 S3_BACKUPS_DIR=$(get_config install S3_BACKUPS_DIR)
@@ -40,7 +40,9 @@ DNS_NAME=$(get_config install DNS_NAME)
 REQUEST_TIMEOUT=$(get_config install REQUEST_TIMEOUT)
 
 # Define data directories for containers
-/bin/bash /root/prepare-dirs.sh
+# We use source to execute script in current shell
+# so we are able to read the variables defined here.
+source /root/prepare-dirs.sh
 
 # Start containers providing some config files
 
