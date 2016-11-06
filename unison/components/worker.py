@@ -2,6 +2,7 @@
 
 import os
 import uuid
+import time
 import datetime
 import logging
 import subprocess
@@ -21,6 +22,12 @@ class Worker(models.Model):
     @api.model
     def install_tasks(self):
         print "UNISON: Checking Server tasks..."
+        digital_ocean = self.env['unison.digital_ocean']
+
+        # Right now we only have support for just one cloud
+        cloud = self.env['unison.cloud']
+        clouds = cloud.search([('code', '=', 'digitalocean')])
+        cloud_id = clouds[0].id
 
         # Check if there are custom images that should be created
         distro = self.env['unison.distro']
@@ -30,15 +37,23 @@ class Worker(models.Model):
                 print "WARNING!!!: No base/custom image was indicated for distro " + distro.name
                 continue
 
-            server_name = "image-" + str(distro.id)
+            image_name = distro.image_name()
 
             # The new custom image for this distro should be created or it's in creation.
             # During the first stage, a new DigitalOcean droplet named image-<distro_id> is created and inserted in the database
             # When that node is up, the prepare-image.sh script is executed. So, the first step is know if the droplet exists.
             node = self.env['unison.node']
-            nodes = node.search([('name', '=', server_name)])
+            nodes = node.search([('name', '=', image_name)])
             if len(nodes) == 0:
                 print "UNISON: Creating custom image for " + distro.name + " using as base image " + distro.stock_image_id.name + "..."
+
+                # Delete every old image with this name if they exists
+                image = self.env['unison.image']
+                images = image.search([('name', '=', image_name)])
+                for image in images:
+                    print "UNISON: Deleting old version of image " + image.name + " (" + str(image.code) + ")"
+                    digital_ocean.delete_image(image.code)
+                    image.unlink()
 
                 # As first step, we will select any SSH key to assign to the node that will be created
                 # to create the image. Since this will be a temporary node (destroyed after save snapshot)
@@ -53,9 +68,8 @@ class Worker(models.Model):
                 region = distro.region_id
 
                 # Create node to create the image
-                print "UNISON: Creating Node " + server_name
-                digital_ocean = self.env['unison.digital_ocean']
-                node = digital_ocean.create_node(server_name, size.code, image.code, region.code, key.fingerprint)
+                print "UNISON: Creating Node " + image_name
+                node = digital_ocean.create_node(image_name, size.code, image.code, region.code, key.fingerprint)
                 node = node[0]
                 node_code = node['id']
                 node_status = node['status']
@@ -64,7 +78,7 @@ class Worker(models.Model):
                 node = self.env['unison.node']
                 node = node.create({
                     'code': node_code,
-                    'name': server_name,
+                    'name': image_name,
                     'image_id': image.id,
                     'size_id': size.id,
                     'region_id': region.id,
@@ -76,7 +90,7 @@ class Worker(models.Model):
                     'notes': '',
                     'active': True
                 })
-                print "UNISON: Node " + server_name + " was created"
+                print "UNISON: Node " + image_name + " was created"
 
                 # That's all for now, once the node is active, the process will continue
             else:
@@ -130,10 +144,51 @@ class Worker(models.Model):
                     node.copy(image_dir + "prepare-image.sh", "/root/prepare-image.sh")
                     node.copy(image_dir + "prepare-node.sh", "/root/prepare-node.sh")
 
-                    # Run command to prepare image
-                    # node.execute("/bin/bash /root/prepare-image.sh", 22)   DDDDDDDDDDDEEEEEEEEEEEEBBBBBBBBBBBUUUUUUUUUUUUUUGGGGGGGGGGGGGGGGG
-                    print "UNISON: Launched preparation of " + server_name
+                    # Run command to prepare image (in a sync way, execution continue after finish)
+                    print "UNISON: Preparing image on node " + image_name + " (please be patient)"
+                    node.execute("/bin/bash /root/prepare-image.sh", 22)
 
+                    # Create snapshot of image (we use the --wait parameter so execution will wait until it's created)
+                    print "UNISON: Creating snapshot of node " + image_name + " (please be patient)"
+                    snapshot = digital_ocean.create_snapshot(image_name, node.code)
+
+                    # Find and register new snapshot
+                    images = digital_ocean.get_images()
+                    for image_item in images:
+                        if image_item['name'] == image_name:
+                            # Save snapshot (image)
+                            image = self.env['unison.image']
+                            image = image.create({
+                                'code': image_item['id'],
+                                'name': image_item['name'],
+                                'cloud_id': cloud_id,
+                                'is_backup': False,
+                                'is_private': True,
+                                'min_disk_size': image_item['min_disk_size'],
+                                'distribution': image_item['distribution'],
+                                'created_at': image_item['created_at'],
+                                'notes': '',
+                                'active': True
+                            })
+                            break
+
+                    time.sleep(10)
+
+                    # Save custom image on distro
+                    print "UNISON: Updating the new custom image on distro"
+                    distro.write({
+                       'custom_image_id': image.id,
+                    })
+
+                    # Delete temp node
+                    print "UNISON: Snapshot " + image_name + " was created. Deleting temp node with same name"
+                    digital_ocean.delete_node(image_name)
+
+                    print "UNISON: Deleting temp node from database"
+                    node.unlink()
+
+                    print "UNISON: Generation of image completed successfully"
+                                                       
         # Check if there are servers inserted or provisioning
         server = self.env['unison.server']
         servers = server.search([('status', '=', 'inserted')])

@@ -101,6 +101,23 @@ class DigitalOcean(models.Model):
             command = command + " --ssh-keys " + key_fingerprint
         return self.run_doctl(command)
 
+    @api.model
+    def create_snapshot(self, name, node_code):
+        command = "droplet-action snapshot " + str(node_code) + " --snapshot-name " + name + " --wait"
+        return self.run_doctl(command)
+
+    @api.model
+    def delete_node(self, node_code):
+        command = "droplet delete " + str(node_code)
+        print "UNISON: Executing " + command
+        return self.run_doctl(command)
+
+    @api.model
+    def delete_image(self, image_id):
+        command = "image delete " + str(image_id)
+        print "UNISON: Executing " + command
+        return self.run_doctl(command)
+
     # This function is used to run a doctl command using a json output
     # but returning the result as a Python list
     def run_doctl(self, command):

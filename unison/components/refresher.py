@@ -123,32 +123,34 @@ class Refresher(models.Model):
             else:
                 code = image_item['id']
 
+            # We don't save images starting with image- because they are registered on worker.py
             name = image_item['name']
-            image = self.env['unison.image']
-            image = image.search([('code', '=', code)])
-            if len(image) == 0:
-                # Create image
-                print "UNISON: Creating image " + name
+            if name[:6] != "image-":
+                image = self.env['unison.image']
+                image = image.search([('code', '=', code)])
+                if len(image) == 0:
+                    # Create image
+                    print "UNISON: Creating image " + name
 
-                is_backup = (image_item['type'] != 'snapshot')
-                if 'public' in image_item.keys():
-                    is_private = (image_item['public'] == False)
-                else:
-                    # Private snapshots doesn't have the 'public' item
-                    is_private = True
+                    is_backup = (image_item['type'] != 'snapshot')
+                    if 'public' in image_item.keys():
+                        is_private = (image_item['public'] == False)
+                    else:
+                        # Private snapshots doesn't have the 'public' item
+                        is_private = True
                 
-                image = image.create({
-                    'code': code, 
-                    'name': name,
-                    'cloud_id': cloud_id,
-                    'is_backup': is_backup,
-                    'is_private': is_private,
-                    'min_disk_size': image_item['min_disk_size'],
-                    'distribution': image_item['distribution'],
-                    'created_at': image_item['created_at'],
-                    'notes': '',
-                    'active': True
-                })
+                    image = image.create({
+                        'code': code, 
+                        'name': name,
+                        'cloud_id': cloud_id,
+                        'is_backup': is_backup,
+                        'is_private': is_private,
+                        'min_disk_size': image_item['min_disk_size'],
+                        'distribution': image_item['distribution'],
+                        'created_at': image_item['created_at'],
+                        'notes': '',
+                        'active': True
+                    })
 
             # Refresh regions where this image is available
             regions = image_item['regions']
@@ -237,7 +239,6 @@ class Refresher(models.Model):
                 })
 
             # Refresh Records of this domain
-            print "UNISON: Refreshing records for domain " + name + "..."
             digital_ocean = self.env['unison.digital_ocean']
             records = digital_ocean.get_records(name)
             for record_item in records:

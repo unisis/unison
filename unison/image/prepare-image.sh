@@ -33,6 +33,10 @@ SMTP_ALERTS=$(get_config general SMTP_ALERTS_RECIPIENT)
 DOCKERHUB_EMAIL=$(get_config general DOCKERHUB_EMAIL)
 DOCKERHUB_AUTH=$(get_config general DOCKERHUB_AUTH)
 
+# Initialize image status file
+IMAGE_STATUS_FILE=/etc/unisis/image-status
+echo "PREPARING" > $IMAGE_STATUS_FILE
+
 # Current directory of script
 CURDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -211,5 +215,8 @@ docker stop odoo
 docker stop pgsql
 docker stop barman
 docker stop aeroo
+
+# Indicate that process was completed
+echo "FINISHED" > $IMAGE_STATUS_FILE
 
 exit 0

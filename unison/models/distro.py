@@ -28,3 +28,10 @@ class Distro(models.Model):
     notes = fields.Text('Notes')
     active = fields.Boolean('Active', default=True)
 
+    # This function returns the name of the image, based on the name of the distro
+    def image_name(self):
+        name = "image-" + self.name
+        name = name.lower()
+        name = name.replace(" ", "-")
+        return name
+    
