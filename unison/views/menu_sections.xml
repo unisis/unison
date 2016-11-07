@@ -41,5 +41,12 @@
             sequence = "40"
         />
 
+        <!-- Jobs Section -->
+        <menuitem 
+            id = "menu_jobs"
+            name = "Jobs"
+            parent = "menu_top"
+            sequence = "50"
+        />
     </data>
 </openerp>

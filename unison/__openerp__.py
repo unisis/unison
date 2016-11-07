@@ -18,8 +18,8 @@
     'category': 'Administration',
 
     # Odoo version: 8.0.1 
-    # Module version: 0.2
-    'version': '8.0.1.0.3', 
+    # Module version: 0.4
+    'version': '8.0.1.0.4', 
 
     # any module necessary for this one to work correctly
     'depends': ['base'],
@@ -45,6 +45,10 @@
         'views/floating_ip.xml',
         'views/image.xml',
         'views/install.xml',
+        'views/job.xml',
+        'views/job_entity.xml',
+        'views/job_step.xml',
+        'views/job_type.xml',
         'views/key.xml',
         'views/module.xml',
         'views/node.xml',

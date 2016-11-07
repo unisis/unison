@@ -13,6 +13,10 @@ import feature
 import floating_ip
 import image
 import install
+import job
+import job_entity
+import job_step
+import job_type
 import key
 import module
 import node

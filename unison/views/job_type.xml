@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Job Types list -->
+        <act_window 
+            id="action_job_type"
+            name="Job Types"
+            res_model="unison.job_type"
+            view_mode="tree,form"
+        />
+        
+        <!-- Menu item to open Job Types List -->
+        <menuitem 
+            id="menu_job_type"
+            name="Job Types"
+            parent="unison.menu_jobs"
+            sequence="10"
+            action="action_job_type"
+        />
+
+        <!-- Job Types Tree -->
+        <record id="view_tree_job_type" model="ir.ui.view">
+            <field name="name">Job Types Tree</field>
+            <field name="model">unison.job_type</field>
+            <field name="arch" type="xml">
+                <tree create="true" delete="false" editable="false">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="frequency"/>
+                    <field name="last_exec"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Job Types Form -->
+        <record id="view_form_job_type" model="ir.ui.view">
+            <field name="name">Job Types Form</field>
+            <field name="model">unison.job_type</field>
+            <field name="arch" type="xml">
+                <form string="Job Type" create="true" delete="true" editable="true">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="code"/>
+                                <field name="name"/>
+                                <field name="description"/>
+                                <field name="frequency"/>
+                                <field name="last_exec" readonly="1"/>
+                                <field name="notes"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

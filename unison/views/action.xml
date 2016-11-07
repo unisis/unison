@@ -5,7 +5,7 @@
         <!-- Action to open Actions list -->
         <act_window 
             id="action_action"
-            name="Actions"
+            name="Cloud Actions"
             res_model="unison.action"
             view_mode="tree"
         />
@@ -13,9 +13,9 @@
         <!-- Menu item to open Actions List -->
         <menuitem 
             id="menu_action"
-            name="Actions"
-            parent="unison.menu_nodes"
-            sequence="100"
+            name="Cloud Actions"
+            parent="unison.menu_jobs"
+            sequence="50"
             action="action_action"
         />
 

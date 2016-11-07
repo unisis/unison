@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Action to open Jobs list -->
+        <act_window 
+            id="action_job"
+            name="Job"
+            res_model="unison.job"
+            view_mode="tree,form"
+        />
+        
+        <!-- Menu item to open Job List -->
+        <menuitem 
+            id="menu_job"
+            name="Jobs"
+            parent="unison.menu_jobs"
+            sequence="20"
+            action="action_job"
+        />
+
+        <!-- Jobs Tree -->
+        <record id="view_tree_job" model="ir.ui.view">
+            <field name="name">Jobs Tree</field>
+            <field name="model">unison.job</field>
+            <field name="arch" type="xml">
+                <tree create="true" delete="false" editable="false">
+                    <field name="name"/>
+                    <field name="job_type_id"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="success"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Jobs Form -->
+        <record id="view_form_job" model="ir.ui.view">
+            <field name="name">Job Form</field>
+            <field name="model">unison.job</field>
+            <field name="arch" type="xml">
+                <form string="Job" create="true" delete="true" editable="true">
+                    <header>
+                        <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="name" readonly="1"/>
+                                <field name="job_type_id" readonly="1"/>
+                                <field name="date_start" readonly="1"/>
+                                <field name="date_end" readonly="1"/>
+                                <field name="success" readonly="1"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>
