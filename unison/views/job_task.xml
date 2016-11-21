@@ -2,31 +2,32 @@
 <openerp>
     <data>
 
-        <!-- Action to open Job Steps list -->
+        <!-- Action to open Job Tasks list -->
         <act_window 
-            id="action_job_step"
-            name="Job Step"
-            res_model="unison.job_step"
+            id="action_job_task"
+            name="Job Taks"
+            res_model="unison.job_task"
             view_mode="tree,form"
         />
         
-        <!-- Menu item to open Job Steps List -->
+        <!-- Menu item to open Job Task List -->
         <menuitem 
-            id="menu_job_step"
-            name="Job Steps"
+            id="menu_job_task"
+            name="Job Tasks"
             parent="unison.menu_jobs"
             sequence="30"
-            action="action_job_step"
+            action="action_job_task"
         />
 
-        <!-- Job Steps Tree -->
-        <record id="view_tree_job_step" model="ir.ui.view">
-            <field name="name">Job Steps Tree</field>
-            <field name="model">unison.job_step</field>
+        <!-- Job Tasks Tree -->
+        <record id="view_tree_job_tasks" model="ir.ui.view">
+            <field name="name">Job Tasks Tree</field>
+            <field name="model">unison.job_task</field>
             <field name="arch" type="xml">
                 <tree create="true" delete="false" editable="false">
-                    <field name="job_id"/>
                     <field name="name"/>
+                    <field name="job_id"/>
+                    <field name="sequence"/>
                     <field name="date_start"/>
                     <field name="date_end"/>
                     <field name="success"/>
@@ -34,21 +35,22 @@
             </field>
         </record>
 
-        <!-- Job Steps Form -->
-        <record id="view_form_job_step" model="ir.ui.view">
-            <field name="name">Job Step Form</field>
-            <field name="model">unison.job_step</field>
+        <!-- Job Tasks Form -->
+        <record id="view_form_job_task" model="ir.ui.view">
+            <field name="name">Job Task Form</field>
+            <field name="model">unison.job_task</field>
             <field name="arch" type="xml">
-                <form string="Job Step" create="true" delete="true" editable="true">
+                <form string="Job Task" create="true" delete="true" editable="true">
                     <header>
                         <!-- <button name="xxxxxxx" type="object" string="Button Name" /> -->
                     </header>
                     <sheet>
                         <group name="group_top">
                             <group name="group_left">
-                                <field name="job_id" readonly="1"/>
                                 <field name="name" readonly="1"/>
+                                <field name="job_id" readonly="1"/>
                                 <field name="sequence" readonly="1"/>
+                                <field name="parallel" readonly="1"/>
                                 <field name="model" readonly="1"/>
                                 <field name="function" readonly="1"/>
                                 <field name="date_start" readonly="1"/>

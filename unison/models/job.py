@@ -8,7 +8,8 @@ class Job(models.Model):
     _order = 'name'
 
     name = fields.Char('Name', required=True, index=True)
-    job_type_id = fields.Many2one('unison.job_type', 'Job Type', ondelete='restrict')
+    job_type_id = fields.Many2one('unison.job_type', 'Job Type', required=True, ondelete='restrict')
+    model_id = fields.Integer('Model Id')
     date_start = fields.Datetime('Date Start')
     date_end = fields.Datetime('Date End')
     success = fields.Boolean('Success')

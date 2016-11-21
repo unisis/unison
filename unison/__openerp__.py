@@ -19,7 +19,7 @@
 
     # Odoo version: 8.0.1 
     # Module version: 0.4
-    'version': '8.0.1.0.4', 
+    'version': '8.0.1.0.5', 
 
     # any module necessary for this one to work correctly
     'depends': ['base'],
@@ -46,8 +46,7 @@
         'views/image.xml',
         'views/install.xml',
         'views/job.xml',
-        'views/job_entity.xml',
-        'views/job_step.xml',
+        'views/job_task.xml',
         'views/job_type.xml',
         'views/key.xml',
         'views/module.xml',

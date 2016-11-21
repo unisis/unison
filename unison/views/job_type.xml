@@ -27,8 +27,9 @@
                 <tree create="true" delete="false" editable="false">
                     <field name="code"/>
                     <field name="name"/>
-                    <field name="frequency"/>
-                    <field name="last_exec"/>
+                    <field name="trigger_model"/>
+                    <field name="trigger_event"/>
+                    <field name="trigger_frequency"/>
                 </tree>
             </field>
         </record>
@@ -47,9 +48,9 @@
                             <group name="group_left">
                                 <field name="code"/>
                                 <field name="name"/>
-                                <field name="description"/>
-                                <field name="frequency"/>
-                                <field name="last_exec" readonly="1"/>
+                                <field name="trigger_model"/>
+                                <field name="trigger_event"/>
+                                <field name="trigger_frequency"/>
                                 <field name="notes"/>
                                 <field name="active"/>
                             </group>
